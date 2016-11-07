@@ -15,35 +15,31 @@ Type ? for help
 ## Requirements:
 
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
+  
+  	* Set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com)
+  	
+  	* Get bot ID and group ID from dev.groupme.com
 
   * Heroku account [Heroku](http://heroku.com).
+  
+  	* use Heroku config var to set the following
+    * botIdProd = bot id for your main group
+    * groupIdProd = group id for your main group
+    * botIdTest = bot id for a test group
+    * groupIdTest = group id for a test group
 
-## Setup
-
-use Heroku variables to set the following
-
-Get your BOTID from dev.groupme.com and configure it in the Heroku web client under settings
-
-Set your callback URL in the dev.groupme page to your heroku domain (your-heroku-app-name.herokuapp.com)
-
-botIdProd = bot id for your main group
-groupIdProd = group id for your main group
-botIdTest = bot id for a test group
-groupIdTest = group id for a test group
-
-
-
+## Useful Heroku Command Line Tools
 
 git add .
+
 git commit -m "comment here"
+
 git push -f heroku
 
-
 heroku ps
+
 heroku logs
+
 heroku logs —source app
-
-
-
 
 # gifbot
