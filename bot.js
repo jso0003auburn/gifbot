@@ -47,7 +47,7 @@ function respond() {
 
 //? for help
 function requestHelp() {
-  postMessage('Stocks = $ ticker symbol\nWeather = ! city or zip\nGIFS = # search keyword', botID);
+  postMessage('Stocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botID);
 }
 
 //# + search term // to post a gif
