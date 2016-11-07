@@ -57,7 +57,7 @@ function requestGif() {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     postMessage(parsedData.data.images.downsized.url, botID);
   } else {
-  postMessage('No gifs\nType ? for help', botID, searchTerm);
+  postMessage('No gifs for: ' + searchTerm + '\nType ? for help', botID, searchTerm);
   }
   });
 }
