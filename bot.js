@@ -54,13 +54,12 @@ function requestHelp() {
 function requestGif() {
   request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
   parsedData = JSON.parse(body);
-  console.log('"' + searchTerm + '" & gif size = ' + parsedData.data.images.downsized.size);
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     postMessage(parsedData.data.images.downsized.url, botID);
-    } else {
-    postMessage('No gifs\nType "?" for help', botID, searchTerm);
-    }
-    });
+  } else {
+  postMessage('No gifs\nType "?" for help', botID, searchTerm);
+  }
+  });
 }
 
 //$ + stock ticker // for current price, day change, and a link to the chart
