@@ -1,0 +1,5 @@
+{
+  "name": “gifbot”,
+  "description": "GroupMe Bot written in Node",
+  "keywords": [GroupMe, Bot, Node]
+}

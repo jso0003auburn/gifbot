@@ -1,0 +1,32 @@
+{
+  "name": "gifbot",
+  "version": "0.1.0",
+  "description": "groupme bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "director": "",
+    "request": "",
+    "https": ""
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jso0003auburn/groupme-gifbot"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "groupme",
+    "gif",
+    "bot",
+    "node.js",
+    "giphy",
+    "API"
+  ],
+  "license": "MIT"
+}
