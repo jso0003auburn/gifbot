@@ -11,6 +11,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substr(1).trim();
+  fullRequest = String(request.text);
   console.log(request.name + ': ' + request.text);
   this.res.end();
 
@@ -19,6 +20,13 @@ function respond() {
   } else {
   botID = botIdTest;
   }
+
+  if (fullRequest.indexOf('gifbot') >= 0) {
+    console.log('yes');
+  } else {
+  console.log('no');
+  }
+
   //HELP ?
   if (trigger == '?') {
     this.res.writeHead(200);
@@ -75,7 +83,7 @@ function requestTicker() {
     change = String('+' + change);
   }
   if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
-    postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm , botID);
+    postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botID);
   } else {
   postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.\nType ? for help', botID);
   } 
