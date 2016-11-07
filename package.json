@@ -1,7 +1,7 @@
 {
   "name": "gifbot",
   "version": "0.1.0",
-  "description": "groupme bot",
+  "description": “GroupMe bot written in Node, supports GIFs, Stock ticker info, and weather updates”,
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
