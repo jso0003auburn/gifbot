@@ -9,17 +9,16 @@ var https = require('https');
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
-  groupId = request.group_id.str;
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substr(1).trim();
   fullRequest = String(request.text);
   console.log(request.name + ': ' + request.text);
   this.res.end();
-  conditions(groupId, trigger, searchTerm, fullRequest);
+  conditions(request, trigger, searchTerm, fullRequest);
 }
 
 function conditions() {
-
+  groupId = request.group_id;
   //Group check
   if (groupId == groupIdProd) {
     botID = botIdProd;
