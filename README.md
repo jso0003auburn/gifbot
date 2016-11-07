@@ -1,6 +1,6 @@
 ## Ultimate GroupMe Bot
-  * #omg or #(your search term) for a gif
-  * $MSFT or #(any other stock ticker) for price and change
+  * #omg or #(your search term) for a GIF
+  * $MSFT or $(any other stock ticker) for stock info
   * !Atlanta or !(your zip code) or !NYC or !(your city) for weather info
   * ? for help
 
