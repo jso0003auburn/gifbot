@@ -15,12 +15,14 @@ function respond() {
   console.log(request.name + ': ' + request.text);
   this.res.end();
 
+  //Group check
   if (request.group_id == groupIdProd) {
     botID = botIdProd;
   } else {
   botID = botIdTest;
   }
 
+  //@gifbot?
   if (fullRequest.indexOf('@gifbot') >= 0) {
     requestHelp();
   } else {
@@ -55,7 +57,7 @@ function respond() {
 
 //? for help
 function requestHelp() {
-  postMessage('Stocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botID);
+  postMessage('HELP:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botID);
 }
 
 //# + search term // to post a gif
