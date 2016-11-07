@@ -1,27 +1,14 @@
-#Groupme Gif-Bot
-
-## Introduction
-
-Ultimate GroupMe Bot
-
-Type #omg or #(your search term) for a gif
-
-Type $MSFT or #(any other stock ticker) for price and change
-
-Type !Atlanta or !(your zip code) or !NYC or !(your city) for weather info
-
-Type ? for help
+## Ultimate GroupMe Bot
+  * #omg or #(your search term) for a gif
+  * $MSFT or #(any other stock ticker) for price and change
+  * !Atlanta or !(your zip code) or !NYC or !(your city) for weather info
+  * ? for help
 
 ## Requirements:
-
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
-  
-  	* Set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com)
-  	
+  	* Set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   	* Get bot ID and group ID from dev.groupme.com
-
   * Heroku account [Heroku](http://heroku.com).
-  
   	* use Heroku config var to set the following
     * botIdProd = bot id for your main group
     * groupIdProd = group id for your main group
@@ -29,22 +16,14 @@ Type ? for help
     * groupIdTest = group id for a test group
 
 ## Useful Heroku Command Line Tools
+  * git add .
+  * git commit -m "comment here"
+  * git push -f heroku
+  * heroku ps
+  * heroku logs
+  * heroku logs —source app
 
-git add .
-
-git commit -m "comment here"
-
-git push -f heroku
-
-heroku ps
-
-heroku logs
-
-heroku logs —source app
-
-## gifbot
-
-## contact
+## Contact
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -95,4 +74,5 @@ D4VeBPjbiYRVlqp72MRV2gV4+hgrTzqVa9rFhAM/GLz6lLIusS9QjUJj7pK34WJm
 jj4gfvDbg//9CSSR1/BjIDsqCmRsYIjAn/Ne0M6oOTj8sT5628DTKSH1bEyFxW2m
 KRFmqANzw1OArf804XtUKwxB0D1os2hgmg8u9bRcsENXqPAqZAWBpmoGFwXYAA==
 =J2SW
+
 -----END PGP PUBLIC KEY BLOCK-----
