@@ -23,7 +23,7 @@ function respond() {
   }
 
   //@gifbot?
-  if (fullRequest.indexOf('@gifbot') >= 0) {
+  if (request.text.indexOf('@gifbot') >= 0) {
     requestHelp();
   } else {
   //cool
@@ -57,7 +57,7 @@ function respond() {
 
 //? for help
 function requestHelp() {
-  postMessage('HELP:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botID);
+  postMessage('Here are some tips:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botID);
 }
 
 //# + search term // to post a gif
