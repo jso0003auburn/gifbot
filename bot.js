@@ -1,20 +1,23 @@
-var botProduction = process.env.botProduction;
-var botTest = process.env.botTest;
-var productionGroup = process.env.productionGroup;
-var testGroup = process.env.testGroup;
+var botIdProd = process.env.botIdProd;
+var botIdTest = process.env.botIdTest;
+var groupIdProd = process.env.groupIdProd;
+var groupIdTest = process.env.groupIdTest;
 var request = require('request');
 var https = require('https');
 
 //scan messages
 function respond() {
+  this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substr(1).trim();
+  console.log(request.name + ': ' + request.text);
+  this.res.end();
 
-  if (request.group_id == productionGroup) {
-    botID = botProduction;
+  if (request.group_id == groupIdProd) {
+    botID = botIdProd;
   } else {
-  botID = botTest;
+  botID = botIdTest;
   }
   //HELP ?
   if (trigger == '?') {
@@ -25,7 +28,7 @@ function respond() {
   //GIF #
   if (trigger == '#') {
     this.res.writeHead(200);
-    requestGif(searchTerm, request.name);
+    requestGif(searchTerm);
     this.res.end();
   }
   //STOCK TICKER $
@@ -51,7 +54,7 @@ function requestHelp() {
 function requestGif() {
   request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
   parsedData = JSON.parse(body);
-  console.log(searchTerm + ' / gif size: ' + parsedData.data.images.downsized.size);
+  console.log('"' + searchTerm + '" & gif size = ' + parsedData.data.images.downsized.size);
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     postMessage(parsedData.data.images.downsized.url, botID);
     } else {
@@ -73,9 +76,9 @@ function requestTicker() {
     change = String('+' + change);
   }
   if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
-    postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'http://finance.yahoo.com/quote/' + searchTerm , botID, searchTerm);
+    postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'http://finance.yahoo.com/quote/' + searchTerm , botID);
   } else {
-  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker. Keep trying.', botID);
+  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.', botID);
   } 
   }); 
 }
@@ -91,7 +94,7 @@ function requestWeather() {
   low = parsedData.query.results.channel.item.forecast[0].low + '°';
   forecast = parsedData.query.results.channel.item.forecast[0].text;
   if (!error && response.statusCode == 200 && parsedData.query.results != null) {
-    postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botID, searchTerm);
+    postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botID);
   } 
   }); 
 }
@@ -112,7 +115,7 @@ function postMessage(botResponse, botID) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Success');
+        //console.log('Success');
       } else {
         console.log('Bad status code ' + res.statusCode);
       }

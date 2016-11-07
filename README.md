@@ -14,22 +14,27 @@ Type ? for help
 
 ## Requirements:
 
-  * GroupMe dev account
-  * Heroku account
+  * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
 
-To create your GroupMe bot:
-https://dev.groupme.com/session/new
-
-Setup an account on Heroku (download their client also): 
-[Heroku](http://heroku.com).
+  * Heroku account [Heroku](http://heroku.com).
 
 ## Setup
+
+use Heroku variables to set the following
 
 Get your BOTID from dev.groupme.com and configure it in the Heroku web client under settings
 
 Set your callback URL in the dev.groupme page to your heroku domain (your-heroku-app-name.herokuapp.com)
 
-ggit add .
+botIdProd = bot id for your main group
+groupIdProd = group id for your main group
+botIdTest = bot id for a test group
+groupIdTest = group id for a test group
+
+
+
+
+git add .
 git commit -m "comment here"
 git push -f heroku
 
