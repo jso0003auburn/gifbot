@@ -9,7 +9,7 @@ var https = require('https');
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
-  groupId = String(request.group_id);
+  groupId = request.group_id.str;
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substr(1).trim();
   fullRequest = String(request.text);
