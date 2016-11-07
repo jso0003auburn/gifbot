@@ -21,10 +21,10 @@ function respond() {
   botID = botIdTest;
   }
 
-  if (fullRequest.indexOf('gifbot') >= 0) {
-    console.log('yes');
+  if (fullRequest.indexOf('@gifbot') >= 0) {
+    requestHelp();
   } else {
-  console.log('no');
+  //cool
   }
 
   //HELP ?
