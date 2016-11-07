@@ -77,7 +77,7 @@ function requestTicker() {
   if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
     postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'http://finance.yahoo.com/quote/' + searchTerm , botID);
   } else {
-  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.', botID);
+  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.\nType "?" for help', botID);
   } 
   }); 
 }
