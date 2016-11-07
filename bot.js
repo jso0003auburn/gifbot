@@ -57,7 +57,7 @@ function requestGif() {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     postMessage(parsedData.data.images.downsized.url, botID);
   } else {
-  postMessage('No gifs\nType "?" for help', botID, searchTerm);
+  postMessage('No gifs\nType ? for help', botID, searchTerm);
   }
   });
 }
@@ -77,7 +77,7 @@ function requestTicker() {
   if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
     postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'http://finance.yahoo.com/quote/' + searchTerm , botID);
   } else {
-  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.\nType "?" for help', botID);
+  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.\nType ? for help', botID);
   } 
   }); 
 }
