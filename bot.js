@@ -17,7 +17,7 @@ function respond() {
   this.res.end();
 }
 
-function conditions(trigger, searchTerm, GroupID, message) {
+function conditions(trigger, searchTerm, groupID, message) {
 
   //Group check
   if (groupID == groupIdProd) {
