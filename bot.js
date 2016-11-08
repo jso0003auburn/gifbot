@@ -5,7 +5,6 @@ var botId = process.env.botIdProd;
 var botIdTest = process.env.botIdTest;
 var myGroupId = process.env.groupIdProd;
 var groupIdTest = process.env.groupIdTest;
-var botName = '@gifbot';
 
 //scan messages
 function respond() {
@@ -17,17 +16,14 @@ function respond() {
   senderGroupId = request.group_id;
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
+  console.log(sender + ': ' + message);
 
   //group check
-  if (senderGroupId == myGroupId && sender !== botName.substring(1)) {
-    console.log(sender + ': ' + message);
-  } else {
-  botId = botIdTest;
-  console.log(sender + ': test -  ' + searchTerm);
+  if (senderGroupId !== myGroupId) {
+    botId = botIdTest;
   }
-
   //@gifbot?
-  gifbotCheck = message.indexOf(botName);
+  gifbotCheck = message.indexOf('@gifbot');
   if (gifbotCheck >= 0) {
     requestHelp();
     return;
