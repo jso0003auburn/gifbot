@@ -34,7 +34,8 @@ function respond() {
   //HELP ?
   gifbotCheck = message.indexOf('@' + botName);
   if (trigger == '?' || gifbotCheck >= 0 || trigger == '/') {
-    requestHelp();
+    searchTerm = 'gifbot help:';
+    requestHelp(searchTerm);
     return;
   }
 
@@ -60,7 +61,7 @@ function respond() {
 //git push -f heroku
 //? for help
 function requestHelp() {
-  postMessage('Invalid Request:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  postMessage(searchTerm + ' is not valid\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   return;
 }
 
@@ -71,7 +72,7 @@ function requestGif() {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     postMessage(parsedData.data.images.downsized.url, botId);
   } else {
-  requestHelp();
+  requestHelp(searchTerm);
   }
   });
 }
@@ -91,7 +92,7 @@ function requestTicker() {
   if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
     postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
   } else {
-  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.\nType ? for help', botId);
+  requestHelp(searchTerm);
   } 
   }); 
 }
@@ -108,7 +109,9 @@ function requestWeather() {
   forecast = parsedData.query.results.channel.item.forecast[0].text;
   if (!error && response.statusCode == 200 && parsedData.query.results != null) {
     postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botId);
-  } 
+  } else {
+  requestHelp(searchTerm);
+  }  
   }); 
 }
 
