@@ -30,7 +30,7 @@ function respond() {
     console.log(sender + ' replied to: ' + trigger + ' in ' + groupEnv);
   } else {
   console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
-  checkMessage(trigger, gifbotCheck, searchTerm);
+  checkMessage(trigger, gifbotTagCheck, searchTerm);
   }
 }
 
