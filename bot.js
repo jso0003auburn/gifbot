@@ -8,24 +8,26 @@ var https = require('https');
 //scan messages
 function respond() {
   this.res.writeHead(200);
-  request = JSON.parse(this.req.chunks[0]);
-  conditions(request);
+  var request = JSON.parse(this.req.chunks[0]);
+  trigger = request.text.substring(0,1);
+  searchTerm = request.text.substr(1).trim();
+  groupID = request.group_id;
+  message = request.text;
+  conditions(trigger, searchTerm, GroupID, message);
   this.res.end();
 }
 
-function conditions() {
-  trigger = request.text.substring(0,1);
-  searchTerm = request.text.substr(1).trim();
+function conditions(trigger, searchTerm, GroupID, message) {
 
   //Group check
-  if (request.group_id == groupIdProd) {
+  if (groupID == groupIdProd) {
     botID = botIdProd;
   } else {
   botID = botIdTest;
   }
 
   //@gifbot?
-  if (request.text.indexOf('@gifbot') >= 0) {
+  if (message.indexOf('@gifbot') >= 0) {
     requestHelp();
   } else {
   //cool
