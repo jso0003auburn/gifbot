@@ -9,8 +9,6 @@ var groupIdTest = process.env.groupIdTest;
 var groupEnvTest = 'test';
 var botName = 'gifbot';
 
-//    git push -f heroku
-
 //scan messages
 function respond() {
   this.res.writeHead(200);
