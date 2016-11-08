@@ -6,7 +6,6 @@ var botIdTest = process.env.botIdTest;
 var myGroupId = process.env.groupIdProd;
 var groupIdTest = process.env.groupIdTest;
 
-//git push -f heroku
 //scan messages
 function respond() {
   this.res.writeHead(200);
@@ -26,11 +25,10 @@ function respond() {
     return;
   }
 
-  trigger = request.text.substring(0,1);
-  searchTerm = request.text.substring(1).trim();
   message = request.text;
   sender = request.name;
-  console.log(sender + ': ' + message);
+  trigger = request.text.substring(0,1);
+  searchTerm = request.text.substring(1).trim();
 
   //HELP ?
   if (trigger == '?') {
@@ -44,18 +42,21 @@ function respond() {
     this.res.writeHead(200);
     requestGif(searchTerm);
     this.res.end();
+    return;
   }
   //STOCK TICKER $
   if (trigger == '$') {
     this.res.writeHead(200);
     requestTicker(searchTerm);
     this.res.end();
+    return;
   }
   //WEATHER !
   if (trigger == '!') {
     this.res.writeHead(200);
     requestWeather(searchTerm);
     this.res.end();
+    return;
   }
 }
 
@@ -128,7 +129,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        //console.log('Success');
+        //console.log(sender + ': ' + message);
       } else {
         console.log('Bad status code ' + res.statusCode);
       }
