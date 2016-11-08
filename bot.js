@@ -17,10 +17,11 @@ function respond() {
   senderGroupId = request.group_id;
 
   //group check
-  if (senderGroupId !== myGroupId) {
-    botId = botIdTest;
+  if (senderGroupId == myGroupId && sender !== botName.substring(1)) {
+    console.log(sender + ': ' + message);
   } else {
-  console.log(sender + ': ' + message);
+  botId = botIdTest;
+  console.log(sender + ':t ' + message);
   }
 
   //@gifbot?
