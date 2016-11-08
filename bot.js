@@ -24,13 +24,13 @@ function respond() {
   if (senderGroupId !== groupIdTest && sender !== botName) {
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-  } else {
-  console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+    return;
+  }
   botId = botIdTest;
   groupEnv = groupEnvTest;
+  message = message.substring(0,20);
   console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-  }
 }
 
 function checkMessage() {
