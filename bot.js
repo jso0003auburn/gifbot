@@ -8,7 +8,7 @@ var https = require('https');
 //scan messages
 function respond() {
   this.res.writeHead(200);
-  var request = JSON.parse(this.req.chunks[0]),
+  request = JSON.parse(this.req.chunks[0]);
   conditions(request);
   this.res.end();
 }
