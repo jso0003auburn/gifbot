@@ -23,7 +23,7 @@ function respond() {
   gifbotCheck = request.text.indexOf('@gifbot');
   if (gifbotCheck >= 0) {
     requestHelp();
-    process.exit(-1);
+    return;
   }
 
   trigger = request.text.substring(0,1);
@@ -37,7 +37,7 @@ function respond() {
     this.res.writeHead(200);
     requestHelp();
     this.res.end();
-    process.exit(-1);
+    return;
   }
   //GIF #
   if (trigger == '#') {
