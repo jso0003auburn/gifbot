@@ -39,7 +39,7 @@ function respond() {
     this.res.end();
   }
   //GIF #
-  if (trigger == '#') {
+  if (trigger !== '#') {
     this.res.writeHead(200);
     requestGif(searchTerm);
     this.res.end();
