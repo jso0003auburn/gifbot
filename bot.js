@@ -33,6 +33,7 @@ function respond() {
 
   if (sender == botName) {
     console.log(sender + ' replied to: ' + trigger + ' in ' + groupEnv);
+    checkMessage(trigger, gifbotTagCheck, searchTerm);
   } else {
   console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   checkMessage(trigger, gifbotTagCheck, searchTerm);
