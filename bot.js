@@ -10,12 +10,13 @@ function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
   trigger = request.text.substring(0,1);
-  searchTerm = request.text.substr(1).trim();
+  searchTerm = request.text.substring(1).trim();
+  groupId = request.group_id;
   console.log(request.name + ': ' + request.text);
   this.res.end();
 
   //Group check
-  if (request.group_id == groupIdProd) {
+  if (groupId == groupIdProd) {
     botID = botIdProd;
   } else {
   botID = botIdTest;
