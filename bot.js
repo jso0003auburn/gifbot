@@ -21,9 +21,12 @@ function respond() {
   gifbotTagCheck = message.indexOf('@' + botName);
   searchTerm = message.substring(1).trim();
 
-  if (senderGroupId == groupIdTest || sender == botName) {
+  if (senderGroupId == groupIdTest) {
     botId = botIdTest;
     groupEnv = groupEnvTest;
+  }
+
+  if (sender == botName) {
     console.log(sender + ' replied to: ' + trigger + ' in ' + groupEnv);
   } else {
   console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
