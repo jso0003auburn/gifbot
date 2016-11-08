@@ -21,13 +21,12 @@ function respond() {
   gifbotTagCheck = message.indexOf('@' + botName);
   searchTerm = message.substring(1).trim();
 
-  if (senderGroupId == groupIdTest) {
-    botId = botIdTest;
-    groupEnv = groupEnvTest;
+  if (senderGroupId !== groupIdTest) {
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
     checkMessage(trigger, gifbotTagCheck, searchTerm, botId);
   } else {
   console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+  botId = botIdTest;
   checkMessage(trigger, gifbotTagCheck, searchTerm, botId);
   }
 }
@@ -36,22 +35,22 @@ function checkMessage() {
   //HELP ?
   if (trigger == '?' || gifbotTagCheck >= 0 || trigger == '/') {
     searchTerm = 'gifbot help:';
-    requestHelp(searchTerm);
+    requestHelp(searchTerm, botId);
   }
 
   //GIF #
   if (trigger == '#') {
-    requestGif(searchTerm);
+    requestGif(searchTerm, botId);
   }
 
   //STOCK TICKER $
   if (trigger == '$') {
-    requestTicker(searchTerm);
+    requestTicker(searchTerm, botId);
   }
 
   //WEATHER !
   if (trigger == '!') {
-    requestWeather(searchTerm);
+    requestWeather(searchTerm, botId);
   }
 }
 
