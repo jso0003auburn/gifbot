@@ -5,30 +5,48 @@ var botId = process.env.botIdProd;
 var botIdTest = process.env.botIdTest;
 var myGroupId = process.env.groupIdProd;
 var groupIdTest = process.env.groupIdTest;
+var botName = '@gifbot';
 
 //scan messages
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
+  sender = request.name;
+  message = request.text;
+  senderGroupId = request.group_id;
+  console.log(sender + ': ' + rmessage);
 
   //group check
-  requestGroupId = request.group_id;
-  if (requestGroupId !== myGroupId) {
+  if (senderGroupId !== myGroupId) {
     botId = botIdTest;
   }
 
   //@gifbot?
-  gifbotCheck = request.text.indexOf('@gifbot');
+  gifbotCheck = message.indexOf(botName);
   if (gifbotCheck >= 0) {
     requestHelp();
     return;
   }
 
-  message = request.text;
-  sender = request.name;
-  trigger = request.text.substring(0,1);
-  searchTerm = request.text.substring(1).trim();
+  trigger = message.substring(0,1);
+  searchTerm = message.substring(1).trim();
+
+  //GIF #
+  if (trigger == '#') {
+    this.res.writeHead(200);
+    requestGif(searchTerm);
+    this.res.end();
+    return;
+  }
+
+  //STOCK TICKER $
+  if (trigger == '$') {
+    this.res.writeHead(200);
+    requestTicker(searchTerm);
+    this.res.end();
+    return;
+  }
 
   //HELP ?
   if (trigger == '?') {
@@ -37,20 +55,7 @@ function respond() {
     this.res.end();
     return;
   }
-  //GIF #
-  if (trigger == '#') {
-    this.res.writeHead(200);
-    requestGif(searchTerm);
-    this.res.end();
-    return;
-  }
-  //STOCK TICKER $
-  if (trigger == '$') {
-    this.res.writeHead(200);
-    requestTicker(searchTerm);
-    this.res.end();
-    return;
-  }
+
   //WEATHER !
   if (trigger == '!') {
     this.res.writeHead(200);
@@ -129,9 +134,9 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        //console.log(sender + ': ' + message);
+        //cool
       } else {
-        console.log('Bad status code ' + res.statusCode);
+      console.log('Bad status code ' + res.statusCode);
       }
   });
   botReq.on('error', function(err) {
