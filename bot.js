@@ -4,7 +4,7 @@ var https = require('https');
 var botId = process.env.botIdProd;
 var botIdTest = process.env.botIdTest;
 var myGroupId = process.env.groupIdProd;
-var testGroupId = process.env.groupIdTest;
+var groupIdTest = process.env.groupIdTest;
 
 //scan messages
 function respond() {
@@ -20,7 +20,7 @@ function respond() {
   console.log(sender + ': ' + message);
 
   //group check
-  if (senderGroupId == testGroupId) {
+  if (senderGroupId !== myGroupId) {
     botId = botIdTest;
   }
 
