@@ -25,8 +25,9 @@ function respond() {
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
     checkMessage(trigger, gifbotTagCheck, searchTerm, botId);
   } else {
-  console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   botId = botIdTest;
+  groupEnv = groupEnvTest;
+  console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   checkMessage(trigger, gifbotTagCheck, searchTerm, botId);
   }
 }
@@ -34,7 +35,7 @@ function respond() {
 function checkMessage() {
   //HELP ?
   if (trigger == '?' || gifbotTagCheck >= 0 || trigger == '/') {
-    searchTerm = 'gifbot help:';
+    searchTerm = '';
     requestHelp(searchTerm, botId);
   }
 
@@ -56,11 +57,7 @@ function checkMessage() {
 
 //? for help
 function requestHelp() {
-  if (searchTerm !== null) {
-    postMessage(searchTerm + ' did not work.\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
-  } else {
-  postMessage('Help:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
- }
+  postMessage('Invalid' + searchTerm + '\nNeed help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
 }
 
 //# + search term // to post a gif
