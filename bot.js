@@ -9,7 +9,7 @@ var https = require('https');
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
-  trigger = request.text.substring(0,1);
+  var trigger = request.text.substring(0,1);
   searchTerm = request.text.substr(1).trim();
   fullRequest = String(request.text);
   console.log(request.name + ': ' + request.text);
