@@ -57,10 +57,11 @@ function respond() {
     return;
   }
 }
-
+//git push -f heroku
 //? for help
 function requestHelp() {
-  postMessage('gifbot tips:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  postMessage('Invalid Request:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  return;
 }
 
 //# + search term // to post a gif
@@ -70,7 +71,7 @@ function requestGif() {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     postMessage(parsedData.data.images.downsized.url, botId);
   } else {
-  postMessage('No gifs for: ' + searchTerm + '\nType ? for help', botId, searchTerm);
+  requestHelp();
   }
   });
 }
