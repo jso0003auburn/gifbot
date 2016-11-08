@@ -22,11 +22,12 @@ function respond() {
   if (senderGroupId !== myGroupId) {
     botId = botIdTest;
   }
-
-  //@gifbot?
+  //HELP ?
   gifbotCheck = message.indexOf('@gifbot');
-  if (gifbotCheck >= 0) {
+  if (trigger == '?' || gifbotCheck >= 0) {
+    this.res.writeHead(200);
     requestHelp();
+    this.res.end();
     return;
   }
 
@@ -46,13 +47,7 @@ function respond() {
     return;
   }
 
-  //HELP ?
-  if (trigger == '?') {
-    this.res.writeHead(200);
-    requestHelp();
-    this.res.end();
-    return;
-  }
+
 
   //WEATHER !
   if (trigger == '!') {
