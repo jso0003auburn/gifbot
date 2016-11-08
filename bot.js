@@ -9,25 +9,24 @@ var https = require('https');
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
-  var trigger = request.text.substring(0,1);
-  searchTerm = request.text.substr(1).trim();
-  fullRequest = String(request.text);
   console.log(request.name + ': ' + request.text);
   this.res.end();
-  conditions(request, trigger, searchTerm, fullRequest);
+  conditions(request);
 }
 
 function conditions() {
-  groupId = request.group_id;
+  trigger = request.text.substring(0,1);
+  searchTerm = request.text.substr(1).trim();
+
   //Group check
-  if (groupId == groupIdProd) {
+  if (request.group_id == groupIdProd) {
     botID = botIdProd;
   } else {
   botID = botIdTest;
   }
 
   //@gifbot?
-  if (fullRequest.indexOf('@gifbot') >= 0) {
+  if (request.text.indexOf('@gifbot') >= 0) {
     requestHelp();
   } else {
   //cool
