@@ -24,6 +24,11 @@ function respond() {
   if (senderGroupId == groupIdTest) {
     botId = botIdTest;
     groupEnv = groupEnvTest;
+  } else {
+  botId = botId;
+  groupEnv = groupEnvTest;
+  console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+  checkMessage(trigger, gifbotTagCheck, searchTerm, botId);
   }
 
   if (sender == botName) {
