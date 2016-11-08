@@ -4,7 +4,9 @@ var https = require('https');
 var botId = process.env.botIdProd;
 var botIdTest = process.env.botIdTest;
 var myGroupId = process.env.groupIdProd;
+var groupEnv = 'prod';
 var testGroupId = process.env.groupIdTest;
+var groupEnvTest = 'test';
 var botName = 'gifbot';
 
 //scan messages
@@ -15,19 +17,18 @@ function respond() {
   sender = request.name;
   message = request.text;
   trigger = message.substring(0,1);
+  senderGroupId = request.group_id;
 
+  if (senderGroupId == testGroupId) {
+    botId = botIdTest;
+    groupEnv = groupEnvTest;
+  }
   if (sender == botName) {
-    console.log(sender + ' replied to: ' + trigger);
+    console.log(sender + ' replied to: ' + trigger + ' in ' + groupEnv);
   }
 
   if (sender !== botName) {
-    console.log(sender + ' sent: ' + message);
-  }
-
-  //group check
-  senderGroupId = request.group_id;
-  if (senderGroupId == testGroupId) {
-    botId = botIdTest;
+    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   }
 
   //HELP ?
