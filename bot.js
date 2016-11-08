@@ -13,16 +13,17 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
 
+  //group check
+  requestGroupId = request.group_id;
+  if (requestGroupId !== myGroupId) {
+    botId = botIdTest;
+  }
+
   //@gifbot?
   gifbotCheck = request.text.indexOf('@gifbot');
   if (gifbotCheck >= 0) {
     requestHelp();
-  }
-
-  //Group check
-  requestGroupId = request.group_id;
-  if (requestGroupId !== myGroupId) {
-    botId = botIdTest;
+    process.exit(200);
   }
 
   trigger = request.text.substring(0,1);
