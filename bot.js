@@ -8,7 +8,9 @@ var botIdTest = process.env.botIdTest;
 var groupIdTest = process.env.groupIdTest;
 var groupEnvTest = 'test';
 var botName = 'gifbot';
+
 //    git push -f heroku
+
 //scan messages
 function respond() {
   this.res.writeHead(200);
@@ -18,26 +20,26 @@ function respond() {
   message = request.text;
   trigger = message.substring(0,1);
   senderGroupId = request.group_id;
-  gifbotTagCheck = message.indexOf('@' + botName);
+  botNameTagCheck = message.indexOf('@' + botName);
   searchTerm = message.substring(1).trim();
 
-  if (senderGroupId !== groupIdTest) {
+  if (senderGroupId !== groupIdTest && sender !== botName) {
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
-    checkMessage(trigger, gifbotTagCheck, searchTerm, botId);
+    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   } else {
+  console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   botId = botIdTest;
   groupEnv = groupEnvTest;
   console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
-  checkMessage(trigger, gifbotTagCheck, searchTerm, botId);
+  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   }
 }
 
 function checkMessage() {
   //HELP ?
-  if (trigger == '?' || gifbotTagCheck >= 0 || trigger == '/') {
+  if (trigger == '?' || botNameTagCheck >= 0 || trigger == '/') {
     searchTerm = '?';
     requestHelp(searchTerm, botId);
-    return;
   }
 
   //GIF #
