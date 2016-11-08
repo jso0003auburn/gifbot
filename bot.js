@@ -2,10 +2,10 @@ var request = require('request');
 var https = require('https');
 
 var botId = process.env.botIdProd;
-var botIdTest = process.env.botIdTest;
-var myGroupId = process.env.groupIdProd;
+var groupId = process.env.groupIdProd;
 var groupEnv = 'prod';
-var testGroupId = process.env.groupIdTest;
+var botIdTest = process.env.botIdTest;
+var groupIdTest = process.env.groupIdTest;
 var groupEnvTest = 'test';
 var botName = 'gifbot';
 //git push -f heroku
@@ -18,27 +18,22 @@ function respond() {
   message = request.text;
   trigger = message.substring(0,1);
   senderGroupId = request.group_id;
-  gifbotCheck = message.indexOf('@' + botName);
+  gifbotTagCheck = message.indexOf('@' + botName);
   searchTerm = message.substring(1).trim();
 
-  if (senderGroupId == testGroupId) {
+  if (senderGroupId == groupIdTest || sender == botName) {
     botId = botIdTest;
     groupEnv = groupEnvTest;
-  }
-
-  if (sender == botName) {
     console.log(sender + ' replied to: ' + trigger + ' in ' + groupEnv);
-  }
-
-  if (sender !== botName) {
-    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
-  }
+  } else {
+  console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   checkMessage(trigger, gifbotCheck, searchTerm);
+  }
 }
 
 function checkMessage() {
   //HELP ?
-  if (trigger == '?' || gifbotCheck >= 0 || trigger == '/') {
+  if (trigger == '?' || gifbotTagCheck >= 0 || trigger == '/') {
     searchTerm = 'gifbot help:';
     requestHelp(searchTerm);
     return;
