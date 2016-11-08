@@ -11,12 +11,12 @@ var groupIdTest = process.env.groupIdTest;
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
+  this.res.end();
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   groupId = request.group_id;
   message = request.text.indexOf('@gifbot');
   console.log(request.name + ': ' + request.text);
-  this.res.end();
 
   //Group check
   if (groupId == groupIdProd) {
