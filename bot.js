@@ -10,7 +10,7 @@ var groupIdTest = process.env.groupIdTest;
 //scan messages
 function respond() {
   this.res.writeHead(200);
-  var request = JSON.parse(this.req.chunks[0]),
+  var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
