@@ -21,10 +21,10 @@ function respond() {
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
 
-  senderGroupId = request.group_id;
+  senderGroupId = request.message.group_id;
   botNameTagCheck = message.indexOf('@' + botName);
   if (senderGroupId !== groupIdTest && sender !== botName) {
-    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+    console.log(sender + ' sent: ' + message + ' in ' + senderGroupId);
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   } else if (senderGroupId !== groupId && sender !== botName) {
     botId = botIdTest;
