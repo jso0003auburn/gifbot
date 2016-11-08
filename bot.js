@@ -12,30 +12,33 @@ function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
-  senderGroupId = request.group_id;
   sender = request.name;
   message = request.text;
   trigger = message.substring(0,1);
-  searchTerm = message.substring(1).trim();
-  gifbotCheck = message.indexOf('@' + botName);
-  console.log(sender + ': ' + message);
+
+  if (sender == botName) {
+    console.log(sender + ' replied to: ' + trigger);
+  }
+
+  if (sender !== botName) {
+    console.log(sender + ' sent: ' + message);
+  }
 
   //group check
+  senderGroupId = request.group_id;
   if (senderGroupId == testGroupId) {
     botId = botIdTest;
   }
-  //sender check
-  if (sender == botName) {
-    console.log(sender + ' sent');
-  }
 
   //HELP ?
+  gifbotCheck = message.indexOf('@' + botName);
   if (trigger == '?' || gifbotCheck >= 0 || trigger == '/') {
     requestHelp();
     return;
   }
 
   //GIF #
+  searchTerm = message.substring(1).trim();
   if (trigger == '#') {
     requestGif(searchTerm);
     return;
