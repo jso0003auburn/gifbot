@@ -1,9 +1,9 @@
 var request = require('request');
 var https = require('https');
 
-var botIdProd = process.env.botIdProd;
+var botId = process.env.botIdProd;
 var botIdTest = process.env.botIdTest;
-var groupIdProd = process.env.groupIdProd;
+var myGroupId = process.env.groupIdProd;
 var groupIdTest = process.env.groupIdTest;
 
 //git push -f heroku
@@ -13,24 +13,23 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
 
-  trigger = request.text.substring(0,1);
-  searchTerm = request.text.substring(1).trim();
-  groupId = request.group_id;
-  message = request.text;
-  sender = request.name;
-  gifbotCheck = request.text.indexOf('@gifbot');
-  botID = botIdTest;
-  console.log(sender + ': ' + message);
-
   //@gifbot?
+  gifbotCheck = request.text.indexOf('@gifbot');
   if (gifbotCheck >= 0) {
     requestHelp();
   }
 
   //Group check
-  if (groupId == groupIdProd) {
-    botID = botIdProd;
+  requestGroupId = request.group_id;
+  if (requestGroupId !== myGroupId) {
+    botId = botIdTest;
   }
+
+  trigger = request.text.substring(0,1);
+  searchTerm = request.text.substring(1).trim();
+  message = request.text;
+  sender = request.name;
+  console.log(sender + ': ' + message);
 
   //HELP ?
   if (trigger == '?') {
@@ -60,7 +59,7 @@ function respond() {
 
 //? for help
 function requestHelp() {
-  postMessage('Here are some tips:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botID);
+  postMessage('Here are some tips:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botId);
 }
 
 //# + search term // to post a gif
@@ -68,9 +67,9 @@ function requestGif() {
   request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
   parsedData = JSON.parse(body);
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-    postMessage(parsedData.data.images.downsized.url, botID);
+    postMessage(parsedData.data.images.downsized.url, botId);
   } else {
-  postMessage('No gifs for: ' + searchTerm + '\nType ? for help', botID, searchTerm);
+  postMessage('No gifs for: ' + searchTerm + '\nType ? for help', botId, searchTerm);
   }
   });
 }
@@ -88,9 +87,9 @@ function requestTicker() {
     change = String('+' + change);
   }
   if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
-    postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botID);
+    postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
   } else {
-  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.\nType ? for help', botID);
+  postMessage('"'  + searchTerm + '"' + ' is an invalid ticker.\nType ? for help', botId);
   } 
   }); 
 }
@@ -106,13 +105,13 @@ function requestWeather() {
   low = parsedData.query.results.channel.item.forecast[0].low + '°';
   forecast = parsedData.query.results.channel.item.forecast[0].text;
   if (!error && response.statusCode == 200 && parsedData.query.results != null) {
-    postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botID);
+    postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botId);
   } 
   }); 
 }
 
 //Post message
-function postMessage(botResponse, botID) {
+function postMessage(botResponse, botId) {
   var options, body, botReq;
   options = {
     hostname: 'api.groupme.com',
@@ -121,7 +120,7 @@ function postMessage(botResponse, botID) {
   };
 
   body = {
-    "bot_id" : botID,
+    "bot_id" : botId,
     "text" : botResponse 
   };
 
