@@ -4,24 +4,29 @@ var https = require('https');
 var botId = process.env.botIdProd;
 var botIdTest = process.env.botIdTest;
 var myGroupId = process.env.groupIdProd;
-var groupIdTest = process.env.groupIdTest;
+var testGroupId = process.env.groupIdTest;
+var botName = 'gifbot';
 
 //scan messages
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
+  senderGroupId = request.group_id;
   sender = request.name;
   message = request.text;
-  senderGroupId = request.group_id;
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
-  gifbotCheck = message.indexOf('@gifbot');
+  gifbotCheck = message.indexOf('@' + botName);
   console.log(sender + ': ' + message);
 
   //group check
-  if (senderGroupId !== myGroupId) {
+  if (senderGroupId == testGroupId) {
     botId = botIdTest;
+  }
+  //sender check
+  if (sender == botName) {
+    console.log(sender + ' sent');
   }
 
   //HELP ?
