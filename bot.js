@@ -4,7 +4,7 @@ var groupIdProd = process.env.groupIdProd;
 var groupIdTest = process.env.groupIdTest;
 var request = require('request');
 var https = require('https');
-
+//git push -f heroku
 //scan messages
 function respond() {
   this.res.writeHead(200);
@@ -12,7 +12,7 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   groupId = request.group_id;
-  message = request.text;
+  message = request.text.indexOf('gifbot');
   console.log(request.name + ': ' + request.text);
   this.res.end();
 
@@ -24,7 +24,7 @@ function respond() {
   }
 
   //@gifbot?
-  if (message.indexOf('gifbot') >= 0) {
+  if (message >= 0) {
     requestHelp();
   } else {
   //cool
