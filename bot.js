@@ -12,22 +12,24 @@ function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
+
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   groupId = request.group_id;
-  message = request.text.indexOf('@gifbot');
-  console.log(request.name + ': ' + request.text);
+  message = request.text;
+  sender = request.name;
+  gifbotCheck = request.text.indexOf('@gifbot');
+  botID = botIdTest;
+  console.log(sender + ': ' + message);
+
+  //@gifbot?
+  if (gifbotCheck >= 0) {
+    requestHelp();
+  }
 
   //Group check
   if (groupId == groupIdProd) {
     botID = botIdProd;
-  } else {
-  botID = botIdTest;
-  }
-
-  //@gifbot?
-  if (message >= 0) {
-    requestHelp();
   }
 
   //HELP ?
