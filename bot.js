@@ -4,7 +4,7 @@ var https = require('https');
 var botId = process.env.botIdProd;
 var botIdTest = process.env.botIdTest;
 var myGroupId = process.env.groupIdProd;
-var groupIdTest = process.env.groupIdTest;
+var testGroupId = process.env.groupIdTest;
 
 //scan messages
 function respond() {
@@ -16,51 +16,42 @@ function respond() {
   senderGroupId = request.group_id;
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
+  gifbotCheck = message.indexOf('@gifbot');
   console.log(sender + ': ' + message);
 
   //group check
-  if (senderGroupId !== myGroupId) {
+  if (senderGroupId == testGroupId) {
     botId = botIdTest;
   }
+
   //HELP ?
-  gifbotCheck = message.indexOf('@gifbot');
-  if (trigger == '?' || gifbotCheck >= 0) {
-    this.res.writeHead(200);
+  if (trigger == '?' || gifbotCheck >= 0 || trigger == '/') {
     requestHelp();
-    this.res.end();
     return;
   }
 
   //GIF #
   if (trigger == '#') {
-    //this.res.writeHead(200);
     requestGif(searchTerm);
-    //this.res.end();
     return;
   }
 
   //STOCK TICKER $
   if (trigger == '$') {
-    this.res.writeHead(200);
     requestTicker(searchTerm);
-    this.res.end();
     return;
   }
 
-
-
   //WEATHER !
   if (trigger == '!') {
-    this.res.writeHead(200);
     requestWeather(searchTerm);
-    this.res.end();
     return;
   }
 }
 
 //? for help
 function requestHelp() {
-  postMessage('Here are some tips:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)', botId);
+  postMessage('gifbot tips:\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
 }
 
 //# + search term // to post a gif
