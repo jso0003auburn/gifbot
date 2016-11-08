@@ -14,7 +14,7 @@ function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
-
+  
   sender = request.name;
   message = request.text;
 
@@ -23,15 +23,14 @@ function respond() {
 
   senderGroupId = request.group_id;
   botNameTagCheck = message.indexOf('@' + botName);
-  if (senderGroupId !== groupIdTest && sender !== botName) {
-    console.log(sender + ' sent: ' + message + ' in ' + senderGroupId);
-    return;
-    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-  } else if (senderGroupId !== groupId && sender !== botName) {
+  if (senderGroupId == groupIdTest) {
     botId = botIdTest;
     groupEnv = groupEnvTest;
-    console.log(sender + ' sent: ' + message + ' in ' + senderGroupId);
-    return;
+    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
+  } else if (senderGroupId == groupId) {
+    botId = botId;
+    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   }
 }
