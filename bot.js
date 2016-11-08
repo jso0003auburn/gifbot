@@ -13,7 +13,7 @@ function respond() {
   searchTerm = request.text.substr(1).trim();
   groupID = request.group_id;
   message = request.text;
-  conditions(trigger, searchTerm, GroupID, message);
+  conditions(trigger, searchTerm, groupID, message);
   this.res.end();
 }
 
