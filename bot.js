@@ -12,6 +12,7 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   groupId = request.group_id;
+  message = request.text;
   console.log(request.name + ': ' + request.text);
   this.res.end();
 
@@ -23,7 +24,7 @@ function respond() {
   }
 
   //@gifbot?
-  if (request.text.indexOf('@gifbot') >= 0) {
+  if (message.indexOf('gifbot') >= 0) {
     requestHelp();
   } else {
   //cool
