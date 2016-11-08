@@ -7,30 +7,31 @@ var groupEnv = 'prod';
 var botIdTest = process.env.botIdTest;
 var groupIdTest = process.env.groupIdTest;
 var groupEnvTest = 'test';
-var botName = 'gifbot';
+var botName = process.env.botName;
 
 //scan messages
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
   this.res.end();
+
   sender = request.name;
   message = request.text;
+
   trigger = message.substring(0,1);
-  senderGroupId = request.group_id;
-  botNameTagCheck = message.indexOf('@' + botName);
   searchTerm = message.substring(1).trim();
 
+  senderGroupId = request.group_id;
+  botNameTagCheck = message.indexOf('@' + botName);
   if (senderGroupId !== groupIdTest && sender !== botName) {
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-    return;
+  } else if (senderGroupId !== groupId && sender !== botName) {
+    botId = botIdTest;
+    groupEnv = groupEnvTest;
+    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   }
-  botId = botIdTest;
-  groupEnv = groupEnvTest;
-  message = message.substring(0,20);
-  console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
-  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
 function checkMessage() {
