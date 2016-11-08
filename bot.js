@@ -9,9 +9,8 @@ var https = require('https');
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]),
-  console.log(request.name + ': ' + request.text);
-  this.res.end();
   conditions(request);
+  this.res.end();
 }
 
 function conditions() {
