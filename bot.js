@@ -15,13 +15,15 @@ function respond() {
   sender = request.name;
   message = request.text;
   senderGroupId = request.group_id;
+  trigger = message.substring(0,1);
+  searchTerm = message.substring(1).trim();
 
   //group check
   if (senderGroupId == myGroupId && sender !== botName.substring(1)) {
     console.log(sender + ': ' + message);
   } else {
   botId = botIdTest;
-  console.log(sender + ':t ' + message);
+  console.log(sender + ': test -  ' + searchTerm);
   }
 
   //@gifbot?
@@ -30,9 +32,6 @@ function respond() {
     requestHelp();
     return;
   }
-
-  trigger = message.substring(0,1);
-  searchTerm = message.substring(1).trim();
 
   //GIF #
   if (trigger == '#') {
