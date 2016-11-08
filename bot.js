@@ -8,7 +8,7 @@ var groupEnv = 'prod';
 var testGroupId = process.env.groupIdTest;
 var groupEnvTest = 'test';
 var botName = 'gifbot';
-
+//git push -f heroku
 //scan messages
 function respond() {
   this.res.writeHead(200);
@@ -23,6 +23,7 @@ function respond() {
     botId = botIdTest;
     groupEnv = groupEnvTest;
   }
+
   if (sender == botName) {
     console.log(sender + ' replied to: ' + trigger + ' in ' + groupEnv);
   }
@@ -58,10 +59,10 @@ function respond() {
     return;
   }
 }
-//git push -f heroku
+
 //? for help
 function requestHelp() {
-  postMessage(searchTerm + ' is not valid\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  postMessage('You need help...\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   return;
 }
 
