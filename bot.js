@@ -15,7 +15,7 @@ function respond() {
   sender = request.name;
   message = request.text;
   senderGroupId = request.group_id;
-  console.log(sender + ': ' + rmessage);
+  console.log(sender + ': ' + message);
 
   //group check
   if (senderGroupId !== myGroupId) {
