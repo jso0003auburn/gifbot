@@ -35,7 +35,7 @@ function respond() {
 function checkMessage() {
   //HELP ?
   if (trigger == '?' || gifbotTagCheck >= 0 || trigger == '/') {
-    searchTerm = '';
+    searchTerm = '?';
     requestHelp(searchTerm, botId);
   }
 
@@ -57,7 +57,11 @@ function checkMessage() {
 
 //? for help
 function requestHelp() {
-  postMessage('Invalid' + searchTerm + '\nNeed help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  if (searchTerm == '?') {
+    postMessage('Need help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  } else {
+  postMessage('"' + searchTerm + '" is invalid\nNeed help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  }
 }
 
 //# + search term // to post a gif
