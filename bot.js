@@ -22,6 +22,7 @@ function respond() {
   if (senderGroupId !== myGroupId) {
     botId = botIdTest;
   }
+
   //@gifbot?
   gifbotCheck = message.indexOf('@gifbot');
   if (gifbotCheck >= 0) {
@@ -31,9 +32,9 @@ function respond() {
 
   //GIF #
   if (trigger == '#') {
-    this.res.writeHead(200);
+    //this.res.writeHead(200);
     requestGif(searchTerm);
-    this.res.end();
+    //this.res.end();
     return;
   }
 
