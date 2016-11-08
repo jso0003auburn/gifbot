@@ -18,6 +18,8 @@ function respond() {
   message = request.text;
   trigger = message.substring(0,1);
   senderGroupId = request.group_id;
+  gifbotCheck = message.indexOf('@' + botName);
+  searchTerm = message.substring(1).trim();
 
   if (senderGroupId == testGroupId) {
     botId = botIdTest;
@@ -31,9 +33,11 @@ function respond() {
   if (sender !== botName) {
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
   }
+  checkMessage(trigger, gifbotCheck, searchTerm);
+}
 
+function checkMessage() {
   //HELP ?
-  gifbotCheck = message.indexOf('@' + botName);
   if (trigger == '?' || gifbotCheck >= 0 || trigger == '/') {
     searchTerm = 'gifbot help:';
     requestHelp(searchTerm);
@@ -41,7 +45,6 @@ function respond() {
   }
 
   //GIF #
-  searchTerm = message.substring(1).trim();
   if (trigger == '#') {
     requestGif(searchTerm);
     return;
