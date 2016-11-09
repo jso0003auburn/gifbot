@@ -41,7 +41,14 @@ function checkMessage() {
 
   //GIF #
   if (trigger == '#') {
-    requestGif(searchTerm, botId);
+	request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
+	parsedData = JSON.parse(body);
+	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
+	postMessage(parsedData.data.images.downsized.url, botId);
+	} else {
+	requestHelp(searchTerm);
+	}
+	});
   }
 
   //STOCK TICKER $
@@ -77,18 +84,6 @@ function requestHelp() {
   } else {
   postMessage('"' + searchTerm + '" is invalid\nNeed help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   }
-}
-
-//# + search term // to post a gif
-function requestGif() {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
-  parsedData = JSON.parse(body);
-  if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-    postMessage(parsedData.data.images.downsized.url, botId);
-  } else {
-  requestHelp(searchTerm);
-  }
-  });
 }
 
 //! + zip code OR city // for current temp, high low temps, and forecast
