@@ -29,11 +29,12 @@ function respond() {
     botId = botIdTest;
     groupEnv = groupEnvTest;
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   } else if (senderGroupId == groupId) {
     botId = botId;
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   }
-  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
 function checkMessage() {
