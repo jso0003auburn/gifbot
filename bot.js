@@ -100,7 +100,7 @@ function requestHelp() {
   if (searchTerm == '?') {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   } else {
-  postMessage('Sorry, "' + searchTerm + '" is invalid\nNeed help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  postMessage('"' + searchTerm + '" is invalid\nNeed help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   }
 }
 
