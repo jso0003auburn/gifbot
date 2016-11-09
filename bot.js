@@ -24,14 +24,6 @@ function respond() {
   botNameTagCheck = message.indexOf('@' + botName);
   
   this.res.end();
-
-  if (senderGroupId !== groupIdTest) {
-    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
-    return;
-  }
-  botId = botIdTest;
-  groupEnv = groupEnvTest;
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
