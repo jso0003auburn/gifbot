@@ -20,20 +20,19 @@ function respond() {
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
 
+  senderGroupId = request.group_id;
   botNameTagCheck = message.indexOf('@' + botName);
   
   this.res.end();
 
-  if (request.group_id == groupIdTest) {
-    botId = botIdTest;
-    groupEnv = groupEnvTest;
-    console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
+  if (senderGroupId !== groupIdTest) {
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-  } else if (request.group_id == groupId) {
-    botId = botId;
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
-    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
+    return;
   }
+  botId = botIdTest;
+  groupEnv = groupEnvTest;
+  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
 function checkMessage() {
@@ -85,9 +84,9 @@ function requestTicker() {
   request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + searchTerm + '%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json', function (error, response, body) {
   parsedData = JSON.parse(body);   
   last = parseFloat(parsedData.query.results.quote.LastTradePriceOnly);
-  //last = Number((last).toFixed(4));   
+  last = Number((last).toFixed(2));   
   change = parseFloat(parsedData.query.results.quote.ChangeinPercent);
-  //change = Number((change).toFixed(4));
+  change = Number((change).toFixed(2));
   name = String(parsedData.query.results.quote.Name);
   if (change > 0) {
     change = String('+' + change);
