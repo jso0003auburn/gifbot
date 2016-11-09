@@ -3,7 +3,7 @@ var https = require('https');
 
 var botIdProd= process.env.botIdProd;
 var groupIdProd = process.env.groupIdProd;
-var groupEnv = 'prod';
+var groupEnvProd = 'prod';
 var botIdTest = process.env.botIdTest;
 var groupIdTest = process.env.groupIdTest;
 var groupEnvTest = 'test';
@@ -26,9 +26,12 @@ function respond() {
   this.res.end();
   if (senderGroupId == groupIdProd) {
     botId = botIdProd;
+    groupEnv = groupEnvProd;
   } else if (senderGroupId == groupIdTest) {
   botId = botIdTest;
+  groupEnv = groupEnvTest;
   }
+  console.log(sender + ' sent: ' + message + ' in: ' + groupEnv)
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
