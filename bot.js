@@ -95,7 +95,7 @@ function checkMessage() {
 
 }
 
-//? for help
+//? for help if needed
 function requestHelp() {
   if (searchTerm == '?') {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
