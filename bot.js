@@ -48,7 +48,7 @@ function checkMessage() {
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
-	postMessage('"' + searchTerm + '" is invalid', botId);
+	postMessage('"' + searchTerm + '" is invalid\nType "?" for help', botId);
 	}
 	});
   }
@@ -68,7 +68,7 @@ function checkMessage() {
 	  if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
 		postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
 	  } else {
-	  postMessage('"' + searchTerm + '" is invalid', botId);
+	  postMessage('"' + searchTerm + '" is invalid\nType "?" for help', botId);
 	  } 
 	  }); 
   }
@@ -86,7 +86,7 @@ function checkMessage() {
 	  forecast = parsedData.query.results.channel.item.forecast[0].text;
       postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botId);
     } else {
-    postMessage('"' + searchTerm + '" is invalid', botId);
+	postMessage('"' + searchTerm + '" is invalid\nType "?" for help', botId);
     }  
     }); 
   }
