@@ -20,17 +20,16 @@ function respond() {
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
 
-  senderGroupId = request.group_id;
   botNameTagCheck = message.indexOf('@' + botName);
   
   this.res.end();
 
-  if (senderGroupId == groupIdTest) {
+  if (request.group_id == groupIdTest) {
     botId = botIdTest;
     groupEnv = groupEnvTest;
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-  } else if (senderGroupId == groupId) {
+  } else if (request.group_id == groupId) {
     botId = botId;
     console.log(sender + ' sent: ' + message + ' in ' + groupEnv);
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
