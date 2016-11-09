@@ -16,11 +16,10 @@ function respond() {
   
   sender = request.name;
   message = request.text;
-
+  senderGroupId = request.group_id;
+  
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
-
-  senderGroupId = request.group_id;
   botNameTagCheck = message.indexOf('@' + botName);
   
   this.res.end();
