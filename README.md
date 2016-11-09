@@ -25,7 +25,7 @@
 
 ## Contact
 
-jphn.stephen.olson@gmail.com
+john.stephen.olson@gmail.com
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
