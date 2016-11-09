@@ -91,11 +91,6 @@ function requestGif() {
   });
 }
 
-//$ + stock ticker // for current price, day change, and a link to the chart
-function requestTicker() {
-
-}
-
 //! + zip code OR city // for current temp, high low temps, and forecast
 function requestWeather() {
   request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + searchTerm + '%22)&format=json', function (error, response, body) {
