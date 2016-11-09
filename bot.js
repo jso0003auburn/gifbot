@@ -36,6 +36,7 @@ function respond() {
 
 //check for triggers
 function checkMessage() {
+  
   //HELP ?
   if (trigger == '?' || botNameTagCheck >= 0 || trigger == '/') {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
