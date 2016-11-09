@@ -73,8 +73,22 @@ function checkMessage() {
 
   //WEATHER !
   if (trigger == '!') {
-    requestWeather(searchTerm, botId);
+    request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + searchTerm + '%22)&format=json', function (error, response, body) {
+    parsedData = JSON.parse(body);
+    if (!error && response.statusCode == 200 && parsedData.query.results != null) {
+      city = parsedData.query.results.channel.location.city;
+	  region = (parsedData.query.results.channel.title).substring(17,40);
+	  temp = parsedData.query.results.channel.item.condition.temp + '°';
+	  high = parsedData.query.results.channel.item.forecast[0].high + '°';
+	  low = parsedData.query.results.channel.item.forecast[0].low + '°';
+	  forecast = parsedData.query.results.channel.item.forecast[0].text;
+      postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botId);
+    } else {
+    requestHelp(searchTerm);
+    }  
+    }); 
   }
+
 }
 
 //? for help
@@ -84,24 +98,6 @@ function requestHelp() {
   } else {
   postMessage('"' + searchTerm + '" is invalid\nNeed help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   }
-}
-
-//! + zip code OR city // for current temp, high low temps, and forecast
-function requestWeather() {
-  request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + searchTerm + '%22)&format=json', function (error, response, body) {
-  parsedData = JSON.parse(body);
-  if (!error && response.statusCode == 200 && parsedData.query.results != null) {
-    city = parsedData.query.results.channel.location.city;
-	region = (parsedData.query.results.channel.title).substring(17,40);
-	temp = parsedData.query.results.channel.item.condition.temp + '°';
-	high = parsedData.query.results.channel.item.forecast[0].high + '°';
-	low = parsedData.query.results.channel.item.forecast[0].low + '°';
-	forecast = parsedData.query.results.channel.item.forecast[0].text;
-    postMessage(temp + ' in ' + region + '\nToday: ' + low + ' - ' + high + '\nForecast: ' + forecast, botId);
-  } else {
-  requestHelp(searchTerm);
-  }  
-  }); 
 }
 
 //Post message
