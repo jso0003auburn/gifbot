@@ -1,8 +1,8 @@
 var request = require('request');
 var https = require('https');
 
-var botId = process.env.botIdProd;
-var groupId = process.env.groupIdProd;
+var botIdProd= process.env.botIdProd;
+var groupIdProd = process.env.groupIdProd;
 var groupEnv = 'prod';
 var botIdTest = process.env.botIdTest;
 var groupIdTest = process.env.groupIdTest;
@@ -24,6 +24,11 @@ function respond() {
   botNameTagCheck = message.indexOf('@' + botName);
   
   this.res.end();
+  if (senderGroupId == groupIdProd) {
+    botId = botIdProd;
+  } else if (senderGroupId == groupIdTest) {
+  botId = botIdTest;
+  }
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
