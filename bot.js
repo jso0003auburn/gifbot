@@ -11,8 +11,7 @@ var botName = process.env.botName;
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
-  var trigger = request.text.substring(0,1);
-
+  trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + botName);
   
