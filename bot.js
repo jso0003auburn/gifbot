@@ -12,8 +12,9 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
-  botNameTagCheck = request.text.indexOf('@' + botName);
+  botNameTag = request.text.indexOf('@' + botName);
   this.res.end();
+
   if (request.group_id == groupId) {
     botId = process.env.botId;
   } else {
@@ -27,7 +28,7 @@ function respond() {
 function checkMessage() {
   
   //HELP ?
-  if (trigger == '?' || botNameTagCheck >= 0 || trigger == '/') {
+  if (trigger == '?' || botNameTag >= 0 || trigger == '/') {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   }
 
