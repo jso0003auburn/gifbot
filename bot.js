@@ -6,20 +6,15 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
-  botNameTagCheck = request.text.indexOf('@' + process.env.botName);
-  groupSelection(trigger, botNameTagCheck, searchTerm)
-}
-
-function groupSelection() {
-	if (request.group_id == process.env.groupId && request.name != process.env.botName) {
-	  botId = process.env.botId;
-	  console.log('MESSAGE: ' + request.name + ' : ' + request.text);
-	  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-	} else if (process.env.botIdAlternate != null) {
-	  botId = process.env.botIdAlternate;
-	  console.log('TEST: ' + request.name + ' : ' + request.text);
-	  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-	  }
+  if (request.group_id == process.env.groupId && request.name != process.env.botName) {
+    botId = process.env.botId;
+    console.log('MESSAGE: ' + request.name + ' : ' + request.text);
+    checkMessage(trigger, request.text.indexOf('@' + process.env.botName), searchTerm, botId);
+  } else if (process.env.botIdAlternate != null) {
+  botId = process.env.botIdAlternate;
+  console.log('TEST: ' + request.name + ' : ' + request.text);
+  checkMessage(trigger, request.text.indexOf('@' + process.env.botName), searchTerm, botId);
+  }
 }
 
 //check for triggers
