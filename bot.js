@@ -12,23 +12,22 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
-  botNameTag = request.text.indexOf('@' + botName);
+  botNameTagCheck = request.text.indexOf('@' + botName);
   this.res.end();
-
   if (request.group_id == groupId) {
     botId = process.env.botId;
   } else {
   botId = process.env.botIdAlternate;
   }
   console.log(botName + ' : ' + request.name + ' : ' + request.text);
-  checkMessage(trigger, botNameTag, searchTerm, botId);
+  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
 //check for triggers
 function checkMessage() {
   
   //HELP ?
-  if (trigger == '?' || botNameTag >= 0 || trigger == '/') {
+  if (trigger == '?' || botNameTagCheck >= 0 || trigger == '/') {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nWeather = ! + (city or zip)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   }
 
