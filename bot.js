@@ -23,7 +23,7 @@ function respond() {
   sendingUser = request.name;
 
   this.res.writeHead(200);
-  if (sendingGroup ==  groupId) {
+  if (sendingGroup ==  groupId && sendingUser !== botName) {
     botId = botId;
     console.log(sendingUser + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
