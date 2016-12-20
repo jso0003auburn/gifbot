@@ -6,6 +6,7 @@ var https = require('https');
 // botId = "your bot ID"
 // groupId = "your group ID"
 // botName = "your bot name"
+var botName = process.env.botName;
 // botIdAlternate = "your test group bot ID" (optional)
 
 //scan messages
@@ -13,12 +14,12 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
-  botTag = request.text.indexOf('@' + process.env.botName);
+  botTag = request.text.indexOf('@' + botName);
   sendingGroup = request.group_id;
   sendingUser = request.name;
 
   this.res.writeHead(200);
-  if (sendingGroup == process.env.groupId && sendingUser != process.env.botName) {
+  if (sendingGroup == process.env.groupId && sendingUser != botName) {
     botId = process.env.botId;
     console.log('MESSAGE: ' + request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
