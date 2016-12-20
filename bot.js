@@ -20,7 +20,6 @@ function respond() {
     botId = process.env.botId;
   } else {
   botId = process.env.botIdAlternate;
-  groupId = groupiDAlternate
   }
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
