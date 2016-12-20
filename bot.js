@@ -16,7 +16,7 @@ function respond() {
   this.res.end();
   if (request.group_id == groupId) {
     botId = process.env.botId;
-  } else {
+  } else if (process.env.botIdAlternate != null) {
   botId = process.env.botIdAlternate;
   }
   console.log(botName + ' : ' + request.name + ' : ' + request.text);
