@@ -7,13 +7,12 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + process.env.botName);
+  console.log('MESSAGE: ' + request.name + ' : ' + request.text);
   if (request.group_id == process.env.groupId && request.name != process.env.botName) {
     botId = process.env.botId;
-    console.log('MESSAGE: ' + request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
   } else if (process.env.botIdAlternate != null) {
   botId = process.env.botIdAlternate;
-  console.log('TEST: ' + request.name + ' : ' + request.text);
   checkMessage(trigger, botTag, searchTerm, botId);
   }
 }
@@ -33,7 +32,7 @@ function checkMessage() {
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
-	postMessage('"' + searchTerm + '" is invalid\nType "?" for help', botId);
+	postMessage('"' + searchTerm + '" is invalid\nTag me for help', botId);
 	}
 	});
   }
@@ -53,7 +52,7 @@ function checkMessage() {
 	  if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
 		postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
 	  } else {
-	  postMessage('"' + searchTerm + '" is invalid\nType "?" for help', botId);
+	  postMessage('"' + searchTerm + '" is invalid\nTag me for help', botId);
 	  } 
 	  }); 
   }
