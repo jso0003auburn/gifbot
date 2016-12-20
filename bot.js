@@ -1,10 +1,10 @@
 var request = require('request');
 var https = require('https');
 
-var botIdProd= process.env.botIdProd;
-var groupIdProd = process.env.groupIdProd;
-var botIdTest = process.env.botIdTest;
-var groupIdTest = process.env.groupIdTest;
+var botId = process.env.botId;
+var groupId = process.env.groupId;
+var botIdAlternate = process.env.botIdAlternate;
+var groupIdAlternate = process.env.groupIdAlternate;
 var botName = process.env.botName;
 
 //scan messages
@@ -15,17 +15,16 @@ function respond() {
   sender = request.name;
   message = request.text;
   senderGroupId = request.group_id;
-  
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
   botNameTagCheck = message.indexOf('@' + botName);
   
   this.res.end();
-  if (senderGroupId == groupIdProd) {
-    botId = botIdProd;
+  if (request.group_id == groupId) {
+    botId = botId;
     groupEnv = 'PROD';
-  } else if (senderGroupId == groupIdTest) {
-  botId = botIdTest;
+  } else if (request.group_id == groupIdAlternate) {
+  botId = botIdAlternate;
   groupEnv = 'TEST';
   }
   console.log(groupEnv + ' : ' + sender + ' : ' + message);
