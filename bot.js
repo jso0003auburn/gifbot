@@ -21,7 +21,7 @@ function respond() {
   botId = process.env.botIdAlternate;
   }
   console.log(botName + ' : ' + request.name + ' : ' + request.text);
-  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
+  checkMessage(trigger, botNameTag, searchTerm, botId);
 }
 
 //check for triggers
