@@ -4,14 +4,18 @@ var https = require('https');
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
-  
+  group_Id = request.group_id;
+  request_Name = request.name;
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + process.env.botName);
   console.log(request.name + ' : ' + request.text);
-  
+  groupCheck(group_Id, request_Name, trigger, searchTerm, botTag);
+}
+
+function groupCheck() {
   this.res.writeHead(200);
-  if (request.group_id == process.env.groupId && request.name != process.env.botName) {
+  if (group_Id == process.env.groupId && request_Name != process.env.botName) {
     botId = process.env.botId;
     checkMessage(trigger, botTag, searchTerm, botId);
   } else if (process.env.botIdAlternate != null) {
