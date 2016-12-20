@@ -21,14 +21,15 @@ function respond() {
   botTag = request.text.indexOf('@' + botName);
   sendingGroup = request.group_id;
   sendingUser = request.name;
-  console.log(sendingUser + ' : ' + request.text);
 
   this.res.writeHead(200);
   if (sendingGroup ==  groupId && sendingUser !== botName) {
     botId = botId;
+    console.log(sendingUser + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
   } else if (botIdAlt != null && sendingUser !== botName) {
   botId = botIdAlt;
+  console.log(sendingUser + ' : ' + request.text);
   checkMessage(trigger, botTag, searchTerm, botId);
   }
   this.res.end();
