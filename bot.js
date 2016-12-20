@@ -1,6 +1,5 @@
 var request = require('request');
 var https = require('https');
-
 var botId = process.env.botId;
 var groupId = process.env.groupId;
 var botIdAlternate = process.env.botIdAlternate;
@@ -14,7 +13,6 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + botName);
-  
   this.res.end();
   if (request.group_id == groupId) {
     botId = botId;
