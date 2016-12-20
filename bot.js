@@ -4,29 +4,34 @@ var https = require('https');
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
+  trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + process.env.botName);
-  if (request.group_id == process.env.groupId && request.name != process.env.botName) {
-    botId = process.env.botId;
-    console.log('MESSAGE: ' + request.name + ' : ' + request.text);
-    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
-  } else if (process.env.botIdAlternate != null) {
-  botId = process.env.botIdAlternate;
-  console.log('TEST: ' + request.name + ' : ' + request.text);
-  checkMessage(request, botNameTagCheck, searchTerm, botId);
-  }
+  groupSelection(trigger, botNameTagCheck, searchTerm)
+}
+
+function groupSelection() {
+	if (request.group_id == process.env.groupId && request.name != process.env.botName) {
+	  botId = process.env.botId;
+	  console.log('MESSAGE: ' + request.name + ' : ' + request.text);
+	  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
+	} else if (process.env.botIdAlternate != null) {
+	  botId = process.env.botIdAlternate;
+	  console.log('TEST: ' + request.name + ' : ' + request.text);
+	  checkMessage(trigger, botNameTagCheck, searchTerm, botId);
+	  }
 }
 
 //check for triggers
 function checkMessage() {
   
   //HELP ?
-  if (request.text.substring(0,1) == '?' || botNameTagCheck >= 0) {
+  if (trigger == '?' || botNameTagCheck >= 0) {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   }
 
   //GIF #
-  if (request.text.substring(0,1) == '#') {
+  if (trigger == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
 	parsedData = JSON.parse(body);
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
@@ -38,7 +43,7 @@ function checkMessage() {
   }
 
   //STOCK TICKER $
-  if (request.text.substring(0,1) == '$') {
+  if (trigger == '$') {
 	  request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + searchTerm + '%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json', function (error, response, body) {
 	  parsedData = JSON.parse(body);   
 	  last = parseFloat(parsedData.query.results.quote.LastTradePriceOnly);
