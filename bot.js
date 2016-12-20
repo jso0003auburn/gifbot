@@ -18,17 +18,15 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
-  sendingGroup = request.group_id;
-  sendingUser = request.name;
-
+  sendingGroup = request.group_id.String();
+  sendingUser = request.name.String();
+  console.log(sendingUser + ' : ' + request.text);
   this.res.writeHead(200);
   if (sendingGroup ==  groupId && sendingUser != botName) {
     botId = botId;
-    console.log('MESSAGE: ' + request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
-  } else if (process.env.botIdAlternate != null) {
-  botId = process.env.botIdAlt;
-  console.log('TEST: ' + request.name + ' : ' + request.text);
+  } else if (botIdAlt != null) {
+  botId = botIdAlt;
   checkMessage(trigger, botTag, searchTerm, botId);
   }
   this.res.end();
