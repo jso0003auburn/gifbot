@@ -4,13 +4,12 @@ var https = require('https');
 
 // Set these variables in Heroku settings
 // botId = "your bot ID"
-// groupId = "your group ID"
-// botName = "your bot name"
-// botIdAlternate = "your test group bot ID" (optional)
-
 var botId = process.env.botId;
+// groupId = "your group ID"
 var groupId = process.env.groupId;
+// botName = "your bot name"
 var botName = process.env.botName;
+// botIdAlternate = "your test group bot ID" (optional)
 var botIdAlt = process.env.botIdAlt;
 
 //scan messages
@@ -23,7 +22,7 @@ function respond() {
   sendingUser = request.name;
 
   this.res.writeHead(200);
-  if (sendingGroup ==  groupId && sendingUser !== botName) {
+  if (sendingGroup ==  groupId) {
     botId = botId;
     console.log(sendingUser + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
