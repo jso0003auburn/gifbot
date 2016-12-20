@@ -17,7 +17,6 @@ function respond() {
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   }
 }
-
 //check for triggers
 function checkMessage() {
   
