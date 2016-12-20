@@ -15,10 +15,8 @@ function respond() {
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + botName);
   this.res.end();
-  if (request.group_id == groupId) {
-    botId = process.env.botId;
-  } else {
-  botId = process.env.botIdAlternate;
+  if (request.group_id != groupId) {
+    botId = process.env.botIdAlternate;
   }
   console.log(botName + ' : ' + request.name + ' : ' + request.text);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
