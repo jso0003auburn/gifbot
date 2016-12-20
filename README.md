@@ -8,6 +8,7 @@
   	* Set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   	* Bot ID from dev.groupme.com
   	* Group ID from dev.groupme.com
+  	* Assign bot name grom dev.groupme.com
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config var to set the following
       * botId = bot id for your group
