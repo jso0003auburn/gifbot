@@ -1,5 +1,6 @@
 var request = require('request');
 var https = require('https');
+var utf8 = require('utf8');
 
 var botId = process.env.botId;
 var groupId = process.env.groupId;
@@ -52,11 +53,12 @@ function checkMessage() {
 	  change = parseFloat(parsedData.query.results.quote.ChangeinPercent);
 	  change = Number((change).toFixed(2));
 	  name = String(parsedData.query.results.quote.Name);
+	  pct = utf8.encode('\x25');
 	  if (change > 0) {
 		change = String('+' + change);
 	  }
 	  if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
-		postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
+		postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + pct + '\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
 	  } else {
 	  postMessage('"' + searchTerm + '" is invalid\nType "?" for help', botId);
 	  } 
