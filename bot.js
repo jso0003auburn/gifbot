@@ -46,7 +46,7 @@ function checkMessage() {
 	  if (change > 0) {
 		change = String('+' + change);
 	  }
-	  if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
+	  if (!error && response.statusCode == 200 && String(parsedData.query.results.quote.Name).substring(0,23) !== 'null' && String(parsedData.query.results.quote.Name).substring(0,23) !== 'undefined') {
 		postMessage(String(parsedData.query.results.quote.Name).substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
 	  } else {
 	  postMessage('"' + searchTerm + '" is invalid\nTag me for help', botId);
