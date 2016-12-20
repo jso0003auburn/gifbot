@@ -10,10 +10,14 @@ function respond() {
   console.log(request.group_id + ' ' + request.name + ' : ' + request.text);
   if (request.group_id == process.env.groupId && request.name != process.env.botName) {
     botId = process.env.botId;
+    this.res.writeHead(200);
     checkMessage(trigger, botTag, searchTerm, botId);
+    this.res.end();
   } else if (process.env.botIdAlternate != null) {
   botId = process.env.botIdAlternate;
+  this.res.writeHead(200);
   checkMessage(trigger, botTag, searchTerm, botId);
+  this.res.end();
   }
 }
 
