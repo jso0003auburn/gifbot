@@ -11,10 +11,8 @@ var botName = process.env.botName;
 function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
-  
-  sender = request.name;
+
   message = request.text;
-  senderGroupId = request.group_id;
   trigger = message.substring(0,1);
   searchTerm = message.substring(1).trim();
   botNameTagCheck = message.indexOf('@' + botName);
@@ -23,11 +21,11 @@ function respond() {
   if (request.group_id == groupId) {
     botId = botId;
     groupEnv = 'PROD';
-  } else if (request.group_id == groupIdAlternate) {
+  } else if (request.group_id != groupIdAlternate) {
   botId = botIdAlternate;
   groupEnv = 'TEST';
   }
-  console.log(groupEnv + ' : ' + sender + ' : ' + message);
+  console.log(groupEnv + ' : ' + request.name + ' : ' + message);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
