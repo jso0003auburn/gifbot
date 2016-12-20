@@ -10,10 +10,9 @@
   	* Get bot ID and group ID from dev.groupme.com
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config var to set the following
-    * botId = bot id for your main group
-    * groupId = group id for your main group
-    * botIdAlternate = bot id for a test group
-    * groupIdAlternate = group id for a test group
+    * botId = bot id for your group
+    * groupId = group id for your group
+    * botIdAlternate = bot id for a test group (optional)
     * botName = name of your bot
 
 ## Useful Heroku Command Line Tools

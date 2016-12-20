@@ -1,6 +1,5 @@
 var request = require('request');
 var https = require('https');
-
 var groupId = process.env.groupId;
 var botName = process.env.botName;
 
@@ -11,13 +10,14 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + botName);
-  console.log(botName + ' : ' + request.name + ' : ' + request.text);
   this.res.end();
-  if (request.group_id == groupId) {
+  if (request.group_id == groupId && request.name != botName) {
     botId = process.env.botId;
+    console.log('MESSAGE: ' + request.name + ' : ' + request.text);
     checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   } else if (process.env.botIdAlternate != null) {
   botId = process.env.botIdAlternate;
+  console.log('TEST: ' + request.name + ' : ' + request.text);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   }
 }
