@@ -30,7 +30,7 @@ function checkMessage() {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
 	parsedData = JSON.parse(body);
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-	postMessage(parsedData.data.images.downsized.url, botId);
+	  postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
 	postMessage('"' + searchTerm + '" is invalid\nTag me for help', botId);
 	}
@@ -40,10 +40,10 @@ function checkMessage() {
   //STOCK TICKER $
   if (trigger == '$') {
 	  request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + searchTerm + '%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json', function (error, response, body) {
-	  parsedData = JSON.parse(body);   
+	  parsedData = JSON.parse(body); 
+	  name = String(parsedData.query.results.quote.Name);  
 	  last = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));   
 	  change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
-	  name = String(parsedData.query.results.quote.Name);
 	  if (change > 0) {
 		change = String('+' + change);
 	  }
