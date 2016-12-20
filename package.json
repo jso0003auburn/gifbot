@@ -1,7 +1,7 @@
 {
   "name": "gifbot",
-  "version": “0.1.0”,
-  "description": "GroupMe bot in Node for GIFs and Stocks”,
+  "version": "0.1.0",
+  "description": "GroupMe bot for GIFs and STOCKS",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
