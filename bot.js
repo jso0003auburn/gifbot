@@ -64,7 +64,7 @@ function checkMessage() {
   if (trigger == '!') {
     request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + searchTerm + '%22)&format=json', function (error, response, body) {
     parsedData = JSON.parse(body);
-    if (!error && response.statusCode == 200 && parsedData.query.results != null) {
+    if (!error && response.statusCode == 200) {
       city = parsedData.query.results.channel.location.city;
 	  region = (parsedData.query.results.channel.title).substring(17,40);
 	  temp = parsedData.query.results.channel.item.condition.temp + '°';
