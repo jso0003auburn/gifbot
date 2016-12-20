@@ -1,8 +1,7 @@
 ## Ultimate GroupMe Bot
   * #omg or #(your search term) for a GIF
   * $MSFT or $(any other stock ticker) for stock info
-  * !Atlanta or !(your zip code) or !NYC or !(your city) for weather info
-  * ? for help
+  * ? for help or tag @gifbot
 
 ## Requirements:
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),

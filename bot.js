@@ -24,7 +24,7 @@ function respond() {
 function checkMessage() {
   
   //HELP ?
-  if (trigger == '?' || botNameTagCheck >= 0 || trigger == '/') {
+  if (trigger == '?' || botNameTagCheck >= 0) {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
   }
 
