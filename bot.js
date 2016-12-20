@@ -14,7 +14,7 @@ function respond() {
 
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
-  botNameTagCheck = message.indexOf('@' + botName);
+  botNameTagCheck = request.text.indexOf('@' + botName);
   
   this.res.end();
   if (request.group_id == groupId) {
