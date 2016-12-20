@@ -23,11 +23,11 @@ function respond() {
   sendingUser = request.name;
 
   this.res.writeHead(200);
-  if (sendingGroup ==  groupId && sendingUser !== botName) {
+  if (sendingGroup ==  groupId && sendingUser != botName) {
     botId = botId;
     console.log(sendingUser + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
-  } else if (botIdAlt !== null && sendingUser !== botName) {
+  } else if (botIdAlt !== null && sendingUser != botName) {
   botId = botIdAlt;
   console.log(sendingUser + ' : ' + request.text);
   checkMessage(trigger, botTag, searchTerm, botId);
