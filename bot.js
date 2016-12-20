@@ -4,21 +4,21 @@ var https = require('https');
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
+  
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + process.env.botName);
-  console.log(request.group_id + ' ' + request.name + ' : ' + request.text);
+  console.log(request.name + ' : ' + request.text);
+  
+  this.res.writeHead(200);
   if (request.group_id == process.env.groupId && request.name != process.env.botName) {
     botId = process.env.botId;
-    this.res.writeHead(200);
     checkMessage(trigger, botTag, searchTerm, botId);
-    this.res.end();
   } else if (process.env.botIdAlternate != null) {
   botId = process.env.botIdAlternate;
-  this.res.writeHead(200);
   checkMessage(trigger, botTag, searchTerm, botId);
+  } 
   this.res.end();
-  }
 }
 
 //check for triggers
