@@ -17,10 +17,10 @@ function respond() {
   console.log(botName + ' : ' + request.name + ' : ' + request.text);
   this.res.end();
   if (request.group_id == groupId) {
-    botId = botId;
+    botId = process.env.botId;
   } else {
-  botId = botIdAlternate;
-  groupId = groupidAlternate
+  botId = process.env.botIdAlternate;
+  groupId = groupiDAlternate
   }
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
