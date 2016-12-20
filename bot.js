@@ -12,8 +12,7 @@ function respond() {
   this.res.writeHead(200);
   var request = JSON.parse(this.req.chunks[0]);
 
-  message = request.text;
-  trigger = message.substring(0,1);
+  trigger = request.text.substring(0,1);
   searchTerm = message.substring(1).trim();
   botNameTagCheck = message.indexOf('@' + botName);
   
@@ -23,7 +22,7 @@ function respond() {
   } else if (request.group_id == groupIdAlternate) {
   botId = botIdAlternate;
   }
-  console.log(botName + ' : ' + request.name + ' : ' + message);
+  console.log(botName + ' : ' + request.name + ' : ' + request.text);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
