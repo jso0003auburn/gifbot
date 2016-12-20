@@ -43,12 +43,11 @@ function checkMessage() {
 	  parsedData = JSON.parse(body);   
 	  last = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));   
 	  change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
-	  name = String(parsedData.query.results.quote.Name);
 	  if (change > 0) {
 		change = String('+' + change);
 	  }
 	  if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
-		postMessage(name.substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
+		postMessage(String(parsedData.query.results.quote.Name).substring(0,23) + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
 	  } else {
 	  postMessage('"' + searchTerm + '" is invalid\nTag me for help', botId);
 	  } 
