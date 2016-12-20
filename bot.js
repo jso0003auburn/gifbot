@@ -13,7 +13,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
   trigger = request.text.substring(0,1);
-  searchTerm = message.substring(1).trim();
+  searchTerm = request.text.substring(1).trim();
   botNameTagCheck = message.indexOf('@' + botName);
   
   this.res.end();
