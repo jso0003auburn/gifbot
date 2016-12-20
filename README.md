@@ -14,7 +14,8 @@
       * botId = bot id for your group
       * groupId = group id for your group
       * botName = name of your bot
-      * botIdAl t= bot id for a test group (optional)
+      * botIdAlt = bot id for a test group (optional)
+        * It will still work if you don't enter this variable
 
 ## Useful Heroku Command Line Tools
   * git add .
