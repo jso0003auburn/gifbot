@@ -13,14 +13,15 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + botName);
+  console.log(botName + ' : ' + request.name + ' : ' + request.text);
   this.res.end();
   if (request.group_id == groupId) {
     botId = process.env.botId;
+    checkMessage(trigger, botNameTagCheck, searchTerm, botId);
   } else if (process.env.botIdAlternate != null) {
   botId = process.env.botIdAlternate;
-  }
-  console.log(botName + ' : ' + request.name + ' : ' + request.text);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
+  }
 }
 
 //check for triggers
