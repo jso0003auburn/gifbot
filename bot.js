@@ -3,12 +3,10 @@ var https = require('https');
 
 //scan messages
 function respond() {
-  this.res.writeHead(200);
-  var request = JSON.parse(this.req.chunks[0]);
+  request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + process.env.botName);
-  this.res.end();
   if (request.group_id == process.env.groupId && request.name != process.env.botName) {
     botId = process.env.botId;
     console.log('MESSAGE: ' + request.name + ' : ' + request.text);
