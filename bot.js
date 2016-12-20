@@ -20,12 +20,10 @@ function respond() {
   this.res.end();
   if (request.group_id == groupId) {
     botId = botId;
-    groupEnv = 'PROD';
-  } else if (request.group_id != groupIdAlternate) {
+  } else if (request.group_id == groupIdAlternate) {
   botId = botIdAlternate;
-  groupEnv = 'TEST';
   }
-  console.log(groupEnv + ' : ' + request.name + ' : ' + message);
+  console.log(botName + ' : ' + request.name + ' : ' + message);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
 }
 
