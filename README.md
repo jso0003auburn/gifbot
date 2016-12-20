@@ -1,21 +1,19 @@
 ## Ultimate GroupMe Bot
   * #omg or #(your search term) for a GIF
-  * $MSFT or $(any other stock ticker) for stock info
+  * $BAC or $(any other stock ticker) for stock info
   * ? for help or tag @gifbot
 
 ## Requirements:
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
   	* Set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
-  	* Bot ID from dev.groupme.com
-  	* Group ID from dev.groupme.com
-  	* Assign bot name grom dev.groupme.com
   * Heroku account [Heroku](http://heroku.com).
-  	* use Heroku config var to set the following
+  	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
       * botId = bot id for your group
       * groupId = group id for your group
       * botName = name of your bot
       * botIdAlt = bot id for a test group (optional)
         * It will still work if you don't enter this variable
+
 
 ## Useful Heroku Command Line Tools
   * git add .
