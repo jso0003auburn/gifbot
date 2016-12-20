@@ -3,10 +3,8 @@ var https = require('https');
 
 var botIdProd= process.env.botIdProd;
 var groupIdProd = process.env.groupIdProd;
-var groupEnvProd = 'PROD';
 var botIdTest = process.env.botIdTest;
 var groupIdTest = process.env.groupIdTest;
-var groupEnvTest = 'TEST';
 var botName = process.env.botName;
 
 //scan messages
@@ -25,10 +23,10 @@ function respond() {
   this.res.end();
   if (senderGroupId == groupIdProd) {
     botId = botIdProd;
-    groupEnv = groupEnvProd;
+    groupEnv = 'PROD';
   } else if (senderGroupId == groupIdTest) {
   botId = botIdTest;
-  groupEnv = groupEnvTest;
+  groupEnv = 'TEST';
   }
   console.log(groupEnv + ' : ' + sender + ' : ' + message);
   checkMessage(trigger, botNameTagCheck, searchTerm, botId);
