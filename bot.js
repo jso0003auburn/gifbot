@@ -3,7 +3,7 @@ var https = require('https');
 
 //scan messages
 function respond() {
-  request = JSON.parse(this.req.chunks[0]);
+  var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botNameTagCheck = request.text.indexOf('@' + process.env.botName);
