@@ -19,7 +19,7 @@ function respond() {
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
   this.res.writeHead(200);
-  if (request.group_id ==  groupId) {
+  if (request.group_id == groupId) {
     botId = botId;
     console.log(request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
