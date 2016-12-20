@@ -5,8 +5,6 @@ var https = require('https');
 // Set these variables in Heroku settings
 // botId = "your bot ID"
 var botId = process.env.botId;
-// groupId = "your group ID"
-var groupId = process.env.groupId;
 // botName = "your bot name"
 var botName = process.env.botName;
 // botIdAlternate = "your test group bot ID" (optional)
@@ -15,6 +13,7 @@ var botIdAlt = process.env.botIdAlt;
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
+  groupId = process.env.groupId;
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
