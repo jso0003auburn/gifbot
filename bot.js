@@ -21,8 +21,7 @@ function respond() {
   botTag = request.text.indexOf('@' + botName);
   sendingGroup = request.group_id;
   sendingUser = request.name;
-  log = console.log(sendingUser + ' : ' + request.text);
-  console.log(log);
+  console.log(sendingUser + ' : ' + request.text);
 
   this.res.writeHead(200);
   if (sendingGroup ==  groupId && sendingUser !== botName) {
