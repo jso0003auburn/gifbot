@@ -66,14 +66,11 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
 
 //Post message
 function postMessage(botResponse, botId) {
-  var options, body, botReq;
+  var options, botReq;
   options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
-    method: 'POST'
-  };
-
-  body = {
+    method: 'POST',
     "bot_id" : botId,
     "text" : botResponse 
   };
@@ -85,7 +82,7 @@ function postMessage(botResponse, botId) {
       console.log('Bad status code: ' + res.statusCode);
       }
   });
-  botReq.end(JSON.stringify(body));
+  botReq.end(JSON.stringify(options));
 }
 
 exports.respond = respond;
