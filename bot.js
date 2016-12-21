@@ -49,7 +49,7 @@ function respond() {
     } 
     }); 
   }
-  if (botResponse !== null) {
+  if (typeof botResponse !== 'undefined' && botResponse) {
     this.res.writeHead(200);
     postMessage(botResponse, botId);
     this.res.end();
