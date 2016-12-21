@@ -8,21 +8,19 @@ var groupId = process.env.groupId;
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
+  this.res.writeHead(200);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
   console.log(request.name + ' : ' + request.text);
   if (request.group_id == groupId && request.name !== botName) {
-    this.res.writeHead(200);
     botId = process.env.botId;
     checkMessage(trigger, botTag, searchTerm, botId);
-    this.res.end();
   } else if (botIdAlt !== null && request.name !== botName) {
-  this.res.writeHead(200);
   botId = process.env.botIdAlt;
   checkMessage(trigger, botTag, searchTerm, botId);
-  this.res.end();
   }
+  this.res.end();
 }
 
 //check for triggers

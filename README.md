@@ -9,10 +9,11 @@
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
       * botId = bot id for your group
-      * groupId = group id for your group
-      * botName = name of your bot
       * botIdAlt = bot id for a test group (optional)
         * It will still work if you don't enter this variable
+      * groupId = group id for your group
+      * botName = name of your bot
+
 
 
 ## Useful Heroku Command Line Tools
