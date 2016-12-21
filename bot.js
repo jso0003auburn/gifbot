@@ -50,7 +50,7 @@ function checkMessage(botId, post) {
       if (change > 0) {
 	    change = String('+' + change);
       }
-	  postMessage(String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
+	  postMessage(String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + post.text.substring(1).trim(), botId);
     } else {
     postMessage('"' + post.text.substring(1).trim() + '" is invalid', botId);
     } 
