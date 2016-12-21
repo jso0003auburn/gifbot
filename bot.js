@@ -33,7 +33,7 @@ function checkMessage(trigger, searchTerm, botId, sender, message) {
   }
 
   //GIF #
-  if (message.text.substring(0,1) == '#') {
+  if (message.substring(0,1) == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
 	parsedData = JSON.parse(body);
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
