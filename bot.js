@@ -5,31 +5,30 @@ var https = require('https');
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
-  botTag = request.text.indexOf('@' + process.env.botName);
   searchTerm = request.text.substring(1).trim();
+  sender = request.name;
+  message = request.text;
 
   //check if your posting in your main group
-  if (request.group_id == process.env.groupId && request.name !== process.env.botName) {
+  if (request.group_id == process.env.groupId {
     this.res.writeHead(200);
     botId = process.env.botId;
-    console.log(request.name + ' : ' + request.text);
-    checkMessage(trigger, botTag, searchTerm, botId);
+    checkMessage(trigger, searchTerm, botId, sender, message);
     this.res.end();
-  } else if (process.env.botIdAlt !== null && request.name !== process.env.botName) {
+  } else if (process.env.botIdAlt !== null) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  console.log(request.name + ' : ' + request.text);
-  checkMessage(trigger, botTag, searchTerm, botId);
+  checkMessage(trigger, searchTerm, botId, sender, message);
   this.res.end();
   }
 
 }
 
 //check for triggers
-function checkMessage(trigger, botTag, searchTerm, botId) {
-  
+function checkMessage(trigger, searchTerm, botId, sender, message) {
+  console.log(sender + ' : ' + message);
   //HELP ?
-  if (botTag >= 0) {
+  if (message.indexOf('@' + process.env.botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
 
@@ -49,17 +48,17 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
   if (trigger == '$') {
     request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + searchTerm + '%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json', function (error, response, body) {
     parsedData = JSON.parse(body); 
-    change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
-    if (change > 0) {
-	  change = String('+' + change);
-    }
     if (!error && response.statusCode == 200 && String(parsedData.query.results.quote.Name) !== 'null' && String(parsedData.query.results.quote.Name) !== 'undefined') {
+      change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
+      if (change > 0) {
+	    change = String('+' + change);
+      }
 	  postMessage(String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
     } else {
     postMessage('"' + searchTerm + '" is invalid', botId);
     } 
     }); 
-}
+  }
 }
 
 //Post message
