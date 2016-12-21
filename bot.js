@@ -51,7 +51,7 @@ function checkMessage(trigger, botTag, searchTerm, group_Id, requester) {
 	  change = String('+' + change);
     }
     if (!error && response.statusCode == 200 && String(parsedData.query.results.quote.Name) !== 'null' && String(parsedData.query.results.quote.Name) !== 'undefined') {
-	  postMessage(name.substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
+	  postMessage(String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
     } else {
     postMessage('"' + searchTerm + '" is invalid', botId);
     } 
