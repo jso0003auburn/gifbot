@@ -2,6 +2,8 @@ var request = require('request');
 var https = require('https');
 var groupId = process.env.groupId;
 var botName = process.env.botName;
+var botId = process.env.botId;
+var botIdAlt = process.env.botIdAlt;
 
 //scan messages
 function respond() {
@@ -10,17 +12,17 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(sendingUser + ' : ' + message);
-  invalid = ('"' + post.text.substring(1).trim() + '" is invalid');
+  invalid = ('"' + message.substring(1).trim() + '" is invalid');
   this.res.writeHead(200);
 
   //check if your in the main group
   if (sendingGroup == groupId) {
-    botId = process.env.botId;
+    botId = botId;
   }
   
   //check if your in test
-  if (process.env.botIdAlt !== null && sendingGroup !== groupId) {
-  botId = process.env.botIdAlt;
+  if (botIdAlt !== null && sendingGroup !== groupId) {
+  botId = botIdAlt;
   }
 
   //TAG @gifbot
