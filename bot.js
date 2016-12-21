@@ -49,9 +49,11 @@ function respond() {
     } 
     }); 
   }
-  this.res.writeHead(200);
-  postMessage(botResponse, botId);
-  this.res.end();
+  if (botResponse !== null) {
+    this.res.writeHead(200);
+    postMessage(botResponse, botId);
+    this.res.end();
+  }
 }
 
 //Post message
