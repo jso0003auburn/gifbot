@@ -11,7 +11,7 @@ function respond() {
   // define some variables
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
-  botTag = request.text.indexOf('@' + botName);
+  botTag = request.text.indexOf('@' + process.env.botName);
 
   //check if your posting in your main group
   if (request.group_id == process.env.groupId && request.name !== process.env.botName) {
