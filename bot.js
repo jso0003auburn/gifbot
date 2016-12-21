@@ -1,8 +1,8 @@
 var request = require('request');
 var https = require('https');
+var botName = process.env.botName;
 var botId = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
-var botName = process.env.botName;
 var groupId = process.env.groupId;
 
 //scan messages
