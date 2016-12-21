@@ -1,17 +1,12 @@
 var request = require('request');
 var https = require('https');
 
-// heroku ps
-// heroku logs
-
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
-  
-  // define some variables
   trigger = request.text.substring(0,1);
-  searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + process.env.botName);
+  searchTerm = request.text.substring(1).trim();
 
   //check if your posting in your main group
   if (request.group_id == process.env.groupId && request.name !== process.env.botName) {
