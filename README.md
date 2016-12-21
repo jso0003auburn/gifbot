@@ -4,7 +4,7 @@
 
 ## Requirements:
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
-  	* Set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
+  	* Create a bot and set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
   	* http://i.imgur.com/TFxrfLe.png

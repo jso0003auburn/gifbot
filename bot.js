@@ -18,7 +18,7 @@ function respond() {
   botId = process.env.botIdAlt;
   }
 
-  //HELP ?
+  //TAG @gifbot
   if (post.text.indexOf('@' + process.env.botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
