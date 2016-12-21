@@ -90,9 +90,9 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Post success ' + res.statusCode + ' ' + botResponse);
+        console.log('Post success: ' + res.statusCode);
       } else {
-      console.log('Bad status code ' + res.statusCode);
+      console.log('Bad status code: ' + res.statusCode);
       }
   });
   botReq.on('error', function(err) {
