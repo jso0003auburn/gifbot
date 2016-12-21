@@ -20,7 +20,9 @@ function respond() {
   } else if (botIdAlt !== null && request.name !== botName) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  checkMessage(trigger, botTag, searchTerm, botId);
+  if (trigger == '?' || botTag >= 0) {
+    postMessage('Need help?\nStocks = $ + (ticker symbol)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+  }
   this.res.end();
   }
 }
