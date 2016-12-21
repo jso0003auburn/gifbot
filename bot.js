@@ -4,8 +4,9 @@ var https = require('https');
 //scan messages
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
+  this.res.writeHead(200);
   checkMessage(post);
-
+  this.res.end();
 }
 
 //check for triggers
@@ -15,9 +16,7 @@ function checkMessage(post) {
   if (post.group_id == process.env.groupId) {
     botId = process.env.botId;
   } else if (process.env.botIdAlt !== null) {
-  //this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  //this.res.end();
   }
 
   //HELP ?
