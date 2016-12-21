@@ -19,8 +19,8 @@ function respond() {
   botId = process.env.botIdAlt;
   console.log(request.name + ' : ' + request.text);
   checkMessage(trigger, botTag, searchTerm, botId);
-  this.res.end();
   }
+  this.res.end();
 }
 
 //check for triggers
@@ -78,7 +78,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Post success ' + res.statusCode);
+        console.log('Post success ' + res.statusCode + ' ' + botResponse);
       } else {
       console.log('Bad status code ' + res.statusCode);
       }
