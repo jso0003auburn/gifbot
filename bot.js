@@ -10,7 +10,7 @@ function respond() {
   message = request.text;
 
   //check if your posting in your main group
-  if (request.group_id == process.env.groupId {
+  if (request.group_id == process.env.groupId) {
     this.res.writeHead(200);
     botId = process.env.botId;
     checkMessage(trigger, searchTerm, botId, sender, message);
