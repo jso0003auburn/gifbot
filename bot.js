@@ -12,12 +12,14 @@ function respond() {
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
   console.log(request.name + ' : ' + request.text);
-  if (request.group_id == groupId && request.name !== botName) {
+  senderGroup = request.group_id;
+  senderName = request.name;
+  if (senderGroup == groupId && senderName !== botName) {
     this.res.writeHead(200);
     botId = process.env.botId;
     checkMessage(trigger, botTag, searchTerm, botId);
     this.res.end();
-  } else if (botIdAlt !== null && request.name !== botName) {
+  } else if (botIdAlt !== null && senderName !== botName) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
   checkMessage(trigger, botTag, searchTerm, botId);
