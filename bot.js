@@ -43,12 +43,13 @@ function respond() {
   if (message.substring(0,1) == '$') {
     request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json', function (error, response, body) {
     parsedData = JSON.parse(body); 
-    if (!error && response.statusCode == 200 && String(parsedData.query.results.quote.Name) !== 'null' && String(parsedData.query.results.quote.Name) !== 'undefined') {
+    companyName = String(parsedData.query.results.quote.Name);
+    if (!error && response.statusCode == 200 && companyName !== 'null' && companyName !== 'undefined') {
       change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
       if (change > 0) {
 	    change = String('+' + change);
       }
-	  postMessage(String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim(), botId);
+	  postMessage(companyName.substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim(), botId);
     } else {
     postMessage(invalid, botId);
     } 
