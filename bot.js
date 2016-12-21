@@ -15,11 +15,6 @@ function respond() {
   invalid = ('"' + message.substring(1).trim() + '" is invalid');
   this.res.writeHead(200);
 
-  //check if your in the main group
-  if (sendingGroup == groupId) {
-    botId = botId;
-  }
-  
   //check if your in test
   if (botIdAlt !== null && sendingGroup !== groupId) {
   botId = botIdAlt;
