@@ -12,13 +12,17 @@ function respond() {
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
   console.log(request.name + ' : ' + request.text);
-  
   if (request.group_id == groupId && request.name !== botName) {
+    this.res.writeHead(200);
     botId = process.env.botId;
+    checkMessage(trigger, botTag, searchTerm, botId);
+    this.res.end();
   } else if (botIdAlt !== null && request.name !== botName) {
+  this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  }
   checkMessage(trigger, botTag, searchTerm, botId);
+  this.res.end();
+  }
 }
 
 //check for triggers
@@ -63,7 +67,6 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
 //Post message
 function postMessage(botResponse, botId) {
   var options, body, botReq;
-  this.res.writeHead(200);
   options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
@@ -89,7 +92,6 @@ function postMessage(botResponse, botId) {
     console.log('timeout posting message '  + JSON.stringify(err));
   });
   botReq.end(JSON.stringify(body));
-  this.res.end();
 }
 
 exports.respond = respond;
