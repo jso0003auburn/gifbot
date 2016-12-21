@@ -1,4 +1,4 @@
-## Ultimate GroupMe Bot
+## GroupMe Gif Bot
   * #omg or #(your search term) for a GIF
   * $BAC or $(any other stock ticker) for stock info
   * ? for help or tag @gifbot
@@ -9,11 +9,10 @@
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
   	* http://i.imgur.com/TFxrfLe.png
-      * botId = bot id for your group
-      * botIdAlt = bot id for a test group (optional)
-        * It will still work if you don't enter this variable
-      * groupId = group id for your group
-      * botName = name of your bot
+      * botId = bot id for your main group (from dev.groupme.com)
+      * botIdAlt = bot id for a test group (optional--should work even if you don't enter this variable)
+      * groupId = group id for your main group (from dev.groupme.com)
+      * botName = name of your bot (from dev.groupme.com)
 
 
 
