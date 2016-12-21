@@ -1,27 +1,31 @@
 var request = require('request');
 var https = require('https');
+var groupId = process.env.groupId;
+var botName = process.env.botName;
+var botIdAlt = process.env.botIdAlt;
+var botId = process.env.botId;
 
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
-  groupId = process.env.groupId;
-  botName = process.env.botName;
-  botIdAlt = process.env.botIdAlt;
+  this.res.writeHead(200);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
-  this.res.writeHead(200);
   if (request.group_id == groupId && request.name !== botName) {
-    botId = process.env.botId;
     console.log(request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
   } else if (botIdAlt !== null && request.name !== botName) {
   botId = process.env.botIdAlt;
   console.log(request.name + ' : ' + request.text);
   checkMessage(trigger, botTag, searchTerm, botId);
-  }
   this.res.end();
+  }
 }
+}
+//scan messages
+function groups() {
+
 
 //check for triggers
 function checkMessage(trigger, botTag, searchTerm, botId) {
