@@ -9,23 +9,17 @@ var groupId = process.env.groupId;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
-  botTag = request.text.indexOf('@' + botName);
   searchTerm = request.text.substring(1).trim();
-  senderGroup = request.group_id;
-  senderName = request.name;
-
-
+  botTag = request.text.indexOf('@' + botName);
   console.log(request.name + ' : ' + request.text);
-
-
-  if (senderGroup == groupId && senderName !== botName) {
-    botId = botId;
+  if (request.group_id == groupId && request.name !== botName) {
     this.res.writeHead(200);
+    botId = process.env.botId;
     checkMessage(trigger, botTag, searchTerm, botId);
     this.res.end();
-  } else if (botIdAlt !== null && senderName !== botName) {
-  botId = botIdAlt;
+  } else if (botIdAlt !== null && request.name !== botName) {
   this.res.writeHead(200);
+  botId = process.env.botIdAlt;
   checkMessage(trigger, botTag, searchTerm, botId);
   this.res.end();
   }
