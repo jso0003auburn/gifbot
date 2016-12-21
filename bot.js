@@ -4,8 +4,6 @@ var https = require('https');
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
-  trigger = request.text.substring(0,1);
-  searchTerm = request.text.substring(1).trim();
   sender = request.name;
   message = request.text;
 
@@ -13,20 +11,22 @@ function respond() {
   if (request.group_id == process.env.groupId) {
     this.res.writeHead(200);
     botId = process.env.botId;
-    checkMessage(trigger, searchTerm, botId, sender, message);
+    checkMessage(botId, sender, message);
     this.res.end();
   } else if (process.env.botIdAlt !== null) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  checkMessage(trigger, searchTerm, botId, sender, message);
+  checkMessage(botId, sender, message);
   this.res.end();
   }
 
 }
 
 //check for triggers
-function checkMessage(trigger, searchTerm, botId, sender, message) {
+function checkMessage(botId, sender, message) {
+  searchTerm = message.substring(1).trim();
   console.log(sender + ' : ' + message);
+
   //HELP ?
   if (message.indexOf('@' + process.env.botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
@@ -45,7 +45,7 @@ function checkMessage(trigger, searchTerm, botId, sender, message) {
   }
 
   //STOCK TICKER $
-  if (trigger == '$') {
+  if (message.substring(0,1) == '$') {
     request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + searchTerm + '%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json', function (error, response, body) {
     parsedData = JSON.parse(body); 
     if (!error && response.statusCode == 200 && String(parsedData.query.results.quote.Name) !== 'null' && String(parsedData.query.results.quote.Name) !== 'undefined') {
