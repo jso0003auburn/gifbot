@@ -13,14 +13,21 @@ function respond() {
     this.res.writeHead(200);
     botId = process.env.botId;
     console.log(request.name + ' : ' + request.text);
+    checkMessage(trigger, botTag, searchTerm, botId);
     this.res.end();
   } else if (process.env.botIdAlt !== null && request.name !== process.env.botName) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
   console.log(request.name + ' : ' + request.text);
+  checkMessage(trigger, botTag, searchTerm, botId);
   this.res.end();
   }
 
+}
+
+//check for triggers
+function checkMessage(trigger, botTag, searchTerm, botId) {
+  
   //HELP ?
   if (botTag >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
