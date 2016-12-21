@@ -8,7 +8,6 @@ var groupId = process.env.groupId;
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
-  this.res.writeHead(200);
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
@@ -20,7 +19,6 @@ function respond() {
   botId = process.env.botIdAlt;
   }
   checkMessage(trigger, botTag, searchTerm, botId);
-  this.res.end();
 }
 
 //check for triggers
@@ -65,6 +63,7 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
 //Post message
 function postMessage(botResponse, botId) {
   var options, body, botReq;
+  this.res.writeHead(200);
   options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
@@ -90,6 +89,7 @@ function postMessage(botResponse, botId) {
     console.log('timeout posting message '  + JSON.stringify(err));
   });
   botReq.end(JSON.stringify(body));
+  this.res.end();
 }
 
 exports.respond = respond;
