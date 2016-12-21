@@ -22,10 +22,6 @@ function respond() {
   this.res.end();
   }
 }
-}
-//scan messages
-function groups() {
-
 
 //check for triggers
 function checkMessage(trigger, botTag, searchTerm, botId) {
