@@ -21,18 +21,22 @@ function respond() {
 
   //check if your posting in your main group
   if (request.group_id == groupId && request.name !== botName) {
+    this.res.writeHead(200);
     botId = botId;
     checkMessage(trigger, botTag, searchTerm, botId);
+    this.res.end();
   } else if (botIdAlt !== null && request.name !== botName) {
+  this.res.writeHead(200);
   botId = botIdAlt;
   checkMessage(trigger, botTag, searchTerm, botId);
+  this.res.end();
   }
 
 }
 
 //check for triggers
 function checkMessage(trigger, botTag, searchTerm, botId) {
-  this.res.writeHead(200);
+  
   //HELP ?
   if (botTag >= 0) {
     postMessage('Need help?\nStocks = $ + (ticker symbol)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
@@ -67,7 +71,6 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
     } 
     }); 
 }
-  this.res.end();
 }
 
 //Post message
