@@ -6,6 +6,7 @@ function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   console.log(post.name + ' : ' + post.text);
 
+  this.res.writeHead(200);
 
   //check if your in the main group
   if (post.group_id == process.env.groupId) {
@@ -19,7 +20,7 @@ function respond() {
 
   //HELP ?
   if (post.text.indexOf('@' + process.env.botName) >= 0) {
-    botResponse = ('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)');
+    postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
 
   //GIF #
@@ -27,9 +28,9 @@ function respond() {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + post.text.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
 	parsedData = JSON.parse(body);
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-	  botResponse = (parsedData.data.images.downsized.url);
+	  postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
-	botResponse = ('"' + post.text.substring(1).trim() + '" is invalid');
+	postMessage('"' + post.text.substring(1).trim() + '" is invalid', botId);
 	}
 	});
   }
@@ -43,17 +44,14 @@ function respond() {
       if (change > 0) {
 	    change = String('+' + change);
       }
-	  botResponse = (String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + post.text.substring(1).trim());
+	  postMessage(String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + post.text.substring(1).trim(), botId);
     } else {
-    botResponse = ('"' + post.text.substring(1).trim() + '" is invalid');
+    postMessage('"' + post.text.substring(1).trim() + '" is invalid', botId);
     } 
     }); 
   }
-  if (typeof botResponse !== 'undefined' && botResponse) {
-    this.res.writeHead(200);
-    postMessage(botResponse, botId);
-    this.res.end();
-  }
+  
+  this.res.end();
 }
 
 //Post message
