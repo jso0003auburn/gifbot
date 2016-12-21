@@ -74,7 +74,7 @@ function postMessage(botResponse, botId) {
   };
 
   body = {
-    "bot_id" : botId,
+    botId: 'bot_id',
     "text" : botResponse 
   };
 
