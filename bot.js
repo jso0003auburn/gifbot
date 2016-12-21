@@ -1,6 +1,6 @@
 var request = require('request');
 var https = require('https');
-
+var groupId = process.env.groupId;
 //scan messages
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
@@ -11,12 +11,12 @@ function respond() {
   this.res.writeHead(200);
 
   //check if your in the main group
-  if (sendingGroup == process.env.groupId) {
+  if (sendingGroup == groupId) {
     botId = process.env.botId;
   }
   
   //check if your in test
-  if (process.env.botIdAlt !== null && sendingGroup !== process.env.groupId) {
+  if (process.env.botIdAlt !== null && sendingGroup !== groupId) {
   botId = process.env.botIdAlt;
   }
 
