@@ -7,27 +7,24 @@ function respond() {
   trigger = request.text.substring(0,1);
   botTag = request.text.indexOf('@' + process.env.botName);
   searchTerm = request.text.substring(1).trim();
+  group_Id = request.group_id;
+  requester = request.name;
+  checkMessage(trigger, botTag, searchTerm, group_Id, requester);
 
-  //check if your posting in your main group
-  if (request.group_id == process.env.groupId && request.name !== process.env.botName) {
-    this.res.writeHead(200);
-    botId = process.env.botId;
-    console.log(request.name + ' : ' + request.text);
-    checkMessage(trigger, botTag, searchTerm, botId);
-    this.res.end();
-  } else if (process.env.botIdAlt !== null && request.name !== process.env.botName) {
-  this.res.writeHead(200);
-  botId = process.env.botIdAlt;
-  console.log(request.name + ' : ' + request.text);
-  checkMessage(trigger, botTag, searchTerm, botId);
-  this.res.end();
-  }
+
 
 }
 
 //check for triggers
-function checkMessage(trigger, botTag, searchTerm, botId) {
-  
+function checkMessage(trigger, botTag, searchTerm, group_Id, requester) {
+    //check if your posting in your main group
+  if (group_Id == process.env.groupId && requester !== process.env.botName) {
+    botId = process.env.botId;
+    //console.log(request.name + ' : ' + request.text);
+  } else if (process.env.botIdAlt !== null && request.name !== process.env.botName) {
+  botId = process.env.botIdAlt;
+  //console.log(request.name + ' : ' + request.text);
+  }
   //HELP ?
   if (botTag >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
