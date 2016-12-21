@@ -1,6 +1,8 @@
 var request = require('request');
 var https = require('https');
 var groupId = process.env.groupId;
+var botName = process.env.botName;
+
 //scan messages
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
@@ -22,7 +24,7 @@ function respond() {
   }
 
   //TAG @gifbot
-  if (message.indexOf('@' + process.env.botName) >= 0) {
+  if (message.indexOf('@' + botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
 
