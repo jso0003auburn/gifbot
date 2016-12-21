@@ -40,7 +40,7 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	  postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
-	postMessage('"' + searchTerm + '" is invalid\nTag me for help', botId);
+	postMessage('"' + searchTerm + '" is invalid', botId);
 	}
 	});
   }
@@ -58,7 +58,7 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
     if (!error && response.statusCode == 200 && name !== 'null' && name !== 'undefined') {
 	  postMessage(name + '\n$' + last + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + searchTerm, botId);
     } else {
-    postMessage('"' + searchTerm + '" is invalid\nTag me for help', botId);
+    postMessage('"' + searchTerm + '" is invalid', botId);
     } 
     }); 
 }
