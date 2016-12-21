@@ -16,11 +16,10 @@ function respond() {
   
   if (request.group_id == groupId && request.name !== botName) {
     botId = process.env.botId;
-    checkMessage(trigger, botTag, searchTerm, botId);
   } else if (botIdAlt !== null && request.name !== botName) {
   botId = process.env.botIdAlt;
-  checkMessage(trigger, botTag, searchTerm, botId);
   }
+  checkMessage(trigger, botTag, searchTerm, botId);
   this.res.end();
 }
 
