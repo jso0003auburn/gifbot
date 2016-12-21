@@ -6,11 +6,12 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   groupId = process.env.groupId;
   botName = process.env.botName;
+  botIdAlt = process.env.botIdAlt;
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
   this.res.writeHead(200);
-  if (request.group_id == groupId) {
+  if (request.group_id == groupId && request.name !== botName) {
     botId = process.env.botId;
     console.log(request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
