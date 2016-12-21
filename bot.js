@@ -3,12 +3,12 @@ var https = require('https');
 
 //scan messages
 function respond() {
-  var request = JSON.parse(this.req.chunks[0]);
-  sender = request.name;
-  message = request.text;
+  var post = JSON.parse(this.req.chunks[0]);
+  sender = post.name;
+  message = post.text;
 
   //check if your posting in your main group
-  if (request.group_id == process.env.groupId) {
+  if (post.group_id == process.env.groupId) {
     this.res.writeHead(200);
     botId = process.env.botId;
     checkMessage(botId, sender, message);
