@@ -4,17 +4,19 @@ var https = require('https');
 //scan messages
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
-  console.log(post.name + ' : ' + post.text);
+  sendingGroup = post.group_id;
+  sendingUser = post.name;
+  console.log(sendingUser + ' : ' + post.text);
   invalid = ('"' + post.text.substring(1).trim() + '" is invalid');
   this.res.writeHead(200);
 
   //check if your in the main group
-  if (post.group_id == process.env.groupId) {
+  if (sendingGroup == process.env.groupId) {
     botId = process.env.botId;
   }
   
   //check if your in test
-  if (process.env.botIdAlt !== null && post.group_id !== process.env.groupId) {
+  if (process.env.botIdAlt !== null && sendingGroup !== process.env.groupId) {
   botId = process.env.botIdAlt;
   }
 
