@@ -7,27 +7,27 @@ function respond() {
   trigger = request.text.substring(0,1);
   botTag = request.text.indexOf('@' + process.env.botName);
   searchTerm = request.text.substring(1).trim();
+  sender = request.name;
+  message = request.text;
 
   //check if your posting in your main group
   if (request.group_id == process.env.groupId && request.name !== process.env.botName) {
     this.res.writeHead(200);
     botId = process.env.botId;
-    console.log(request.name + ' : ' + request.text);
-    checkMessage(trigger, botTag, searchTerm, botId);
+    checkMessage(trigger, botTag, searchTerm, botId, sender, message);
     this.res.end();
   } else if (process.env.botIdAlt !== null && request.name !== process.env.botName) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  console.log(request.name + ' : ' + request.text);
-  checkMessage(trigger, botTag, searchTerm, botId);
+  checkMessage(trigger, botTag, searchTerm, botId, sender, message);
   this.res.end();
   }
 
 }
 
 //check for triggers
-function checkMessage(trigger, botTag, searchTerm, botId) {
-  
+function checkMessage(trigger, botTag, searchTerm, botId, sender, message) {
+  console.log(sender + ' : ' + message);
   //HELP ?
   if (botTag >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
