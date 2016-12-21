@@ -17,17 +17,18 @@ function respond() {
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
-  console.log(request.name + ' : ' + request.text);
 
   //check if your posting in your main group
   if (request.group_id == groupId && request.name !== botName) {
     this.res.writeHead(200);
     botId = botId;
+    console.log(request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
     this.res.end();
   } else if (botIdAlt !== null && request.name !== botName) {
   this.res.writeHead(200);
   botId = botIdAlt;
+  console.log(request.name + ' : ' + request.text);
   checkMessage(trigger, botTag, searchTerm, botId);
   this.res.end();
   }
@@ -89,7 +90,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Post success ' + res.statusCode);
+        console.log('Post success ' + res.statusCode + ' ' + botResponse);
       } else {
       console.log('Bad status code ' + res.statusCode);
       }
