@@ -1,7 +1,6 @@
 ## GroupMe Gif Bot
   * #omg or #(your search term) for a GIF
   * $BAC or $(any other stock ticker) for stock info
-  * ? for help or tag @gifbot
 
 ## Requirements:
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),

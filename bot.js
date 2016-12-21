@@ -30,7 +30,7 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
   
   //HELP ?
   if (botTag >= 0) {
-    postMessage('Need help?\nStocks = $ + (ticker symbol)\nGIFS = # + (search keyword)\nTag me to see this again', botId);
+    postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
 
   //GIF #
