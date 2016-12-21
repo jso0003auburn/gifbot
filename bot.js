@@ -11,21 +11,21 @@ function respond() {
   if (post.group_id == process.env.groupId) {
     this.res.writeHead(200);
     botId = process.env.botId;
-    checkMessage(botId, sender, message);
+    checkMessage(botId, sender, message, post);
     this.res.end();
   } else if (process.env.botIdAlt !== null) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  checkMessage(botId, sender, message);
+  checkMessage(botId, sender, message, post);
   this.res.end();
   }
 
 }
 
 //check for triggers
-function checkMessage(botId, sender, message) {
+function checkMessage(botId, sender, message, post) {
   searchTerm = message.substring(1).trim();
-  console.log(sender + ' : ' + message);
+  console.log(post.name + ' : ' + post.text);
 
   //HELP ?
   if (message.indexOf('@' + process.env.botName) >= 0) {
