@@ -85,12 +85,6 @@ function postMessage(botResponse, botId) {
       console.log('Bad status code: ' + res.statusCode);
       }
   });
-  botReq.on('error', function(err) {
-    console.log('error posting message '  + JSON.stringify(err));
-  });
-  botReq.on('timeout', function(err) {
-    console.log('timeout posting message '  + JSON.stringify(err));
-  });
   botReq.end(JSON.stringify(body));
 }
 
