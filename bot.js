@@ -4,17 +4,17 @@ var https = require('https');
 //scan messages
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
+  console.log(post.name + ' : ' + post.text);
+  error = '"' + post.text.substring(1).trim() + '" is invalid');
   this.res.writeHead(200);
 
   //check if your in the main group
   if (post.group_id == process.env.groupId) {
-    console.log(post.name + ' : ' + post.text + ' in MAIN');
     botId = process.env.botId;
   }
   
   //check if your in test
   if (process.env.botIdAlt !== null && post.group_id !== process.env.groupId) {
-  console.log(post.name + ' : ' + post.text + ' in TEST');
   botId = process.env.botIdAlt;
   }
 
@@ -30,7 +30,7 @@ function respond() {
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	  postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
-	postMessage('"' + post.text.substring(1).trim() + '" is invalid', botId);
+	postMessage(error, botId);
 	}
 	});
   }
@@ -46,7 +46,7 @@ function respond() {
       }
 	  postMessage(String(parsedData.query.results.quote.Name).substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + post.text.substring(1).trim(), botId);
     } else {
-    postMessage('"' + post.text.substring(1).trim() + '" is invalid', botId);
+    postMessage(error, botId);
     } 
     }); 
   }
