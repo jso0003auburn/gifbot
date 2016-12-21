@@ -14,11 +14,9 @@ function checkMessage(post) {
   //check if your posting in your main group
   if (post.group_id == process.env.groupId) {
     botId = process.env.botId;
-    checkMessage(botId, post);
   } else if (process.env.botIdAlt !== null) {
   //this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  checkMessage(botId, post);
   //this.res.end();
   }
 
