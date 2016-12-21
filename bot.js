@@ -1,9 +1,9 @@
 var request = require('request');
 var https = require('https');
-var groupId = process.env.groupId;
 var botName = process.env.botName;
-var botIdAlt = process.env.botIdAlt;
 var botId = process.env.botId;
+var botIdAlt = process.env.botIdAlt;
+var groupId = process.env.groupId;
 
 //scan messages
 function respond() {
@@ -13,6 +13,7 @@ function respond() {
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
   if (request.group_id == groupId && request.name !== botName) {
+    botId = process.env.botId;
     console.log(request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
   } else if (botIdAlt !== null && request.name !== botName) {
@@ -78,7 +79,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Post success ' + res.statusCode + ' ' + botResponse);
+        console.log('Post success ' + res.statusCode);
       } else {
       console.log('Bad status code ' + res.statusCode);
       }
