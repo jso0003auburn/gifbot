@@ -1,15 +1,21 @@
 var request = require('request');
 var https = require('https');
-var botName = process.env.botName;
-var botId = process.env.botId;
-var botIdAlt = process.env.botIdAlt;
-var groupId = process.env.groupId;
+
+
+// heroku ps
+// heroku logs
+
 
 //scan messages
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   
   // define some variables
+  botName = process.env.botName;
+  botId = process.env.botId;
+  botIdAlt = process.env.botIdAlt;
+  groupId = process.env.groupId;
+  
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
@@ -18,12 +24,12 @@ function respond() {
   //check if your posting in your main group
   if (request.group_id == groupId && request.name !== botName) {
     this.res.writeHead(200);
-    botId = process.env.botId;
+    botId = botId;
     checkMessage(trigger, botTag, searchTerm, botId);
     this.res.end();
   } else if (botIdAlt !== null && request.name !== botName) {
   this.res.writeHead(200);
-  botId = process.env.botIdAlt;
+  botId = botIdAlt;
   checkMessage(trigger, botTag, searchTerm, botId);
   this.res.end();
   }
