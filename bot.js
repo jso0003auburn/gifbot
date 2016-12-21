@@ -67,6 +67,7 @@ function checkMessage(trigger, botTag, searchTerm, botId) {
     } 
     }); 
 }
+}
 
 //Post message
 function postMessage(botResponse, botId) {
