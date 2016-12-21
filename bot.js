@@ -9,25 +9,20 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   
   // define some variables
-  botName = process.env.botName;
-  botId = process.env.botId;
-  botIdAlt = process.env.botIdAlt;
-  groupId = process.env.groupId;
-  
   trigger = request.text.substring(0,1);
   searchTerm = request.text.substring(1).trim();
   botTag = request.text.indexOf('@' + botName);
 
   //check if your posting in your main group
-  if (request.group_id == groupId && request.name !== botName) {
+  if (request.group_id == process.env.groupId && request.name !== process.env.botName) {
     this.res.writeHead(200);
-    botId = botId;
+    botId = process.env.botId;
     console.log(request.name + ' : ' + request.text);
     checkMessage(trigger, botTag, searchTerm, botId);
     this.res.end();
-  } else if (botIdAlt !== null && request.name !== botName) {
+  } else if (process.env.botIdAlt !== null && request.name !== process.env.botName) {
   this.res.writeHead(200);
-  botId = botIdAlt;
+  botId = process.env.botIdAlt;
   console.log(request.name + ' : ' + request.text);
   checkMessage(trigger, botTag, searchTerm, botId);
   this.res.end();
