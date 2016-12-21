@@ -5,7 +5,6 @@ var https = require('https');
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   trigger = request.text.substring(0,1);
-  botTag = request.text.indexOf('@' + process.env.botName);
   searchTerm = request.text.substring(1).trim();
   sender = request.name;
   message = request.text;
@@ -14,22 +13,22 @@ function respond() {
   if (request.group_id == process.env.groupId && request.name !== process.env.botName) {
     this.res.writeHead(200);
     botId = process.env.botId;
-    checkMessage(trigger, botTag, searchTerm, botId, sender, message);
+    checkMessage(trigger, searchTerm, botId, sender, message);
     this.res.end();
   } else if (process.env.botIdAlt !== null && request.name !== process.env.botName) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  checkMessage(trigger, botTag, searchTerm, botId, sender, message);
+  checkMessage(trigger, searchTerm, botId, sender, message);
   this.res.end();
   }
 
 }
 
 //check for triggers
-function checkMessage(trigger, botTag, searchTerm, botId, sender, message) {
+function checkMessage(trigger, searchTerm, botId, sender, message) {
   console.log(sender + ' : ' + message);
   //HELP ?
-  if (botTag >= 0) {
+  if (message.indexOf('@' + process.env.botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
 
