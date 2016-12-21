@@ -5,11 +5,15 @@ var https = require('https');
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   console.log(post.name + ' : ' + post.text);
+
   this.res.writeHead(200);
+
   //check if your posting in your main group
   if (post.group_id == process.env.groupId) {
     botId = process.env.botId;
-  } else if (process.env.botIdAlt !== null) {
+  }
+  
+  if (process.env.botIdAlt !== null && post.group_id !== process.env.groupId) {
   botId = process.env.botIdAlt;
   }
 
