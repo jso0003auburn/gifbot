@@ -4,27 +4,25 @@ var https = require('https');
 //scan messages
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
-  sender = post.name;
-  message = post.text;
 
   //check if your posting in your main group
   if (post.group_id == process.env.groupId) {
     this.res.writeHead(200);
     botId = process.env.botId;
-    checkMessage(botId, sender, message, post);
+    checkMessage(botId, post);
     this.res.end();
   } else if (process.env.botIdAlt !== null) {
   this.res.writeHead(200);
   botId = process.env.botIdAlt;
-  checkMessage(botId, sender, message, post);
+  checkMessage(botId, post);
   this.res.end();
   }
 
 }
 
 //check for triggers
-function checkMessage(botId, sender, message, post) {
-  searchTerm = message.substring(1).trim();
+function checkMessage(botId, post) {
+  searchTerm = post.text.substring(1).trim();
   console.log(post.name + ' : ' + post.text);
 
   //HELP ?
