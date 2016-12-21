@@ -8,6 +8,7 @@
   	* Set your callnack URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
+  	* http://i.imgur.com/TFxrfLe.png
       * botId = bot id for your group
       * botIdAlt = bot id for a test group (optional)
         * It will still work if you don't enter this variable
