@@ -4,15 +4,8 @@ var https = require('https');
 //scan messages
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
-  this.res.writeHead(200);
   console.log(post.name + ' : ' + post.text);
-  checkMessage(post);
-  this.res.end();
-}
-
-//check for triggers
-function checkMessage(post) {
-
+  this.res.writeHead(200);
   //check if your posting in your main group
   if (post.group_id == process.env.groupId) {
     botId = process.env.botId;
@@ -52,6 +45,7 @@ function checkMessage(post) {
     } 
     }); 
   }
+  this.res.end();
 }
 
 //Post message
