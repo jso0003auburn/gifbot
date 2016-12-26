@@ -13,7 +13,6 @@ function respond() {
   message = post.text;
   console.log(sendingUser + ' : ' + message);
   invalid = ('"' + message.substring(1).trim() + '" is invalid');
-  this.res.writeHead(200);
 
   //check if your in test
   if (botIdAlt !== null && sendingGroup !== groupId) {
@@ -26,7 +25,8 @@ function respond() {
   if (message.indexOf('@' + botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
-
+  
+  this.res.writeHead(200);
   //GIF #
   if (message.substring(0,1) == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
