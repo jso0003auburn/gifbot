@@ -18,6 +18,10 @@ function respond() {
   botId = botId;
   }
   
+  if (sendingUser !== botName) {
+    console.log(sendingUser + ' : ' + message);
+  }
+  
   this.res.writeHead(200);
   scanMessage();
   this.res.end();
@@ -66,6 +70,7 @@ function scanMessage() {
     } 
     }); 
   }
+
 }
 
 //posts message
