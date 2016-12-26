@@ -67,7 +67,7 @@ function scanMessage() {
     }); 
   }
 
-  if (botResppnse == message) {
+  if (botResponse == message) {
     console.log(sendingUser + ' : ' + message);
   }
 }
