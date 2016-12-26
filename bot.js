@@ -26,10 +26,11 @@ function respond() {
 //checks posts to see if gifbot should respond
 function scanMessage() {
   console.log(sendingUser + ' : ' + message);
-  
+  botResponse = message;
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
-    postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
+    botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
+    postMessage(botResponse, botId);
   }
   
   //GIF #
@@ -38,7 +39,8 @@ function scanMessage() {
 	parsedData = JSON.parse(body);
 	
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-	  postMessage(parsedData.data.images.downsized.url, botId);
+	  botResponse = parsedData.data.images.downsized.url;
+	  postMessage(botResponse, botId);
 	} else {
 	console.log(message + ' is invalid');
 	}
