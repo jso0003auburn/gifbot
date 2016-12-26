@@ -25,8 +25,8 @@ function respond() {
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
-  console.log(sendingUser + ' : ' + message);
   botResponse = message;
+  
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
@@ -53,20 +53,22 @@ function scanMessage() {
     parsedData = JSON.parse(body);
     
     if (!error && response.statusCode == 200 && parsedData.query.results !== 'undefined' && parsedData.query.results.quote.Name) {
+      botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
       companyName = String(parsedData.query.results.quote.Name);
       lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
       change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
       if (change > 0) {
 	    change = String('+' + change);
-      }
-      
-	  postMessage(companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim(), botId);
+      } 
+	  postMessage(botResponse, botId);
     } else {
     console.log(message + ' is invalid');
     } 
     }); 
   }
-  
+  if (botResppnse == message) {
+    console.log(sendingUser + ' : ' + message);
+  }
 }
 
 //posts message
