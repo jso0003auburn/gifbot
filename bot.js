@@ -20,6 +20,11 @@ function respond() {
   } else {
   botId = botId;
   }
+  
+  scanMessage(message, botName, sendingUser, invalid, botId);
+}
+
+function scanMessage() {
 
   //TAG @gifbot
   if (message.indexOf('@' + botName) >= 0) {
