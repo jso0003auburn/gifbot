@@ -5,7 +5,7 @@ var botName = process.env.botName;
 var botId = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
 
-//scan messages
+//processes incoming groupme posts
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   sendingGroup = post.group_id;
@@ -14,20 +14,21 @@ function respond() {
   console.log(sendingUser + ' : ' + message);
   invalid = ('"' + message.substring(1).trim() + '" is invalid');
 
-  //check if your in test
   if (botIdAlt !== null && sendingGroup !== groupId) {
     botId = botIdAlt;
   } else {
   botId = botId;
   }
+  
   this.res.writeHead(200);
   scanMessage(message, botName, sendingUser, invalid, botId);
   this.res.end();
 }
 
+//checks posts to see if gifbot should respond
 function scanMessage() {
 
-  //TAG @gifbot
+  //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
@@ -63,7 +64,7 @@ function scanMessage() {
   
 }
 
-//Post message
+//posts message
 function postMessage(botResponse, botId) {
   var options, botReq;
   options = {
