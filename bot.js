@@ -25,10 +25,10 @@ function respond() {
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
-  console.log(sendingUser + ' : ' + message);
   
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
+    sent = 1;
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
   
@@ -64,7 +64,11 @@ function scanMessage() {
     } 
     }); 
   }
-  
+
+  if (sent !== 1) {
+    console.log(sendingUser + ' : ' + message);
+  }
+
 }
 
 //posts message
