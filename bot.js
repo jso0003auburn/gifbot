@@ -34,7 +34,7 @@ function respond() {
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	  postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
-	postMessage(invalid, botId);
+	console.log(sendingUser + ' : ' + invalid);
 	}
 	});
   }
@@ -51,7 +51,7 @@ function respond() {
       }
 	  postMessage(companyName.substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim(), botId);
     } else {
-    postMessage(invalid, botId);
+    console.log(sendingUser + ' : ' + invalid);
     } 
     }); 
   }
