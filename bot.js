@@ -29,7 +29,6 @@ function respond() {
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
-  botResponse = message;
   
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
