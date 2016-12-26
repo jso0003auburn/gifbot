@@ -28,7 +28,7 @@ function respond() {
 function scanMessage() {
 
   //Was @gifbot tagged?
-  if (message.indexOf('@' + botName) >= 0) {
+  if (post.text.indexOf('@' + botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
   
