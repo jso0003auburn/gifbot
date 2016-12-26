@@ -25,8 +25,8 @@ function respond() {
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
-
   console.log(sendingUser + ' : ' + message);
+  
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
@@ -36,6 +36,7 @@ function scanMessage() {
   if (message.substring(0,1) == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
 	parsedData = JSON.parse(body);
+	
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	  postMessage(parsedData.data.images.downsized.url, botId);
 	} else {
@@ -47,7 +48,8 @@ function scanMessage() {
   //STOCK TICKER $
   if (message.substring(0,1) == '$') {
     request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json', function (error, response, body) {
-    parsedData = JSON.parse(body); 
+    parsedData = JSON.parse(body);
+    
     if (!error && response.statusCode == 200 && parsedData.query.results !== 'undefined' && parsedData.query.results.quote.Name) {
       companyName = String(parsedData.query.results.quote.Name);
       lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
@@ -55,6 +57,7 @@ function scanMessage() {
       if (change > 0) {
 	    change = String('+' + change);
       }
+      
 	  postMessage(companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim(), botId);
     } else {
     console.log(message + ' is invalid');
