@@ -20,7 +20,7 @@ function respond() {
   }
   
   this.res.writeHead(200);
-  scanMessage(message, botId);
+  scanMessage(message, post, botId);
   this.res.end();
 }
 
