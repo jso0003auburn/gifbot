@@ -11,7 +11,6 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-  console.log(sendingUser + ' : ' + message);
 
   if (botIdAlt !== null && sendingGroup !== groupId) {
     botId = botIdAlt;
@@ -20,15 +19,16 @@ function respond() {
   }
   
   this.res.writeHead(200);
-  scanMessage(message, post, botId);
+  scanMessage();
   this.res.end();
 }
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
 
+  console.log(sendingUser + ' : ' + message);
   //Was @gifbot tagged?
-  if (post.text.indexOf('@' + botName) >= 0) {
+  if (message.indexOf('@' + botName) >= 0) {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
   
