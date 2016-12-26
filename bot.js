@@ -50,11 +50,12 @@ function scanMessage() {
     parsedData = JSON.parse(body); 
     if (!error && response.statusCode == 200 && parsedData.query.results !== 'undefined' && parsedData.query.results !== 'null') {
       companyName = String(parsedData.query.results.quote.Name);
+      lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
       change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
       if (change > 0) {
 	    change = String('+' + change);
       }
-	  postMessage(companyName.substring(0,20) + '\n$' +  Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2)) + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim(), botId);
+	  postMessage(companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim(), botId);
     } else {
     console.log(message + ' is invalid');
     } 
