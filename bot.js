@@ -66,10 +66,6 @@ function scanMessage() {
     } 
     }); 
   }
-
-  if (botResponse == message) {
-    console.log(sendingUser + ' : ' + message);
-  }
 }
 
 //posts message
