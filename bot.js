@@ -20,8 +20,9 @@ function respond() {
   } else {
   botId = botId;
   }
-  
+  this.res.writeHead(200);
   scanMessage(message, botName, sendingUser, invalid, botId);
+  this.res.end();
 }
 
 function scanMessage() {
@@ -31,7 +32,6 @@ function scanMessage() {
     postMessage('GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)', botId);
   }
   
-  this.res.writeHead(200);
   //GIF #
   if (message.substring(0,1) == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
@@ -61,7 +61,6 @@ function scanMessage() {
     }); 
   }
   
-  this.res.end();
 }
 
 //Post message
