@@ -25,7 +25,7 @@ function respond() {
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
-    postMessage(botResponse, botId);
+    postMessage(botResponse);
   }
   
   this.res.writeHead(200);
