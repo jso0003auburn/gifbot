@@ -16,16 +16,12 @@ function respond() {
     botId = botIdAlt;
   } else {
   botId = botId;
+  console.log(sendingUser + ' : ' + message);
   }
-  
-  if (sendingUser !== botName) {
-    console.log(sendingUser + ' : ' + message);
-  }
-
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
-    postMessage(botResponse);
+    postMessage(botResponse, botId);
   }
   
   this.res.writeHead(200);
