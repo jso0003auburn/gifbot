@@ -12,13 +12,22 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
 
-  this.res.writeHead(200);
+
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
     postMessage(botResponse, botId);
   }
+  
+  this.res.writeHead(200);
+  scanMessage();
+  this.res.end();
+}
 
+//checks posts to see if gifbot should respond
+function scanMessage() {
+  
+  
   //GIF #
   if (message.substring(0,1) == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
@@ -52,7 +61,8 @@ function respond() {
     } 
     }); 
   }
-  this.res.end();
+
+}
 
 //posts message
 function postMessage(botResponse, botId) {
