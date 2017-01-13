@@ -12,12 +12,7 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
 
-  if (botIdAlt !== null && sendingGroup !== groupId) {
-    botId = botIdAlt;
-  } else {
-  botId = botId;
-  console.log(sendingUser + ' : ' + message);
-  }
+
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
@@ -71,6 +66,12 @@ function scanMessage() {
 
 //posts message
 function postMessage(botResponse, botId) {
+  if (botIdAlt !== null && sendingGroup !== groupId) {
+    botId = botIdAlt;
+  } else {
+  botId = botId;
+  console.log(sendingUser + ' : ' + message);
+  }
   var options, botReq;
   options = {
     hostname: 'api.groupme.com',
