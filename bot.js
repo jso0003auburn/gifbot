@@ -21,6 +21,12 @@ function respond() {
   if (sendingUser !== botName) {
     console.log(sendingUser + ' : ' + message);
   }
+
+  //Was @gifbot tagged?
+  if (message.indexOf('@' + botName) >= 0) {
+    botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
+    postMessage(botResponse, botId);
+  }
   
   this.res.writeHead(200);
   scanMessage();
@@ -30,11 +36,6 @@ function respond() {
 //checks posts to see if gifbot should respond
 function scanMessage() {
   
-  //Was @gifbot tagged?
-  if (message.indexOf('@' + botName) >= 0) {
-    botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
-    postMessage(botResponse, botId);
-  }
   
   //GIF #
   if (message.substring(0,1) == '#') {
