@@ -66,6 +66,8 @@ function scanMessage() {
 	  postMessage(botResponse, botId);
     } else {
     console.log(message + ' is invalid');
+    botResponse = (sendingUser + ' invalid')
+    postMessage(botResponse, botId);
     } 
     }); 
   }
