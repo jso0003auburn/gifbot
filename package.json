@@ -1,6 +1,6 @@
 {
   "name": “groupme-gif-bot”,
-  "version": “5.0”,
+  "version": “0.1.0”,
   "description": "GroupMe Bot”,
   "main": "index.js",
   "scripts": {
