@@ -92,4 +92,3 @@ function postMessage(botResponse, botId) {
 }
 
 exports.respond = respond;
-Contact GitHub API Training Shop Blog About
