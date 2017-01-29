@@ -4,6 +4,7 @@ var groupId = process.env.groupId;
 var botName = process.env.botName;
 var botId = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
+var botResponseTag = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
 
 //processes incoming groupme posts
 function respond() {
@@ -15,7 +16,7 @@ function respond() {
 
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
-    botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
+    botResponse = botResponseTag;
     postMessage(botResponse, botId);
   }
   
