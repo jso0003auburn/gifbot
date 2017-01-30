@@ -13,13 +13,7 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(sendingUser + ' : ' + message);
-
-  //Was @gifbot tagged?
-  if (message.indexOf('@' + botName) >= 0) {
-    botResponse = botResponseTag;
-    postMessage(botResponse, botId);
-  }
-  
+ 
   this.res.writeHead(200);
   scanMessage();
   this.res.end();
@@ -28,7 +22,12 @@ function respond() {
 //checks posts to see if gifbot should respond
 function scanMessage() {
   
-  
+    //Was @gifbot tagged?
+  if (message.indexOf('@' + botName) >= 0) {
+    botResponse = botResponseTag;
+    postMessage(botResponse, botId);
+  }
+
   //GIF #
   if (message.substring(0,1) == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
