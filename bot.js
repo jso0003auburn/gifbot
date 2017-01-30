@@ -20,12 +20,7 @@ function respond() {
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
-
-  if (botIdAlt !== null && sendingGroup !== groupId) {
-    botId = botIdAlt;
-  } else {
-  botId = botId;
-  }
+  
     //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     botResponse = botResponseTag;
@@ -39,7 +34,7 @@ function scanMessage() {
 	
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	  botResponse = parsedData.data.images.downsized.url;
-	  postMessage(botResponse);
+	  postMessage(botResponse, botId);
 	} else {
 	console.log(message + ' is invalid');
 	}
@@ -59,7 +54,7 @@ function scanMessage() {
 	    change = String('+' + change);
       }
       botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-	  postMessage(botResponse);
+	  postMessage(botResponse, botId);
     } else {
     console.log(message + ' is invalid');
     } 
@@ -69,7 +64,12 @@ function scanMessage() {
 }
 
 //posts message
-function postMessage(botResponse) {
+function postMessage(botResponse, botId) {
+  if (botIdAlt !== null && sendingGroup !== groupId) {
+    botId = botIdAlt;
+  } else {
+  botId = botId;
+  }
   var options, botReq;
   options = {
     hostname: 'api.groupme.com',
