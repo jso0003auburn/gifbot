@@ -26,6 +26,16 @@ function respond() {
     botResponse = botResponseTag;
     postMessage(botResponse, botId);
   }
+  
+  this.res.writeHead(200);
+  scanMessage();
+  this.res.end();
+}
+
+//checks posts to see if gifbot should respond
+function scanMessage() {
+  
+  
   //GIF #
   if (message.substring(0,1) == '#') {
 	request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
@@ -33,9 +43,7 @@ function respond() {
 	
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	  botResponse = parsedData.data.images.downsized.url;
-	  this.res.writeHead(200);
 	  postMessage(botResponse, botId);
-	  this.res.end();
 	} else {
 	console.log(message + ' is invalid');
 	}
@@ -55,21 +63,12 @@ function respond() {
 	    change = String('+' + change);
       }
       botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-	  this.res.writeHead(200);
 	  postMessage(botResponse, botId);
-	  this.res.end();
     } else {
     console.log(message + ' is invalid');
     } 
     }); 
   }
-}
-
-//checks posts to see if gifbot should respond
-function scanMessage() {
-  
-  
-
 
 }
 
