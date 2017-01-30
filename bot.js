@@ -13,13 +13,6 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(sendingUser + ' : ' + message);
-  
-  //Main group or alternate group?
-  if (botIdAlt !== null && sendingGroup !== groupId) {
-    botId = botIdAlt;
-  } else {
-  botId = botId;
-  }
 
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
@@ -74,6 +67,11 @@ function scanMessage() {
 
 //posts message
 function postMessage(botResponse, botId) {
+  if (botIdAlt !== null && sendingGroup !== groupId) {
+    botId = botIdAlt;
+  } else {
+  botId = botId;
+  }
   var options, botReq;
   options = {
     hostname: 'api.groupme.com',
