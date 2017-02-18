@@ -1,18 +1,12 @@
 var request = require('request');
 var https = require('https');
-var groupId = process.env.groupId;
 var botName = process.env.botName;
-var botId = process.env.botId;
-var botIdAlt = process.env.botIdAlt;
+
 
 
 //posts message
 function postMessage(botResponse, botId) {
-  if (sendingGroup == groupId) {
-    botId = botId;
-  } else {
-  botId = botIdAlt;
-  }
+
 
   var options, botReq;
   options = {
