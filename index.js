@@ -1,4 +1,5 @@
 var http, director, bot, router, server, port;
+var request = require('request');
 
 http        = require('http');
 director    = require('director');
@@ -25,6 +26,18 @@ server = http.createServer(function (req, res) {
 
 port = Number(process.env.PORT || 5000);
 server.listen(port);
+
+//processes incoming groupme posts
+function respond() {
+  var post = JSON.parse(this.req.chunks[0]);
+  this.res.writeHead(200);
+  sendingGroup = post.group_id;
+  sendingUser = post.name;
+  message = post.text;
+  console.log(message + ' : ' + sendingUser);
+  scanMessage();
+  this.res.end();
+}
 
 function ping() {
   this.res.writeHead(200);
