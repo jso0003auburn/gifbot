@@ -1,6 +1,5 @@
 var request = require('request');
 var https = require('https');
-var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
 var botTag = require('./botTag');
@@ -28,11 +27,12 @@ function respond() {
   }
   
   //not from the main group?
-  if (sendingGroup !== groupId) {
+  if (sendingGroup !== groupId && botIdAlt !== null) {
     botId = botIdAlt;
   }
   
   //Was @gifbot tagged?
+  var gifbotTag = '@';
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botTag.botTag(botId);
   }
