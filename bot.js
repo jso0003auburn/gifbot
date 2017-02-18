@@ -43,7 +43,7 @@ function scanMessage() {
 
   //STOCK TICKER $
   if (message.substring(0,1) == '$') {
-    request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"' + message.substring(1).trim() + '"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
+    request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
     parsedData = JSON.parse(body);
     console.log(parsedData.query.results.quote.Name);
     if (!error && response.statusCode == 200) {
