@@ -35,17 +35,17 @@ function scanMessage() {
   }
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
-    botTag.botTag();
+    botTag.botTag(botId);
   }
 
   //GIF #
   if (message.substring(0,1) == gifPostTag) {
-    gifTag.gifTag();
+    gifTag.gifTag(botId);
   }
 
   //STOCK TICKER $
   if (message.substring(0,1) == stockPostTag) {
-    stockTag.stockTag();
+    stockTag.stockTag(botId);
   }
 
 }
