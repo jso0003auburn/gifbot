@@ -23,10 +23,10 @@ function respond() {
   message = post.text;
   console.log(message + ' : ' + sendingUser);
   if (sendingGroup == groupId) {
-    botId == botIdMain;
+    botId = botIdMain;
   }
   if (sendingGroup !== groupId) {
-    botId == botIdAlt;
+    botId = botIdAlt;
   }
   scanMessage();
   this.res.end();
