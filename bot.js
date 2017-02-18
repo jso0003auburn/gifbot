@@ -17,6 +17,11 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(message + ' : ' + sendingUser);
+  //Was @gifbot tagged?
+  if (message.indexOf('@' + botName) >= 0) {
+    botResponse = botResponseTag;
+    post.postMessage(botResponse, botId);
+  }
   scanMessage();
   this.res.end();
 }
@@ -24,11 +29,7 @@ function respond() {
 //checks posts to see if gifbot should respond
 function scanMessage() {
   
-    //Was @gifbot tagged?
-  if (message.indexOf('@' + botName) >= 0) {
-    botResponse = botResponseTag;
-    post.postMessage(botResponse, botId);
-  }
+
 
   //GIF #
   if (message.substring(0,1) == '#') {
