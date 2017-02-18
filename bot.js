@@ -35,7 +35,7 @@ function respond() {
   
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
-    post.botTag(botId);
+    botTag.post(botId);
   }
 
   //GIF #
