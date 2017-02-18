@@ -10,7 +10,7 @@ function gifTag() {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
-	post.postMessage(botResponse);
+	post.postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
   }

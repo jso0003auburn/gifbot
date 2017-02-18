@@ -8,7 +8,10 @@ var post = require('./post');
 var botTag = require('./botTag');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
-
+var groupId = process.env.groupId;
+var botName = process.env.botName;
+var botId = process.env.botId;
+var botIdAlt = process.env.botIdAlt;
 
 
 //processes incoming groupme posts
@@ -25,7 +28,11 @@ function respond() {
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
-  
+  if (botIdAlt !== null && sendingGroup !== groupId) {
+    botId = botIdAlt;
+  } else {
+  botId = botId;
+  }
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botTag.botTag();

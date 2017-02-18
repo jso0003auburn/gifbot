@@ -7,7 +7,7 @@ var post = require('./post');
 //posts message
 function botTag() {
   botResponse = botResponseTag;
-  post.postMessage(botResponse);
+  post.postMessage(botResponse, botId);
 }
 
 exports.botTag = botTag;
