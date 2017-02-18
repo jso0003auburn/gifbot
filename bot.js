@@ -1,6 +1,6 @@
 var request = require('request');
 var https = require('https');
-var botTag = require('./botTag');
+var botTag = require('./post');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
 var botName = process.env.botName;

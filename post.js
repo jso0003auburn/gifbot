@@ -37,3 +37,4 @@ function postMessage(botResponse, sendingGroup) {
 }
 
 exports.postMessage = postMessage;
+exports.botTag = botTag;
