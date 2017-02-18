@@ -41,7 +41,9 @@ function respond() {
   //STOCK TICKER $
   if (message.substring(0,1) == stockPostTag) {
     stockTag.stockTag(botId);
-  }  this.res.end();
+  }  
+  
+  this.res.end();
 }
 
 
