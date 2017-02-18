@@ -8,10 +8,10 @@ var botIdAlt = process.env.botIdAlt;
 
 //posts message
 function postMessage(botResponse, botId) {
-  if (botIdAlt !== null && sendingGroup !== groupId) {
-    botId = botIdAlt;
+  if (sendingGroup == groupId) {
+    botId = botId;
   } else {
-  botId = botId;
+  botId = botIdAlt;
   }
 
   var options, botReq;
