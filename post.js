@@ -30,3 +30,4 @@ function postMessage(botResponse, botId) {
 }
 
 exports.postMessage = postMessage;
+exports.botTag = botTag;
