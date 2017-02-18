@@ -3,7 +3,6 @@ var https = require('https');
 var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
-var botTag = require('./botTag');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
 var botTag = require('./post');
