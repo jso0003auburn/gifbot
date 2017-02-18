@@ -6,7 +6,17 @@ var botId = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
 var botResponseTag = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
 
-
+//processes incoming groupme posts
+function respond() {
+  var post = JSON.parse(this.req.chunks[0]);
+  this.res.writeHead(200);
+  sendingGroup = post.group_id;
+  sendingUser = post.name;
+  message = post.text;
+  console.log(message + ' : ' + sendingUser);
+  scanMessage();
+  this.res.end();
+}
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
@@ -79,4 +89,4 @@ function postMessage(botResponse, botId) {
   botReq.end(JSON.stringify(options));
 }
 
-exports.postMessage = postMessage;
+exports.respond = respond;
