@@ -1,5 +1,6 @@
 var request = require('request');
 var https = require('https');
+var botName = process.env.botName;
 var botResponseTag = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
 var gifbotTag = '@';
 var gifPostTag = '#';
