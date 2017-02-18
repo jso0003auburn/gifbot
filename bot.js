@@ -19,13 +19,6 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(message + ' : ' + sendingUser);
-  scanMessage();
-  this.res.end();
-}
-
-//checks posts to see if gifbot should respond
-function scanMessage() {
-  
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botTag.botTag();
@@ -40,8 +33,9 @@ function scanMessage() {
   if (message.substring(0,1) == stockPostTag) {
     stockTag.stockTag();
   }
-
+  this.res.end();
 }
+
 
 
 exports.respond = respond;
