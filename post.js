@@ -1,13 +1,18 @@
 var request = require('request');
 var https = require('https');
+var groupId = process.env.groupId;
 var botName = process.env.botName;
-
+var botId = process.env.botId;
+var botIdAlt = process.env.botIdAlt;
 
 
 //posts message
 function postMessage(botResponse, botId) {
-
-
+  if (botIdAlt !== null && sendingGroup !== groupId) {
+    botId = botIdAlt;
+  } else {
+  botId = botId;
+  }
   var options, botReq;
   options = {
     hostname: 'api.groupme.com',
