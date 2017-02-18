@@ -6,7 +6,7 @@ bot         = require('./bot.js');
 
 router = new director.http.Router({
   '/' : {
-    post: bot.respond,
+    post: bot.scanMessage,
     get: ping
   }
 });
