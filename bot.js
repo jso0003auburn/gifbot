@@ -3,10 +3,9 @@ var https = require('https');
 var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
+var botTag = require('./botTag');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
-var botTag = require('./post');
-
 var groupId = process.env.groupId;
 var botName = process.env.botName;
 var botIdMain = process.env.botId;
@@ -35,7 +34,7 @@ function respond() {
   
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
-    post.botTag(botId);
+    botTag.botTag(botId);
   }
 
   //GIF #
