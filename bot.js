@@ -30,14 +30,12 @@ function respond() {
   }
   
   //Was @gifbot tagged?
-  var gifbotTag = '@';
-  if (message.indexOf(gifbotTag + botName) >= 0) {
+  if (message.indexOf('@' + botName) >= 0) {
     botTag.botTag(botId);
   }
 
   //GIF #
-  var gifTag = '#';
-  if (message.substring(0,1) == gifTag) {
+  if (message.substring(0,1) == '#') {
     gifTag.gifTag(botId);
   }
 
