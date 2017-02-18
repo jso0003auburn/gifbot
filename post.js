@@ -35,4 +35,4 @@ function postMessage(botResponse, botId) {
   botReq.end(JSON.stringify(options));
 }
 
-exports.post = post;
+exports.postMessage = postMessage;
