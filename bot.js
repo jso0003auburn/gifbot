@@ -4,7 +4,6 @@ var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
 var post = require('./post');
-var botTag = require('./botTag');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
 var groupId = process.env.groupId;
@@ -36,7 +35,7 @@ function respond() {
   
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
-    botTag.botTag(botId);
+    post.botTag(botId);
   }
 
   //GIF #
