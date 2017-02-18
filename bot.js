@@ -1,7 +1,5 @@
 var request = require('request');
 var https = require('https');
-var gifPostTag = '#';
-var stockPostTag = '$';
 var botTag = require('./botTag');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
@@ -38,12 +36,14 @@ function respond() {
   }
 
   //GIF #
-  if (message.substring(0,1) == gifPostTag) {
+  var gifTag = '#';
+  if (message.substring(0,1) == gifTag) {
     gifTag.gifTag(botId);
   }
 
   //STOCK TICKER $
-  if (message.substring(0,1) == stockPostTag) {
+  var stockTag = '$';
+  if (message.substring(0,1) == stockTag) {
     stockTag.stockTag(botId);
   }  
   
