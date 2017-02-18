@@ -16,7 +16,7 @@ function stockTag(botId) {
 	  change = String('+' + change);
 	}
 	botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-	post.postMessage(botResponse, botId);
+	post.postMessage(botResponse, sendingGroup);
   } else {
   console.log(message + ' is invalid');
   } 

@@ -3,10 +3,8 @@ var https = require('https');
 var botTag = require('./botTag');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
-var groupId = process.env.groupId;
 var botName = process.env.botName;
-var botIdMain = process.env.botId;
-var botIdAlt = process.env.botIdAlt;
+
 
 
 //processes incoming groupme posts
@@ -18,30 +16,21 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(sendingUser + ' : ' + message);
-  
-  //From the main group?
-  if (sendingGroup == groupId) {
-    botId = botIdMain;
-  }
-  
-  //not from the main group?
-  if (sendingGroup !== groupId && botIdAlt !== null) {
-    botId = botIdAlt;
-  }
+
   
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
-    botTag.botTag(botId);
+    botTag.botTag(sendingGroup);
   }
 
   //GIF #
   if (message.substring(0,1) == '#') {
-    gifTag.gifTag(botId);
+    gifTag.gifTag(sendingGroup);
   }
 
   //STOCK TICKER $
   if (message.substring(0,1) == '$') {
-    stockTag.stockTag(botId);
+    stockTag.stockTag(sendingGroup);
   }  
   
   this.res.end();
