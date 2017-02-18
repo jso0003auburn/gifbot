@@ -7,7 +7,7 @@ bot         = require('./bot.js');
 
 router = new director.http.Router({
   '/' : {
-    post: bot.respond,
+    post: index.respond,
     get: ping
   }
 });
@@ -35,7 +35,7 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(message + ' : ' + sendingUser);
-  scanMessage();
+  bot.scanMessage();
   this.res.end();
 }
 
