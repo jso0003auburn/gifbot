@@ -33,7 +33,7 @@ function scanMessage() {
   message = post.text;
   console.log(message + ' : ' + sendingUser);
   this.res.end();
-  //Was @gifbot tagged?
+    //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botResponse = botResponseTag;
     post.postMessage(botResponse, botId);
@@ -76,4 +76,4 @@ function scanMessage() {
 }
 
 
-exports.scanMessage = scanMessage;
+exports.respond = respond;
