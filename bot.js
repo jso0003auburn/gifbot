@@ -26,13 +26,6 @@ function respond() {
 
 //checks posts to see if gifbot should respond
 function scanMessage() {
-  var post = JSON.parse(this.req.chunks[0]);
-  this.res.writeHead(200);
-  sendingGroup = post.group_id;
-  sendingUser = post.name;
-  message = post.text;
-  console.log(message + ' : ' + sendingUser);
-  this.res.end();
     //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botResponse = botResponseTag;
