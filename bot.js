@@ -6,6 +6,7 @@ var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
 var post = require('./post');
+var botTag = require('./botTag');
 
 
 
@@ -27,7 +28,7 @@ function scanMessage() {
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botResponse = botResponseTag;
-    post.postMessage(botResponse);
+    botTag.botTag(botResponse);
   }
 
   //GIF #
