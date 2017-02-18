@@ -27,7 +27,7 @@ function scanMessage() {
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botResponse = botResponseTag;
-    post.postMessage(botResponse, botId);
+    post.postMessage(botResponse);
   }
 
   //GIF #
@@ -37,7 +37,7 @@ function scanMessage() {
 	
 	if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	  botResponse = parsedData.data.images.downsized.url;
-	  post.postMessage(botResponse, botId);
+	  post.postMessage(botResponse;
 	} else {
 	console.log(message + ' is invalid');
 	}
@@ -57,7 +57,7 @@ function scanMessage() {
 	    change = String('+' + change);
       }
       botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-	  post.postMessage(botResponse, botId);
+	  post.postMessage(botResponse);
     } else {
     console.log(message + ' is invalid');
     } 
