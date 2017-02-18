@@ -9,7 +9,7 @@ var post = require('./post');
 
 
 //posts message
-function botTag(botResponse, botId) {
+function botTag() {
   botResponse = botResponseTag;
   post.postMessage(botResponse);
 }

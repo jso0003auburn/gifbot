@@ -26,7 +26,7 @@ function scanMessage() {
   
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
-    botTag.botTag(botResponse);
+    botTag.botTag();
   }
 
   //GIF #
