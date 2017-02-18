@@ -1,6 +1,5 @@
 var request = require('request');
 var https = require('https');
-var botName = process.env.botName;
 var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
@@ -18,16 +17,23 @@ var botIdAlt = process.env.botIdAlt;
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   this.res.writeHead(200);
+  
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
+  
   console.log(message + ' : ' + sendingUser);
+  
+  //From the main group?
   if (sendingGroup == groupId) {
     botId = botIdMain;
   }
+  
+  //not from the main group?
   if (sendingGroup !== groupId) {
     botId = botIdAlt;
   }
+  
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botTag.botTag(botId);

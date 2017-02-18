@@ -1,12 +1,11 @@
 var request = require('request');
 var https = require('https');
-var botResponseTag = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
 var post = require('./post');
 
 
 //posts message
 function botTag(botId) {
-  botResponse = botResponseTag;
+  botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
   post.postMessage(botResponse, botId);
 }
 
