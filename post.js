@@ -13,6 +13,11 @@ function postMessage(botResponse, botId) {
   } else {
   botId = botId;
   }
+  //Was @gifbot tagged?
+  if (message.indexOf(gifbotTag + botName) >= 0) {
+    botResponse = botResponseTag;
+    post.postMessage(botResponse);
+  }
   var options, botReq;
   options = {
     hostname: 'api.groupme.com',
