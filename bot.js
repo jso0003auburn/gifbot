@@ -28,13 +28,6 @@ function respond() {
   if (sendingGroup !== groupId) {
     botId = botIdAlt;
   }
-  scanMessage();
-  this.res.end();
-}
-
-//checks posts to see if gifbot should respond
-function scanMessage() {
-
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
     botTag.botTag(botId);
@@ -48,8 +41,7 @@ function scanMessage() {
   //STOCK TICKER $
   if (message.substring(0,1) == stockPostTag) {
     stockTag.stockTag(botId);
-  }
-
+  }  this.res.end();
 }
 
 
