@@ -16,9 +16,9 @@ function respond() {
   message = post.text;
   console.log(message + ' : ' + sendingUser);
   if (message.indexOf(gifbotTag + botName) > -1 && message.substring(0,1) !== '#' && message.substring(0,1) !== '$') {
-    scanMessage();
+    console.log('no trigger');
   } else {
-  console.log('no trigger');
+  scanMessage();
   }
   this.res.end();
 }
