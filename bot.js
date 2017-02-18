@@ -6,19 +6,18 @@ var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
 var post = require('./post');
-
+var mess = JSON.parse(this.req.chunks[0]);
+this.res.writeHead(200);
+sendingGroup = mess.group_id;
+sendingUser = mess.name;
+message = mess.text;
+console.log(message + ' : ' + sendingUser);
+this.res.end();
 
 
 //processes incoming groupme posts
 function respond() {
-  var post = JSON.parse(this.req.chunks[0]);
-  this.res.writeHead(200);
-  sendingGroup = post.group_id;
-  sendingUser = post.name;
-  message = post.text;
-  console.log(message + ' : ' + sendingUser);
   scanMessage();
-  this.res.end();
 }
 
 //checks posts to see if gifbot should respond
