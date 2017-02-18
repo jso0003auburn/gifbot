@@ -1,7 +1,6 @@
 var request = require('request');
 var https = require('https');
 var botName = process.env.botName;
-var botResponseTag = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
 var gifbotTag = '@';
 var gifPostTag = '#';
 var stockPostTag = '$';
@@ -27,7 +26,6 @@ function scanMessage() {
   
   //Was @gifbot tagged?
   if (message.indexOf(gifbotTag + botName) >= 0) {
-    botResponse = botResponseTag;
     botTag.botTag(botResponse);
   }
 
