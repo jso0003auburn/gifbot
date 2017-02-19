@@ -23,13 +23,13 @@ function respond() {
   }
   
   //Was the bot mentioned?
-  if (message.indexOf(botName) >= 0) {
+  if (message.indexOf('xyz') >= 0) {
     botTag.botMention(sendingGroup);
   }
 
   //GIF #
   if (message.substring(0,1) == '#') {
-    gifTag.gifTag(sendingGroup);
+    botTag.gifTag(sendingGroup);
   }
 
   //STOCK TICKER $
