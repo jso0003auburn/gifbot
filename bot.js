@@ -1,6 +1,5 @@
 var request = require('request');
 var https = require('https');
-var botTag = require('./botTag');
 var botName = process.env.botName;
 var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
@@ -27,9 +26,9 @@ function respond() {
     botId = botIdAlt;
   }
   
-    //not from the main group?
+  //from an unrecognized group?
   if (botId == '1') {
-    console.log(message + ' sent without a group');
+    console.log(message + ' sent without a valid group id');
   }
 
   //Was the bot tagged?
@@ -89,6 +88,7 @@ function stockTag(botId) {
   } 
   }); 
 }
+
 //posts message
 function postMessage(botResponse, botId) {
   
