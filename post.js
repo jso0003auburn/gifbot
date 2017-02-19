@@ -4,7 +4,11 @@ var groupId = process.env.groupId;
 var botIdMain = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
 
-
+//posts message
+function botTag(sendingGroup) {
+  botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
+  post.postMessage(botResponse, sendingGroup);
+}
 //posts message
 function postMessage(botResponse, sendingGroup) {
   
