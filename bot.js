@@ -19,11 +19,6 @@ function respond() {
   if (message.indexOf('@' + botName) >= 0) {
     botTag.botTag(sendingGroup);
   }
-  
-  //Was the bot mentioned?
-  if (message.indexOf('xyz') >= 0) {
-    botTag.botMention(sendingGroup);
-  }
 
   //GIF #
   if (message.substring(0,1) == '#') {
