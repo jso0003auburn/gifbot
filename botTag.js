@@ -4,19 +4,19 @@ var bot = require('./bot');
 
 
 //if @gifbot was tagged this will post a help message
-function botTag(sendingGroup) {
+function botTag(botId) {
   botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
-  bot.postMessage(botResponse, sendingGroup);
+  bot.postMessage(botResponse, botId);
 }
 
 //posts message
-function gifTag(sendingGroup) {
+function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
   parsedData = JSON.parse(body);
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
-	bot.postMessage(botResponse, sendingGroup);
+	bot.postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
   }
@@ -24,7 +24,7 @@ function gifTag(sendingGroup) {
 }
 
 //posts message
-function stockTag(sendingGroup) {
+function stockTag(botId) {
   request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
   parsedData = JSON.parse(body);
   console.log(parsedData.query.results.quote.Name);
@@ -36,7 +36,7 @@ function stockTag(sendingGroup) {
 	  change = String('+' + change);
 	}
 	botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-	bot.postMessage(botResponse, sendingGroup);
+	bot.postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
   } 

@@ -17,29 +17,7 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(sendingUser + ' : ' + message);
- 
-  //Was the bot tagged?
-  if (message.indexOf('@' + botName) >= 0) {
-    botTag.botTag(sendingGroup);
-  }
-
-  //GIF #
-  if (message.substring(0,1) == '#') {
-    botTag.gifTag(sendingGroup);
-  }
-
-  //STOCK TICKER $
-  if (message.substring(0,1) == '$') {
-    botTag.stockTag(sendingGroup);
-  }  
-  
-  this.res.end();
-}
-
-//posts message
-function postMessage(botResponse, sendingGroup) {
-  
-  //From the main group?
+   //From the main group?
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
   }
@@ -48,6 +26,33 @@ function postMessage(botResponse, sendingGroup) {
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
   }
+  
+  if(botId == null) {
+    process.exit(1);
+  }
+  
+  //Was the bot tagged?
+  if (message.indexOf('@' + botName) >= 0) {
+    botTag.botTag(botId);
+  }
+
+  //GIF #
+  if (message.substring(0,1) == '#') {
+    botTag.gifTag(botId);
+  }
+
+  //STOCK TICKER $
+  if (message.substring(0,1) == '$') {
+    botTag.stockTag(botId);
+  }  
+  
+  this.res.end();
+}
+
+//posts message
+function postMessage(botResponse, botId) {
+  
+
   var options, botReq;
   options = {
     hostname: 'api.groupme.com',
