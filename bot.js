@@ -34,7 +34,7 @@ function respond() {
 
   //STOCK TICKER $
   if (message.substring(0,1) == '$') {
-    stockTag.stockTag(sendingGroup);
+    botTag.stockTag(sendingGroup);
   }  
   
   this.res.end();
