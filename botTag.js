@@ -14,3 +14,4 @@ function botMention(botId) {
   post.postMessage(botResponse, sendingGroup);
 }
 exports.botTag = botTag;
+exports.botMention = botMention;
