@@ -3,7 +3,6 @@ var https = require('https');
 var botTag = require('./botTag');
 var gifTag = require('./gifTag');
 var stockTag = require('./stockTag');
-var post = require('./post');
 var botName = process.env.botName;
 
 
@@ -19,10 +18,7 @@ function respond() {
   console.log(sendingUser + ' : ' + message);
 
 
-  //GIF #
-  if (message.substring(0,1) == '!') {
-    post.weatherTag(sendingGroup);
-  }
+
   
   //Was @gifbot tagged?
   if (message.indexOf('@' + botName) >= 0) {
