@@ -27,7 +27,7 @@ function respond() {
     botId = botIdAlt;
   }
   
-  if(botId == null) {
+  if(botId == 'undefined' || botId == null) {
     process.exit(1);
   }
   
