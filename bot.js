@@ -2,7 +2,8 @@ var request = require('request');
 var https = require('https');
 var botTag = require('./botTag');
 var botName = process.env.botName;
-var groupId = process.env.groupId;
+var groupIdMain = process.env.groupId;
+var groupIdAlt = process.env.groupIdAlt;
 var botIdMain = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
 
@@ -39,12 +40,12 @@ function respond() {
 function postMessage(botResponse, sendingGroup) {
   
   //From the main group?
-  if (sendingGroup == groupId) {
+  if (sendingGroup == groupIdMain) {
     botId = botIdMain;
   }
   
   //not from the main group?
-  if (sendingGroup !== groupId && botIdAlt !== null) {
+  if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
   }
   var options, botReq;
