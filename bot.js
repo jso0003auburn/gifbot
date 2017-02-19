@@ -62,6 +62,7 @@ function gifTag(botId) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
+	console.log('GIF size: ' + parsedData.data.images.downsized.size);
 	postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
