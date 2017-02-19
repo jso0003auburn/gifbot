@@ -16,13 +16,15 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(sendingUser + ' : ' + message);
-
-
-
-  
-  //Was @gifbot tagged?
+ 
+  //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0) {
     botTag.botTag(sendingGroup);
+  }
+  
+  //Was the bot mentioned?
+  if (message.indexOf(botName) >= 0) {
+    botTag.botMention(sendingGroup);
   }
 
   //GIF #

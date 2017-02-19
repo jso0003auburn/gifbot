@@ -8,5 +8,9 @@ function botTag(botId) {
   botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
   post.postMessage(botResponse, sendingGroup);
 }
-
+//posts message
+function botMention(botId) {
+  botResponse = 'mention = # + (search keyword)\nStocks = $ + (ticker symbol)';
+  post.postMessage(botResponse, sendingGroup);
+}
 exports.botTag = botTag;
