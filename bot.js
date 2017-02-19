@@ -21,7 +21,7 @@ function respond() {
     botId = botIdMain;
   }
   
-  //not from the main group?
+  //from the alt group?
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
   }
