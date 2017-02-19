@@ -12,7 +12,7 @@ var botIdAlt = process.env.botIdAlt;
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   this.res.writeHead(200);
-  
+  botId = '1';
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
@@ -27,7 +27,7 @@ function respond() {
     botId = botIdAlt;
   }
   
-  if(botId == 'undefined' || botId == null) {
+  if(botId == '1') {
     process.exit(1);
   }
   
