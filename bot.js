@@ -3,8 +3,8 @@ var https = require('https');
 var botTag = require('./botTag');
 var botName = process.env.botName;
 var groupIdMain = process.env.groupIdMain;
+var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
-var botIdMain = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
 
 
