@@ -2,7 +2,7 @@ var request = require('request');
 var https = require('https');
 var botTag = require('./botTag');
 var botName = process.env.botName;
-var groupIdMain = process.env.groupId;
+var groupIdMain = process.env.groupIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdMain = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
@@ -16,7 +16,8 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-   //From the main group?
+  
+  //From the main group?
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
   }
@@ -26,6 +27,11 @@ function respond() {
     botId = botIdAlt;
   }
   
+    //not from the main group?
+  if (botId == '1') {
+    console.log(message + ' sent without a group');
+  }
+
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
     botTag.botTag(botId);
@@ -40,7 +46,7 @@ function respond() {
   if (message.substring(0,1) == '$' && botId !== '1') {
     botTag.stockTag(botId);
   }  
-  console.log(sendingUser + ' : ' + message + ' ' + botId);
+  console.log(sendingUser + ' : ' + message);
   this.res.end();
 }
 
