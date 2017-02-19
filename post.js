@@ -5,6 +5,11 @@ var botIdMain = process.env.botId;
 var botIdAlt = process.env.botIdAlt;
 
 
+function weatherTag(sendingGroup) {
+  botResponse = 'hey';
+  postMessage(botResponse, sendingGroup);
+  }
+  
 //posts message
 function postMessage(botResponse, sendingGroup) {
   
@@ -37,3 +42,4 @@ function postMessage(botResponse, sendingGroup) {
 }
 
 exports.postMessage = postMessage;
+exports.weatherTag = weatherTag;
