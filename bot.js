@@ -27,22 +27,18 @@ function respond() {
     botId = botIdAlt;
   }
   
-  if(botId == '1') {
-    process.exit(1);
-  }
-  
   //Was the bot tagged?
-  if (message.indexOf('@' + botName) >= 0) {
+  if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
     botTag.botTag(botId);
   }
 
   //GIF #
-  if (message.substring(0,1) == '#') {
+  if (message.substring(0,1) == '#' && botId !== '1') {
     botTag.gifTag(botId);
   }
 
   //STOCK TICKER $
-  if (message.substring(0,1) == '$') {
+  if (message.substring(0,1) == '$' && botId !== '1') {
     botTag.stockTag(botId);
   }  
   
