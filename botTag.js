@@ -3,7 +3,7 @@ var https = require('https');
 var post = require('./post');
 
 
-//posts message
+//if @gifbot was tagged this will post a help message
 function botTag(sendingGroup) {
   botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
   post.postMessage(botResponse, sendingGroup);
