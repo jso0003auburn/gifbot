@@ -1,12 +1,12 @@
 var request = require('request');
 var https = require('https');
-var post = require('./post');
+var bot = require('./bot');
 
 
 //if @gifbot was tagged this will post a help message
 function botTag(sendingGroup) {
   botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
-  post.postMessage(botResponse, sendingGroup);
+  bot.postMessage(botResponse, sendingGroup);
 }
 
 //posts message
@@ -16,7 +16,7 @@ function gifTag(sendingGroup) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
-	post.postMessage(botResponse, sendingGroup);
+	bot.postMessage(botResponse, sendingGroup);
   } else {
   console.log(message + ' is invalid');
   }
@@ -36,7 +36,7 @@ function stockTag(sendingGroup) {
 	  change = String('+' + change);
 	}
 	botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-	post.postMessage(botResponse, sendingGroup);
+	bot.postMessage(botResponse, sendingGroup);
   } else {
   console.log(message + ' is invalid');
   } 
