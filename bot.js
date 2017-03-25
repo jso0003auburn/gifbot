@@ -5,7 +5,7 @@ var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
-var gifTag = require('./gifTag.js');
+var gifTag = require('./gifTag');
 
 
 
