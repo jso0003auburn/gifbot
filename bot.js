@@ -11,7 +11,7 @@ var botIdAlt = process.env.botIdAlt;
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   this.res.writeHead(200);
-  botId = null;
+  botId = '1';
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
@@ -21,9 +21,14 @@ function respond() {
     botId = botIdMain;
   }
   
-  //not from the main group?
+  //from the alt group?
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
+  }
+  
+  //from an unrecognized group?
+  if (botId == '1') {
+    console.log(message + ' sent without a valid group id');
   }
 
   //Was the bot tagged?
