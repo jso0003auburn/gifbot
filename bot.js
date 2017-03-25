@@ -5,7 +5,6 @@ var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
-//var botTag = require('./modules/botTag.js');
 
 
 //processes incoming groupme posts
@@ -20,10 +19,13 @@ function respond() {
   //From the main group?
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
-  } else if (groupIdAlt !== null) {
-  botId = botIdAlt;
   }
-
+  
+  //from the alt group?
+  if (sendingGroup == groupIdAlt) {
+    botId = botIdAlt;
+  }
+  
   //from an unrecognized group?
   if (botId == '1') {
     console.log(message + ' sent without a valid group id');
