@@ -20,7 +20,7 @@ function respond() {
   //From the main group?
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
-  } else if groupIdAlt !== null {
+  } else if (groupIdAlt !== null) {
   botId = botIdAlt;
   }
 
