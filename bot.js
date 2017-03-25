@@ -25,11 +25,6 @@ function respond() {
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
   }
-  
-  //from an unrecognized group?
-  if (botId == null) {
-    console.log(message + ' sent without a valid group id');
-  }
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
