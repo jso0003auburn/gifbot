@@ -51,7 +51,7 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
+  botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)lol';
   postMessage(botResponse, botId);
 }
 
