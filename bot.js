@@ -11,7 +11,7 @@ var botIdAlt = process.env.botIdAlt;
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   this.res.writeHead(200);
-  botId = '1';
+  botId = null;
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
@@ -27,7 +27,7 @@ function respond() {
   }
   
   //from an unrecognized group?
-  if (botId == '1') {
+  if (botId == null) {
     console.log(message + ' sent without a valid group id');
   }
 
