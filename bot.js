@@ -79,8 +79,7 @@ function stockTag(botId) {
 	companyName = String(parsedData.query.results.quote.Name);
 	lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
 	change = Number((parseFloat(parsedData.query.results.quote.PercentChange)).toFixed(2));
-	pct = '%';
-	pct = pct.toString("utf8");
+	pct = String("%");
 	if (change > 0) {
 	  change = String('+' + change);
 	}
