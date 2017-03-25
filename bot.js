@@ -75,11 +75,7 @@ function stockTag(botId) {
   request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
   parsedData = JSON.parse(body);
   console.log(parsedData.query.results.quote.Name);
-  if (parsedData.query.results.quote.Name == null) {
-    botResponse = ('invalid');
-	postMessage(botResponse, botId);
-  }
-  if (!error && response.statusCode == 200) {
+  if (!error && response.statusCode == 200 && parsedData.query.results.quote.Name !== null) {
 	companyName = String(parsedData.query.results.quote.Name);
 	lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
 	change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
