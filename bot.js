@@ -9,6 +9,7 @@ var botIdAlt = process.env.botIdAlt;
 var config = require('config');
 var bot = {};
 var groupIdToBotMap = {}, groupLocalIdToBotMap = {};
+
 config.bots.forEach(function (bot) {
   groupIdToBotMap[bot.groupID] = bot;
   groupLocalIdToBotMap[bot.groupLocalID] = bot;
