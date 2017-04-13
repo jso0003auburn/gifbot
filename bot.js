@@ -79,11 +79,12 @@ function stockTag(botId) {
 	companyName = String(parsedData.query.results.quote.Name);
 	lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
 	change = Number((parseFloat(parsedData.query.results.quote.PercentChange)).toFixed(2));
+	symbol = String(parsedData.query.results.quote.Symbol);
 	if (change > 0) {
 	  change = String('+' + change);
 	}
 	console.log(parsedData);
-	botResponse = ('$' + lastPrice + '\n' + companyName.substring(0,20) + '\n' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
+	botResponse = (Symbol + ': $' + lastPrice + ' | ' + change + 'pct\n' + companyName.substring(0,20) + '\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
 	postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
