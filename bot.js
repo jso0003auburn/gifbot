@@ -15,6 +15,7 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
+  console.log(post);
   
   //From the main group?
   if (sendingGroup == groupIdMain) {
