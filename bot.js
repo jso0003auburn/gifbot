@@ -6,7 +6,7 @@ var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
 
-var config = require('/config');
+var config = require('./config');
 var bot = {};
 var groupIdToBotMap = {}, groupLocalIdToBotMap = {};
 
