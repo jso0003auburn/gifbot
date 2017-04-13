@@ -6,6 +6,12 @@ var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
 
+var bot = {};
+var groupIdToBotMap = {}, groupLocalIdToBotMap = {};
+config.bots.forEach(function (bot) {
+  groupIdToBotMap[bot.groupID] = bot;
+  groupLocalIdToBotMap[bot.groupLocalID] = bot;
+});
 
 //processes incoming groupme posts
 function respond() {
@@ -15,8 +21,9 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-  console.log(post);
-  
+  botConfig = groupIdToBotMap[sendingGroup];
+  console.log(botConfig);
+
   //From the main group?
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
