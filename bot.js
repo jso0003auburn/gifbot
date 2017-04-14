@@ -83,7 +83,7 @@ function stockTag(botId) {
 	if (change > 0) {
 	  change = String('+' + change);
 	}
-	botResponse = (symbol.toUpperCase() + ' $' + lastPrice + '\n' + change + 'pct\n'+ companyName.substring(0,20) +  + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
+	botResponse = (symbol.toUpperCase() + ' $' + lastPrice + '\n' + change + 'pct\n'+ companyName.substring(0,20) + '\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
 	postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
