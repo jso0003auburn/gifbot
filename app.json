@@ -1,5 +1,5 @@
 {
-  "name": "gifbot-groupme”,
-  "description": "GroupMe GIF Bot”,
+  "name": "gifbot-groupme",
+  "description": "GroupMe gifbot",
   "keywords": [GroupMe, Bot, Node, heroku, gifbot]
 }
