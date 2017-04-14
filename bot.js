@@ -52,6 +52,7 @@ function respond() {
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
   botResponse = 'GIFS = # + (search keyword)\nStocks = $ + (ticker symbol)';
+  deets = 'gifbot';
   postMessage(botResponse, botId);
 }
 
@@ -62,8 +63,8 @@ function gifTag(botId) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
-	gifSize = parsedData.data.images.downsized.size;
-	console.log('GIF size: ' + gifSize);
+	deets = parsedData.data.images.downsized.size;
+	console.log('GIF size: ' + deets);
 	postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
@@ -77,6 +78,7 @@ function stockTag(botId) {
   parsedData = JSON.parse(body);
   if (!error && response.statusCode == 200 && parsedData.query.results.quote.Name !== null) {
 	companyName = String(parsedData.query.results.quote.Name);
+	deets = companyName;
 	lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
 	change = Number((parseFloat(parsedData.query.results.quote.PercentChange)).toFixed(2));
 	if (change > 0) {
@@ -105,7 +107,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Post success: ' + res.statusCode + ' ' + gifSize);
+        console.log('Post success: ' + res.statusCode + ' ' + deets);
       } else {
       console.log('Bad status code: ' + res.statusCode);
       }
