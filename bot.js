@@ -15,7 +15,6 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-  console.log(sendingUser + ' : ' + message);
 
   //From the main group?
   if (sendingGroup == groupIdMain) {
@@ -46,6 +45,7 @@ function respond() {
   if (message.substring(0,1) == '$' && botId !== '1') {
     stockTag(botId);
   }  
+  console.log(sendingUser + ' : ' + message);
   this.res.end();
 }
 
