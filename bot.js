@@ -63,7 +63,7 @@ function gifTag(botId) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
-	deets = ('gif size: ' + parsedData.data.images.downsized.size);
+	deets = ('gif size: ' + String(parsedData.data.images.downsized.size).replace(/(.)(?=(\d{3})+$)/g,'$1,'));
 	postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
