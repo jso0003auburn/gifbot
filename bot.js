@@ -63,7 +63,6 @@ function gifTag(botId) {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
 	gifSize = parsedData.data.images.downsized.size;
-	gifSize = gifSize.toFixed(0);
 	console.log('GIF size: ' + gifSize);
 	postMessage(botResponse, botId);
   } else {
