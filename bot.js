@@ -78,11 +78,12 @@ function stockTag(botId) {
   if (!error && response.statusCode == 200 && parsedData.query.results.quote.Name !== null) {
 	companyName = String(parsedData.query.results.quote.Name);
 	lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
+	symbol = String(parsedData.query.results.quote.Symbol);
 	change = Number((parseFloat(parsedData.query.results.quote.PercentChange)).toFixed(2));
 	if (change > 0) {
 	  change = String('+' + change);
 	}
-	botResponse = ('$' + lastPrice + ' | ' + change + 'pct\n'+ companyName.substring(0,20) +  + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
+	botResponse = (symbol.toUpperCase() + ' $' + lastPrice + '\n' + change + 'pct\n'+ companyName.substring(0,20) +  + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
 	postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
