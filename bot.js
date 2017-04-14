@@ -62,9 +62,9 @@ function gifTag(botId) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
 	botResponse = parsedData.data.images.downsized.url;
-	gifSize = parsedData.data.images.downsized.size;
-	console.log('GIF size: ' + gifSize.toLocaleString('en-US', {minimumFractionDigits: 2})); // 10,000.00
-);
+	gifSize = parsedData.data.images.downsized.size
+	gifSize = gifSize.toLocaleString('en-US', {minimumFractionDigits: 2}); // 10,000.00
+	console.log('GIF size: ' + gifSize);
 	postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
