@@ -14,7 +14,7 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-  senderId = post.post.name;
+  senderId = post.name;
 
 
   //From the main group?
