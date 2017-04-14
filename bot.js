@@ -14,7 +14,6 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-  senderId = post.name;
 
 
   //From the main group?
@@ -87,7 +86,6 @@ function stockTag(botId) {
 	botResponse = ('$' + lastPrice + ' | ' + change + 'pct\n'+ companyName.substring(0,15) + '\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
 	postMessage(botResponse, botId);
   } else {
-  postDm('invalid', botId, senderId)
   console.log(message + ' is invalid');
   } 
   }); 
@@ -104,30 +102,6 @@ function postMessage(botResponse, botId) {
     method: 'POST',
     "bot_id" : botId,
     "text" : botResponse 
-  };
-
-  botReq = https.request(options, function(res) {
-      if(res.statusCode == 202) {
-        console.log('Post success: ' + res.statusCode);
-      } else {
-      console.log('Bad status code: ' + res.statusCode);
-      }
-  });
-  botReq.end(JSON.stringify(options));
-}
-
-//posts message
-function postDm(botResponse, botId, senderId) {
-  
-
-  var options, botReq;
-  options = {
-    hostname: 'api.groupme.com',
-    path: '/v3/bots/post',
-    method: 'POST',
-    "bot_id" : botId,
-    "text" : botResponse ,
-    "recipient_id" : senderId
   };
 
   botReq = https.request(options, function(res) {
