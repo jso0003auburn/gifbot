@@ -75,7 +75,7 @@ function gifTag(botId) {
 function stockTag(botId) {
   request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
   parsedData = JSON.parse(body);
-  if (parsedData.query.results.quote.Name == undefined || parsedData.query.results.quote.Name == null) {
+  if (error || parsedData.query.results.quote.Name == undefined || parsedData.query.results.quote.Name == null) {
 	console.log(message + ' is invalid');
   } else {
   companyName = String(parsedData.query.results.quote.Name);
@@ -85,7 +85,7 @@ function stockTag(botId) {
   if (change > 0) {
     change = String('+' + change);
   }
-  botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' / ' + change + '\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
+  botResponse = (companyName.substring(0,15) + '\n$' + lastPrice + ' / ' + change + '\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
   postMessage(botResponse, botId);  } 
   }); 
 }
