@@ -62,9 +62,9 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-	botResponse = parsedData.data.images.downsized.url;
-	deets = ('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
-	postMessage(botResponse, botId);
+    botResponse = parsedData.data.images.downsized.url;
+    deets = ('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
+    postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
   }
@@ -76,7 +76,7 @@ function stockTag(botId) {
   request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
   parsedData = JSON.parse(body);
   if (parsedData.query.results.quote.Name == undefined || parsedData.query.results.quote.Name == null) {
-	console.log(message + ' is invalid');
+    console.log(message + ' is invalid');
   } else {
   companyName = String(parsedData.query.results.quote.Name);
   companyName = companyName.substring(0,15);
