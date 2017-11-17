@@ -86,7 +86,7 @@ function stockTag(botId) {
   if (change > 0) {
     change = String('+' + change);
   }
-  botResponse = (companyName + '\nstock$' + lastPrice + ' / ' + change + '\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
+  botResponse = (companyName + '\n$' + lastPrice + ' / ' + change + '\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
   postMessage(botResponse, botId);  } 
   }); 
 }
