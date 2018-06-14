@@ -44,7 +44,7 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  botResponse = 'to post a GIF: #lol';
+  botResponse = 'to post a GIF try #lol';
   deets = 'gifbot';
   postMessage(botResponse, botId);
 }
