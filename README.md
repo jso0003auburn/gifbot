@@ -21,7 +21,7 @@
   * git push -f heroku
   * heroku ps
   * heroku logs
-  * heroku logs —source app
+  * heroku logs --source app
 
 ## Contact
 

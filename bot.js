@@ -15,8 +15,9 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
+  console.log(sendingUser + ' : ' + message);
 
-  //From the main group?
+  //From the main group?	
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
   }
@@ -56,6 +57,7 @@ function gifTag(botId) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.downsized.url;
+    console.log('GIF size: ' + parsedData.data.images.downsized.size);
     deets = ('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
     postMessage(botResponse, botId);
   } else {
