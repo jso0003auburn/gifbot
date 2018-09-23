@@ -22,7 +22,8 @@
   * heroku ps
   * heroku logs
   * heroku logs --source app
-
+  * heroku logs --app groupme-gif-bot --source app --tail
+  
 ## Contact
 
 john.stephen.olson@gmail.com
