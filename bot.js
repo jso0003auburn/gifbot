@@ -55,8 +55,7 @@ function botTag(botId) {
 }
 
 function stockTag(botId) {
-  //https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=
-  request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
+  request('http://finance.yahoo.com/webservice/v1/symbols/' + message.substring(1).trim() + '/quote?format=json&view=%E2%80%8C%E2%80%8Bdetail', function (error, response, body) {
   parsedData = JSON.parse(body);
   if (!error && response.statusCode == 200 && parsedData.query.results.quote.Name !== null) {
 	companyName = String(parsedData.query.results.quote.Name);
