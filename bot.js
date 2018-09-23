@@ -45,7 +45,7 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  botResponse = 'https://www.google.com/search?q=braves+score&rlz=1C5CHFA_enUS783US783&oq=braves+score&aqs=chrome..69i57j35i39j0l4.4576j1j9&sourceid=chrome&ie=UTF-8';
+  botResponse = 'https://www.mlb.com/braves/scores';
   postMessage(botResponse, botId);
 }
 
@@ -57,7 +57,7 @@ function gifTag(botId) {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.downsized.url;
     postMessage(botResponse, botId);
-    console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB')
+    //console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB')
   } else {
   console.log(message + ' is invalid');
   }
