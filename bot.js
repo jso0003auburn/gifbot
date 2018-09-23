@@ -37,6 +37,11 @@ function respond() {
     botTag(botId);
   }
 
+  //Was the bot tagged?
+  if (message.indexOf(botName) >= 0 && botId !== '1') {
+    botTag(botId);
+  }
+
   //GIF #
   if (message.substring(0,1) == '#' && botId !== '1') {
     gifTag(botId);
@@ -49,7 +54,7 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  botResponse = 'https://media.giphy.com/media/nHLxYNNVcGhzO/giphy.gif';
+  botResponse = 'Go Braves';
   postMessage(botResponse, botId);
 }
 
@@ -82,7 +87,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Post success: ' + res.statusCode + ' ' + 'gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
+        console.log('LOG - SUCCESS: ' + res.statusCode + ' ' + 'gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
       } else {
       console.log('Bad status code: ' + res.statusCode);
       }
