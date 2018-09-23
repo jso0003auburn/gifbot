@@ -41,10 +41,6 @@ function respond() {
   if (message.substring(0,1) == '#' && botId !== '1') {
     gifTag(botId);
   }
-
-  if (message.substring(0,1) == '$' && botId !== '1') {
-    stockTag(botId);
-  }  
 }
 
 //if @gifbot was tagged this will post a help message
