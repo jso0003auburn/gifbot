@@ -49,28 +49,8 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  botResponse = 'to post a GIF try #lol';
-  deets = 'gifbot';
+  botResponse = 'https://media.giphy.com/media/nHLxYNNVcGhzO/giphy.gif';
   postMessage(botResponse, botId);
-}
-
-function stockTag(botId) {
-  request('http://finance.yahoo.com/webservice/v1/symbols/' + message.substring(1).trim() + '/quote?format=json&view=%E2%80%8C%E2%80%8Bdetail', function (error, response, body) {
-  parsedData = JSON.parse(body);
-
-  if (!error && response.statusCode == 200 && parsedData.query.results.quote.Name !== null) {
-    companyName = String(parsedData.query.results.quote.Name);
-    lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
-    change = Number((parseFloat(parsedData.query.results.quote.PercentChange)).toFixed(2));
-    if (change > 0) {
-      change = String('+' + change);
-    }
-    botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + '\n' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-    postMessage(botResponse, botId);
-  } else {
-  console.log(message + ' is invalid');
-  } 
-  }); 
 }
 
 //posts message
