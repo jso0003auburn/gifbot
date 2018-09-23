@@ -37,11 +37,6 @@ function respond() {
     botTag(botId);
   }
 
-  //Was the bot tagged?
-  if (message.indexOf(botName) >= 0 && botId !== '1') {
-    botTag(botId);
-  }
-
   //GIF #
   if (message.substring(0,1) == '#' && botId !== '1') {
     gifTag(botId);
