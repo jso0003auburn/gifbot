@@ -57,8 +57,6 @@ function gifTag(botId) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.downsized.url;
-    console.log('GIF size: ' + parsedData.data.images.downsized.size);
-    deets = ('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
@@ -81,7 +79,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('Post success: ' + res.statusCode + ' ' + deets);
+        console.log('Post success: ' + res.statusCode + ' ' + 'gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
       } else {
       console.log('Bad status code: ' + res.statusCode);
       }
