@@ -9,10 +9,10 @@
   "dependencies": {
     "director": "",
     "https": "",
-    "request": "",
+    "request": ""
   },
   "engines": {
-    "node": "x.10.x",
+    "node": "x.10.x"
   },
   "repository": {
     "type": "git",
