@@ -77,7 +77,7 @@ function stockTag(botId) {
     if (key == "4. close") {
       console.log(value);
       value = value[1];
-      console.log(value
+      console.log(value);
     } else {
       //console.log('error parsing');
     }});
