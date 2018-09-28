@@ -73,21 +73,12 @@ function gifTag(botId) {
 
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-  parsedData = JSON.parse(body, function (key, value[1]) {
+  parsedData = JSON.parse(body, function (key, value) {
     if (key == "4. close") {
       console.log(value);
     } else {
       //console.log('error parsing');
     }});
-  if (!error && response.statusCode == 200) {
-    //botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-    console.log(message);
-    //console.log(String(botResponse));
-    //postMessage(botResponse, botId);
-  } else {
-  console.log(message + ' is invalid');
-  } 
-  }); 
 }
 //posts message
 function mlbTag(botId) {
