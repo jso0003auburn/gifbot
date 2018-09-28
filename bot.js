@@ -76,10 +76,10 @@ function stockTag(botId) {
   parsedData = JSON.parse(body);
   console.log(parsedData.[1]);
   if (!error && response.statusCode == 200) {
-	//botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
-	console.log(message);
-	//console.log(String(botResponse));
-	//postMessage(botResponse, botId);
+    //botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
+    console.log(message);
+    //console.log(String(botResponse));
+    //postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
   } 
