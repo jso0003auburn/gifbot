@@ -80,7 +80,7 @@ function stockTag(botId) {
       console.log(lastRefreshed);
     } else {
       //console.log('error parsing');
-    }});
+    });
     if (key == lastRefreshed) {
       console.log(today);
     } else {
