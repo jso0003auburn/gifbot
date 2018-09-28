@@ -84,7 +84,7 @@ function stockTag(botId) {
 	}
 	botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
 	console.log(message);
-	console.log(botResponse);
+	console.log(String(botResponse));
 	//postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
@@ -100,7 +100,7 @@ function mlbTag(botId) {
     //botResponse = parsedData.data.images.downsized.url;
     //postMessage(botResponse, botId);
     console.log(message);
-    console.log(parsedData.data.images.downsized.url);
+    console.log(String(parsedData.data.images.downsized.url));
     console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
   } else {
   console.log(message + ' is invalid');
