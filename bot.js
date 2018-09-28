@@ -77,7 +77,9 @@ function stockTag(botId) {
     if (key == "3. Last Refreshed") {
       console.log(value);
       value = value.substr(0,10);
-      console.log(value);
+      item = body['Time Series (Daily)'][1];
+      console.log(item);
+      
     } else {
       //console.log('error parsing');
     }});
