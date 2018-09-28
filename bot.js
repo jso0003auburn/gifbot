@@ -6,7 +6,6 @@ var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
 
-var eyes = require('eyes');
 var fs = require('fs');
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
