@@ -74,10 +74,9 @@ function gifTag(botId) {
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   parsedData = JSON.parse(body, function (key, value) {
-    if (key == "3. Last Refreshed") {
+    if (key == "1. close") {
       console.log(value);
-      value = value.substr(0,10);
-      item = body['Time Series (Daily)'][1];
+      item = value[1];
       console.log(item);
       
     } else {
