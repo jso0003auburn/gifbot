@@ -8,8 +8,9 @@
   },
   "dependencies": {
     "director": "",
-    "request": "",
-    "https": ""
+    "eyes": "^0.1.8",
+    "https": "",
+    "request": ""
   },
   "engines": {
     "node": "0.10.x"
