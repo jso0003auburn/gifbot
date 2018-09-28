@@ -7,7 +7,6 @@ var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
 
 
-
 //processes incoming groupme posts
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
