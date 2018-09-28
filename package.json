@@ -9,8 +9,10 @@
   "dependencies": {
     "director": "",
     "eyes": "^0.1.8",
+    "fs": "0.0.1-security",
     "https": "",
-    "request": ""
+    "request": "",
+    "xml2js": "^0.4.19"
   },
   "engines": {
     "node": "0.10.x"
