@@ -70,7 +70,18 @@ function gifTag(botId) {
 }
 //posts message
 function mlbTag(botId) {
-  console.log(message);
+  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
+  parsedData = JSON.parse(body);
+  
+  if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
+    //botResponse = parsedData.data.images.downsized.url;
+    //postMessage(botResponse, botId);
+    console.log(message);
+    console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB')
+  } else {
+  console.log(message + ' is invalid');
+  }
+  });
 }
 //posts message
 function postMessage(botResponse, botId) {
