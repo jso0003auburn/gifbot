@@ -73,11 +73,9 @@ function gifTag(botId) {
 
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-  parsedData = JSON.parse(body, function (key, value) {
+  parsedData = JSON.parse(body, function (key, value[1]) {
     if (key == "4. close") {
       console.log(value);
-      item = value[1];
-      console.log(item);
       
     } else {
       //console.log('error parsing');
