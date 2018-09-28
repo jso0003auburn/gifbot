@@ -23,6 +23,7 @@
   * heroku logs
   * heroku logs --source app
   * heroku logs --app groupme-gif-bot --source app --tail
+  * alphavantage 528P3B6Q2EW4I7B3
   
 ## Contact
 
