@@ -76,8 +76,9 @@ function stockTag(botId) {
   parsedData = JSON.parse(body, function (key, value) {
     if (key == "1. open") {
       price = value;
+      console.log(price);
     } else {
-      console.log('error parsing');
+      //console.log('error parsing');
     }});
   if (!error && response.statusCode == 200) {
     //botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
