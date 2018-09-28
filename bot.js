@@ -76,7 +76,6 @@ function stockTag(botId) {
   parsedData = JSON.parse(body, function (key, value[1]) {
     if (key == "4. close") {
       console.log(value);
-      
     } else {
       //console.log('error parsing');
     }});
