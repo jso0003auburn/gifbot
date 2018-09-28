@@ -73,13 +73,18 @@ function gifTag(botId) {
 
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-  parsedData = JSON.parse(body, function (key, lastRefreshed) {
+  parsedData = JSON.parse(body, function (key, lastRefreshed, today) {
     if (key == "3. Last Refreshed") {
       console.log(lastRefreshed);
       lastRefreshed = lastRefreshed.substring(0,10);
       console.log(lastRefreshed);
     } else {
       //console.log('error parsing');
+    }});
+    if (key == lastRefreshed) {
+      console.log(today);
+    } else {
+      //nothing
     }});
   if (!error && response.statusCode == 200) {
     //botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
