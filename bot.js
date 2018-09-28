@@ -41,8 +41,11 @@ function respond() {
   if (message.substring(0,1) == '#' && botId !== '1') {
     gifTag(botId);
   }
-
-  //MLB #
+  //Stock $
+  if (message.substring(0,1) == '$' && botId !== '1') {
+    stockTag(botId);
+  }
+  //MLB %
   if (message.substring(0,1) == '%' && botId !== '1') {
     mlbTag(botId);
   }
@@ -62,11 +65,31 @@ function gifTag(botId) {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.downsized.url;
     postMessage(botResponse, botId);
-    //console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB')
   } else {
   console.log(message + ' is invalid');
   }
   });
+}
+
+function stockTag(botId) {
+  request('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22' + message.substring(1).trim() + '%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function (error, response, body) {
+  parsedData = JSON.parse(body);
+  console.log(parsedData.query.results.quote.Name);
+  if (!error && response.statusCode == 200) {
+	companyName = String(parsedData.query.results.quote.Name);
+	lastPrice = Number((parseFloat(parsedData.query.results.quote.LastTradePriceOnly)).toFixed(2));
+	change = Number((parseFloat(parsedData.query.results.quote.ChangeinPercent)).toFixed(2));
+	if (change > 0) {
+	  change = String('+' + change);
+	}
+	botResponse = (companyName.substring(0,20) + '\n$' + lastPrice + ' | ' + change + 'pct\n' + 'www.finance.yahoo.com/quote/' + message.substring(1).trim());
+	console.log(message);
+	console.log(botResponse);
+	//postMessage(botResponse, botId);
+  } else {
+  console.log(message + ' is invalid');
+  } 
+  }); 
 }
 //posts message
 function mlbTag(botId) {
@@ -77,7 +100,8 @@ function mlbTag(botId) {
     //botResponse = parsedData.data.images.downsized.url;
     //postMessage(botResponse, botId);
     console.log(message);
-    console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB')
+    console.log(parsedData.data.images.downsized.url);
+    console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
   } else {
   console.log(message + ' is invalid');
   }
