@@ -74,7 +74,7 @@ function gifTag(botId) {
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   key = '4. close';
-  console.log(body[Object.keys(body)[0]]);
+  console.log(body[Object.keys(body)[1]]);
   }); 
 }
 //posts message
