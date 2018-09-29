@@ -72,6 +72,7 @@ function stockTag(botId) {
   parsedData = JSON.parse(body);
 
   if (!error && parsedData && parsedData !== 'undefined') {
+    console.log(parsedData)
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
     lastRefreshed = lastRefreshed.substring(0,10);
     console.log(lastRefreshed);
