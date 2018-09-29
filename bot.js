@@ -75,9 +75,13 @@ function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   parsedData = JSON.parse(body);
 
-  if (!error && parsedData) {  
-    botResponse = parsedData['Time Series (Daily)']['2018-09-28']['4. close'];
-    //postMessage(botResponse, botId);
+  if (!error && parsedData) {
+    lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
+    lastRefreshed = lastRefreshed.substring(0,10);
+    console.log(lastRefreshed);
+    close = parsedData['Time Series (Daily)']['2018-09-28']['4. close'];
+    botResponse = close + ' as of ' + last refresh
+    postMessage(botResponse, botId);
     console.log(botResponse)
   } else {
   console.log(message + ' is invalid');
