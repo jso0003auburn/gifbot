@@ -76,7 +76,7 @@ function stockTag(botId) {
   parsedData = JSON.parse(body);
 
   if (!error && parsedData) {  
-    botResponse = parsedData['Time Series (Daily)'];
+    botResponse = parsedData['Time Series (Daily)']['2018-09-28']['4. close'];
     //postMessage(botResponse, botId);
     console.log(botResponse)
   } else {
