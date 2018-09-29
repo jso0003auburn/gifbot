@@ -73,13 +73,18 @@ function gifTag(botId) {
 
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-  parsedData = JSON.parse(body["{"]);
-  console.log(JSON.stringify(parsedData, null, 4));
-  console.log("break1");
-  console.log(JSON.stringify(body, null, 4));
+  parsedData = JSON.parse(body);
 
+  if (!error && parsedData) {  
+    botResponse = parsedData['Time Series (Daily)'];
+    //postMessage(botResponse, botId);
+    console.log(botResponse)
+  } else {
+  console.log(message + ' is invalid');
+  }
   });
 }
+
 //posts message
 function mlbTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
