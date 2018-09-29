@@ -45,10 +45,6 @@ function respond() {
   if (message.substring(0,1) == '$' && botId !== '1') {
     stockTag(botId);
   }
-  //MLB %
-  if (message.substring(0,1) == '%' && botId !== '1') {
-    mlbTag(botId);
-  }
 }
 
 //if @gifbot was tagged this will post a help message
@@ -75,7 +71,7 @@ function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   parsedData = JSON.parse(body);
 
-  if (!error && parsedData) {
+  if (!error && parsedData && parsedData['Meta Data']['3. Last Refreshed']) {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
     lastRefreshed = lastRefreshed.substring(0,10);
     console.log(lastRefreshed);
@@ -89,22 +85,6 @@ function stockTag(botId) {
   });
 }
 
-//posts message
-function mlbTag(botId) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
-  parsedData = JSON.parse(body);
-  
-  if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-    //botResponse = parsedData.data.images.downsized.url;
-    //postMessage(botResponse, botId);
-    console.log(message);
-    console.log(String(parsedData.data.images.downsized.url));
-    console.log('gif size: ' + String(Math.ceil(parsedData.data.images.downsized.size/1000)).replace(/(.)(?=(\d{3})+$)/g,'$1,') + 'kB');
-  } else {
-  console.log(message + ' is invalid');
-  }
-  });
-}
 //posts message
 function postMessage(botResponse, botId) {
   
