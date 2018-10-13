@@ -72,7 +72,7 @@ function stockTag(botId) {
   parsedData = JSON.parse(body);
   console.log(Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.'));
 
-  if (!error && response.statusCode == 200 && Object.values(parsedData).indexOf('Invalid') >= 1 && parsedData !== 'undefined') {
+  if (!error && response.statusCode == 200 && Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.') < 0 && parsedData !== 'undefined') {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
     lastRefreshed = lastRefreshed.substring(0,10);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
