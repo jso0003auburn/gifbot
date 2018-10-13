@@ -74,9 +74,9 @@ function stockTag(botId) {
   if (!error && parsedData && parsedData !== 'undefined') {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
     lastRefreshed = lastRefreshed.substring(0,10);
-    console.log('LOG: ' + lastRefreshed);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
-    botResponse = close + '\n' + lastRefreshed;
+    ticker = parsedData['Meta Data']['2. Symbol'];
+    botResponse = ticker + ' $' + close + '\n' + lastRefreshed;
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
@@ -99,7 +99,6 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('LOG - GIFBOT: ' + botResponse);
         console.log('LOG - SUCCESS: ' + res.statusCode);
       } else {
       console.log('LOG - Bad status code: ' + res.statusCode);
