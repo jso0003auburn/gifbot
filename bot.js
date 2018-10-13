@@ -80,6 +80,7 @@ function stockTag(botId) {
     botResponse = ('$' + close);
     postMessage(botResponse, botId);
     console.log(botResponse)
+    return;
   } else {
   console.log(message + ' is invalid');
   }
