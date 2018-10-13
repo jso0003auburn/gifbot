@@ -72,14 +72,13 @@ function stockTag(botId) {
   parsedData = JSON.parse(body);
 
   if (!error && parsedData && parsedData !== 'undefined') {
-    console.log(parsedData)
-    ticker = parsedData['Meta Data']['2. Symbol'];
+    //console.log(parsedData)
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
     lastRefreshed = lastRefreshed.substring(0,10);
-    console.log(lastRefreshed);
+    //console.log(lastRefreshed);
     close = parsedData['Time Series (Daily)'][lastRefreshed]['4. close'];
     close = Number(close);
-    botResponse = '$' + close + ' ' + ticker + '\n' + 'as of ' + lastRefreshed
+    botResponse = '$' + close + '\n' + 'as of ' + lastRefreshed
     postMessage(botResponse, botId);
     console.log(botResponse)
   } else {
