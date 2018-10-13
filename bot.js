@@ -16,7 +16,6 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   console.log(sendingUser + ' : ' + message);
-  console.log('sending user id: ' + post.user_id);
 
   //From the main group?    
   if (sendingGroup == groupIdMain) {
@@ -71,16 +70,14 @@ function gifTag(botId) {
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   parsedData = JSON.parse(body);
-  console.log(Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.'));
+  errorCheck = Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
 
-  if (!error && parsedData && Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.') < 0) {
-    lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
-    lastRefreshed = lastRefreshed.substring(0,10);
-    console.log(lastRefreshed);
+  if (!error && parsedData && errorCheck < 0) {
+    lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'].substring(0,10);
+    //lastRefreshed = lastRefreshed.substring(0,10);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
     botResponse = '$' + close + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
-    console.log(botResponse)
   } else {
   console.log(message + ' is invalid');
   }
