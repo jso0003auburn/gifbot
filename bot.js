@@ -77,7 +77,7 @@ function stockTag(botId) {
     lastRefreshed = lastRefreshed.substring(0,10);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
     ticker = parsedData['Meta Data']['2. Symbol'];
-    ticker = ticker.toUpperCase;
+    ticker = ticker.toUpperCase();
     botResponse = ticker + ' $' + close + '\n' + 'https://finance.yahoo.com/quote/' + ticker;
     postMessage(botResponse, botId);
   } else {
