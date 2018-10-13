@@ -78,7 +78,7 @@ function stockTag(botId) {
     //console.log(lastRefreshed);
     close = parsedData['Time Series (Daily)'][lastRefreshed]['4. close'];
     close = Number(close);
-    botResponse = '$' + close + '\n' + 'as of ' + lastRefreshed
+    botResponse = '$' + close + '\n' + 'as of ' + lastRefreshed;
     postMessage(botResponse, botId);
     console.log(botResponse)
   } else {
