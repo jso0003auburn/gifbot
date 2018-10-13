@@ -43,7 +43,7 @@ function respond() {
     gifTag(botId);
   }
   //Stock $
-  if (message.substring(0,1) == '$' && botId !== '1') {
+  if (message.substring(0,1) == '$' && botId !== '1' && post.name !== 'gifbot') {
     stockTag(botId);
   }
 }
@@ -78,7 +78,7 @@ function stockTag(botId) {
     lastRefreshed = lastRefreshed.substring(0,10);
     console.log(lastRefreshed);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
-    botResponse = close + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
+    botResponse = '$' + close + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
     console.log(botResponse)
   } else {
