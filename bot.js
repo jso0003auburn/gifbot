@@ -75,8 +75,8 @@ function stockTag(botId) {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'];
     lastRefreshed = lastRefreshed.substring(0,10);
     console.log(lastRefreshed);
-    close = parsedData['Time Series (Daily)']['2018-10-12']['4. close'];
-    botResponse = close + ' as of ' + lastRefreshed
+    close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
+    botResponse = close + ' as of ' + lastRefreshed;
     postMessage(botResponse, botId);
     console.log(botResponse)
   } else {
