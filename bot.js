@@ -68,15 +68,13 @@ function gifTag(botId) {
 }
 
 function stockTag(botId) {
-  request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-  parsedData = JSON.parse(body);
-  errorCheck = Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
-  console.log(Object.keys(parsedData['Time Series (Daily)'])[0]);
-  if (!error && parsedData && errorCheck < 0) {
-    lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'].substring(0,10);
-    console.log(parsedData[1]);
-    close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
-    open = Number(parsedData['Time Series (Daily)'][lastRefreshed]['1. open']);
+  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
+  quoteObj = JSON.parse(body);
+  errorCheck = Object.values(quoteObj).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
+  if (!error && quoteObj && errorCheck < 0) {
+    lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
+    price = Number(quoteObj['Global Quote']['05. price']);
+    open = Number(quoteObj['Global Quote']['02. open']);
     change = ((1 - (close / open)) * -100).toFixed(2);
     botResponse = 'now: $' + close + '\n' + 'today: ' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
