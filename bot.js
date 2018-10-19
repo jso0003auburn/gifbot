@@ -70,8 +70,8 @@ function gifTag(botId) {
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   quoteObj = JSON.parse(body);
-  errorCheck = Object.values(quoteObj).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
-  if (!error && quoteObj && errorCheck < 0) {
+  //errorCheck = Object.values(quoteObj).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
+  if (!error && quoteObj && quoteObj !== undefined) {
   
     open = Number(quoteObj['Global Quote']['02. open']);
     console.log(open);
