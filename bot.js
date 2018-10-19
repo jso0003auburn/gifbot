@@ -67,36 +67,30 @@ function gifTag(botId) {
   });
 }
 
+
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   quoteObj = JSON.parse(body);
-  //console.log(quoteObj['Global Quote']);
-  if (!error && quoteObj) {
-  	  request('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-	  searchObj = JSON.parse(body);
-	  name = searchObj['bestMatches']['2. name'];
-	  console.log(name);
-	  });
+  if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) !== null && Number(quoteObj['Global Quote']['05. price']) !== '') {
+
 
     open = Number(quoteObj['Global Quote']['02. open']);
-    //console.log(open);
-    
     price = Number(quoteObj['Global Quote']['05. price']);
-    //console.log(price);
-    
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
-    //console.log(lastRefreshed);
-    
     change = Number(quoteObj['Global Quote']['09. change']).toFixed(2);
-    //console.log(change);
     
     
-    botResponse = 'now: $' + price + '\n' + 'today: ' + change + 'pct\n' + 'placeholder' + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
+    botResponse = 'now: $' + price + '\n' + 'today: ' + change + 'pct' + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
   } else {
+  
   console.log(message + ' is invalid');
   }
   });
+}
+
+function stockResponse(botResponse, botId) {
+
 }
 
 //posts message
