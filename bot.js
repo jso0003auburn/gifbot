@@ -72,7 +72,7 @@ function stockTag(botId) {
   quoteObj = JSON.parse(body);
   console.log(quoteObj['Global Quote']);
   //errorCheck = Object.values(quoteObj).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
-  if (!error && quoteObj && quoteObj['Global Quote'] !== undefined) {
+  if (!error && quoteObj && quoteObj['Global Quote'] != null && quoteObj['Global Quote'] != '') {
   
     open = Number(quoteObj['Global Quote']['02. open']);
     console.log(open);
