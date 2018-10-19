@@ -30,3 +30,4 @@
 john.stephen.olson@gmail.com
 
 
+https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AMZN&outputsize=compact&apikey=528P3B6Q2EW4I7B3

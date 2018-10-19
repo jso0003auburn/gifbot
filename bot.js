@@ -76,7 +76,8 @@ function stockTag(botId) {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'].substring(0,10);
     //lastRefreshed = lastRefreshed.substring(0,10);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
-    botResponse = '$' + close + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
+    open = Number(parsedData['Time Series (Daily)'][lastRefreshed]['1. open']);
+    botResponse = '$' + close + ' ' open + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
