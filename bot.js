@@ -72,13 +72,20 @@ function stockTag(botId) {
   quoteObj = JSON.parse(body);
   errorCheck = Object.values(quoteObj).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
   if (!error && quoteObj && errorCheck < 0) {
-    lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
-    console.log(lastRefreshed);
-    price = Number(quoteObj['Global Quote']['05. price']);
-    console.log(price);
+  
     open = Number(quoteObj['Global Quote']['02. open']);
     console.log(open);
-    botResponse = 'now: $' + price + '\n' + 'today: ' + open + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
+    
+    price = Number(quoteObj['Global Quote']['05. price']);
+    console.log(price);
+    
+    lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
+    console.log(lastRefreshed);
+    
+    change = Number(quoteObj['Global Quote']['09. change']).toFixed(2);
+    console.log(change);
+    
+    botResponse = 'now: $' + price + '\n' + 'today: ' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
