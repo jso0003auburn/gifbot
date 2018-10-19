@@ -72,7 +72,12 @@ function stockTag(botId) {
   quoteObj = JSON.parse(body);
   //console.log(quoteObj['Global Quote']);
   if (!error && quoteObj) {
-  
+  	  request('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
+	  searchObj = JSON.parse(body);
+	  name = searchObj['bestMatches']['2. name'];
+	  console.log(name);
+	  });
+
     open = Number(quoteObj['Global Quote']['02. open']);
     //console.log(open);
     
@@ -85,11 +90,6 @@ function stockTag(botId) {
     change = Number(quoteObj['Global Quote']['09. change']).toFixed(2);
     //console.log(change);
     
-  request('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-  searchObj = JSON.parse(body);
-  name = searchObj['bestMatches']['2. name'];
-  console.log(name);
-  });
     
     botResponse = 'now: $' + price + '\n' + 'today: ' + change + 'pct\n' + 'placeholder' + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
