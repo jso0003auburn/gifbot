@@ -74,9 +74,9 @@ function stockTag(botId) {
 
   if (!error && parsedData && errorCheck < 0) {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'].substring(0,10);
+    previousDay = parsedData['Time Series (Daily)'][2];
+    console.log(previousDay);
     //lastRefreshed = lastRefreshed.substring(0,10);
-    yesterday = new Date();
-    console.log(yesterday.setDate(yesterday.getDate()-1));
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
     open = Number(parsedData['Time Series (Daily)'][lastRefreshed]['1. open']);
     change = ((1 - (close / open)) * -100).toFixed(2);
