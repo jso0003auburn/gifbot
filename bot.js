@@ -78,7 +78,7 @@ function stockTag(botId) {
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
     open = Number(parsedData['Time Series (Daily)'][lastRefreshed]['1. open']);
     change = ((1 - (close / open)) * -100).toFixed(2);
-    botResponse = 'now: $' + close + '\n' + 'today: ' + change + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
+    botResponse = 'now: $' + close + '\n' + 'today: %' + change + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
