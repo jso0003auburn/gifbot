@@ -72,7 +72,7 @@ function stockTag(botId) {
   parsedData = JSON.parse(body);
   errorCheck = Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
   function firstValue(parsedData) {
-    return a[Object.keys(parsedData)[0]];
+    return parsedData[Object.keys(parsedData)[0]];
   }
 
   console.log(firstValue(firstValue(parsedData)).key1);
