@@ -71,12 +71,12 @@ function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
   parsedData = JSON.parse(body);
   errorCheck = Object.values(parsedData).indexOf('Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.');
-
+  var keys = Object.keys(parsedData);
+  for (var i = 0; i < keys.length; i++) {
+    console.log(parsedData[keys[i]]);
+  }
   if (!error && parsedData && errorCheck < 0) {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'].substring(0,10);
-    previousDay = Object.keys(parsedData['Time Series (Daily)'][1]);
-    console.log(previousDay);
-    //lastRefreshed = lastRefreshed.substring(0,10);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
     open = Number(parsedData['Time Series (Daily)'][lastRefreshed]['1. open']);
     change = ((1 - (close / open)) * -100).toFixed(2);
