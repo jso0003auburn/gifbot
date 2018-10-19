@@ -74,7 +74,7 @@ function stockTag(botId) {
 
   if (!error && parsedData && errorCheck < 0) {
     lastRefreshed = parsedData['Meta Data']['3. Last Refreshed'].substring(0,10);
-    previousDay = Object.keys(parsedData['Time Series (Daily)']);
+    previousDay = Object.keys(parsedData['Time Series (Daily)'][1]);
     console.log(previousDay);
     //lastRefreshed = lastRefreshed.substring(0,10);
     close = Number(parsedData['Time Series (Daily)'][lastRefreshed]['4. close']);
