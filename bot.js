@@ -5,6 +5,7 @@ var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
+const utf8 = require('utf8');
 
 //processes incoming groupme posts
 function respond() {
@@ -78,7 +79,8 @@ function stockTag(botId) {
     price = Number(quoteObj['Global Quote']['05. price']);
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
     change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
-    change = Number(change);
+    change = Number(change) + '%';
+    change = utf8.encode(change);
     if (quoteObj['Global Quote']['10. change percent'].substring(0,1) == '-') {
      //change = change;
     } else {

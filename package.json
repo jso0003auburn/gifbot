@@ -10,7 +10,8 @@
     "director": "",
     "https": "",
     "mysportsfeeds-node": "^2.0.1",
-    "request": ""
+    "request": "",
+    "utf8": "^3.0.0"
   },
   "engines": {
     "node": "x.10.x"
