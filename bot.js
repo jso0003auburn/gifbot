@@ -80,14 +80,13 @@ function stockTag(botId) {
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
     change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
     change = Number(change) + '%';
-    change = utf8.encode(change);
     if (quoteObj['Global Quote']['10. change percent'].substring(0,1) == '-') {
      //change = change;
     } else {
     change = '+' + change;
     }
    
-    botResponse = '$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
+    botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim().toString("utf8"));
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
