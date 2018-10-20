@@ -77,17 +77,13 @@ function stockTag(botId) {
     open = Number(quoteObj['Global Quote']['02. open']);
     price = Number(quoteObj['Global Quote']['05. price']);
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
-    change = Number(quoteObj['Global Quote']['09. change']).toFixed(2);
+    change = Number(quoteObj['Global Quote']['10. change percent']).toFixed(2);
     
     
     botResponse = 'now: $' + price + '\n' + 'today: ' + change + 'pct' + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
   } else {
-  request('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
-  searchObj = JSON.parse(body);
-  console.log(searchObj);
   console.log(message + ' is invalid');
-  });
   }
   });
 }
