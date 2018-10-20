@@ -5,7 +5,9 @@ var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
+var MySportsFeeds = require("mysportsfeeds-node");
 
+var msf = new MySportsFeeds("2.0", true);
 
 //processes incoming groupme posts
 function respond() {
@@ -45,7 +47,20 @@ function respond() {
   if (message.substring(0,1) == '$' && botId !== '1' && post.name !== 'gifbot') {
     stockTag(botId);
   }
+  //Sport ^
+  if (message.substring(0,1) == '^' && botId !== '1' && post.name !== 'gifbot') {
+    sportTag(botId);
+  }
 }
+//if @gifbot was tagged this will post a help message
+function sportTag(botId) {
+  msf.authenticate("6fb20657-3118-4107-9d74-a5af27", "CamNewton2");
+  data = msf.getData('nba', '2016-2017-regular', 'player_gamelogs', 'json', {player: 'stephen-curry'});
+  console.log(data);
+  //botResponse = 'https://www.mlb.com/braves/scores';
+  //postMessage(botResponse, botId);
+}
+
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
