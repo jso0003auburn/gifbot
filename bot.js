@@ -79,8 +79,8 @@ function stockTag(botId) {
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
     change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
     change = Number(change);
-    if (change.substring(0,1) == '-') {
-     change = change;
+    if (quoteObj['Global Quote']['10. change percent'].substring(0,1) == '-') {
+     //change = change;
     } else {
     change = '+' + change;
     }
