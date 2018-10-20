@@ -84,9 +84,8 @@ function stockTag(botId) {
     } else {
     change = '+' + change;
     }
-    
-    
-    botResponse = 'now: $' + price + '\n' + 'today: ' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
+   
+    botResponse = '$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
