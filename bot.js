@@ -77,7 +77,7 @@ function stockTag(botId) {
     open = Number(quoteObj['Global Quote']['02. open']);
     price = Number(quoteObj['Global Quote']['05. price']);
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
-    change = Number(quoteObj['Global Quote']['10. change percent']);
+    change = quoteObj['Global Quote']['10. change percent'];
     
     
     botResponse = 'now: $' + price + '\n' + 'today: ' + change + '\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
