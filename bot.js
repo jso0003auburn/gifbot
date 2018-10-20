@@ -87,7 +87,7 @@ function stockTag(botId) {
     }
     percent = '%'.toString('utf8');
     console.log(percent);
-    botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim().toString("utf8"));
+    botResponse = ('$' + price + '\n' + change + percent + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim().toString("utf8"));
     postMessage(botResponse, botId);
   } else {
   console.log(message + ' is invalid');
