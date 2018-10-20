@@ -79,6 +79,11 @@ function stockTag(botId) {
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
     change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
     change = Number(change);
+    if (change.substring(0,1) == '-') {
+     change = change;
+    } else {
+    change = '+' + change;
+    }
     
     
     botResponse = 'now: $' + price + '\n' + 'today: ' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1).trim();
