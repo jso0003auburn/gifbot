@@ -60,6 +60,8 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
+    console.log('downsized: ' + parsedData.data.images.downsized.url);
+    console.log('fixed: ' + parsedData.data.images.fixed_width.url);
     botResponse = parsedData.data.images.fixed_width.url;
     postMessage(botResponse, botId);
   } else {
