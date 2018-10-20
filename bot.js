@@ -55,7 +55,7 @@ function respond() {
 //if @gifbot was tagged this will post a help message
 function sportTag(botId) {
   msf.authenticate("6fb20657-3118-4107-9d74-a5af27", "CamNewton2");
-  data = msf.getData('nba', '2016-2017-regular', 'player_gamelogs', 'json', {player: 'stephen-curry'});
+  data = msf.getData('nba', '2018-2019-regular', 'latest_updates', 'json', {player: 'stephen-curry'});
   console.log(data);
   //botResponse = 'https://www.mlb.com/braves/scores';
   //postMessage(botResponse, botId);
