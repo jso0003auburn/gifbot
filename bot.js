@@ -5,6 +5,10 @@ var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
 var groupIdAlt = process.env.groupIdAlt;
 var botIdAlt = process.env.botIdAlt;
+var groupId2 = process.env.groupId2;
+var botId2 = process.env.botId2;
+var groupId3 = process.env.groupId3;
+var botId3 = process.env.botId3;
 const utf8 = require('utf8');
 
 //processes incoming groupme posts
@@ -26,7 +30,17 @@ function respond() {
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
   }
-  
+
+  //from the 2 group WOLFPACK?
+  if (sendingGroup == groupId2) {
+    botId = botId2;
+  }
+
+  //from the 3 group OLSON FAMILY?
+  if (sendingGroup == groupId3) {
+    botId = botId3;
+  }
+
   //from an unrecognized group?
   if (botId == '1') {
     console.log(message + ' sent without a valid group id from: ' + sendingGroup);
