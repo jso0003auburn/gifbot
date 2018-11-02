@@ -1,17 +1,29 @@
 var request = require('request');
 var https = require('https');
-var botName = process.env.botName;
-var groupIdMain = process.env.groupIdMain;
-var botIdMain = process.env.botIdMain;
-var groupIdAlt = process.env.groupIdAlt;
-var botIdAlt = process.env.botIdAlt;
-var groupId2 = process.env.groupId2;
-var botId2 = process.env.botId2;
-var groupId3 = process.env.groupId3;
-var botId3 = process.env.botId3;
 const utf8 = require('utf8');
 
-//processes incoming groupme posts
+//  https://dev.groupme.com/bots
+// https://dashboard.heroku.com/apps/groupme-gif-bot/settings
+// required variable
+var botName = process.env.botName;
+	
+// - MNBC
+var groupIdMain = process.env.groupIdMain;
+var botIdMain = process.env.botIdMain;
+
+// - Olson Test
+var groupIdAlt = process.env.groupIdAlt;
+var botIdAlt = process.env.botIdAlt;
+
+// - Wolfpack
+var groupId2 = process.env.groupId2;
+var botId2 = process.env.botId2;
+
+// - Olson Family
+var groupId3 = process.env.groupId3;
+var botId3 = process.env.botId3;
+
+// - processes incoming groupme posts
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   this.res.writeHead(200);
@@ -64,7 +76,7 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  botResponse = 'https://www.mlb.com/braves/scores';
+  botResponse = 'try #lol for a gif\ntry $bac for a stock price';
   postMessage(botResponse, botId);
 }
 
