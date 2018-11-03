@@ -38,24 +38,28 @@ function respond() {
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
     groupName = 'MNBC       ';
+    rating = 'r'
   }
   
   //from the alt group?
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
     groupName = 'Olson Test ';
+    rating = 'g';
   }
 
   //from the 2 group WOLFPACK?
   if (sendingGroup == groupId2) {
     botId = botId2;
     groupName = 'Wolfpack   ';
+    rating = 'r';
   }
 
   //from the 3 group OLSON FAMILY?
   if (sendingGroup == groupId3) {
     botId = botId3;
     groupName = 'Olson Family ';
+    rating = 'pg';
   }
 
   //from an unrecognized group?
@@ -90,7 +94,7 @@ function botTag(botId) {
 
 //posts message
 function gifTag(botId) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
+  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=' + rating), function (error, response, body) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
