@@ -28,6 +28,7 @@ function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   this.res.writeHead(200);
   botId = '1';
+  groupName = '1';
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
@@ -36,30 +37,30 @@ function respond() {
   //From the main group?    
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
-    groupName == 'MNBC';
+    groupName = 'MNBC';
   }
   
   //from the alt group?
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
-    groupName == 'Olson Test';
+    groupName = 'Olson Test';
   }
 
   //from the 2 group WOLFPACK?
   if (sendingGroup == groupId2) {
     botId = botId2;
-    groupName == 'Wolfpack';
+    groupName = 'Wolfpack';
   }
 
   //from the 3 group OLSON FAMILY?
   if (sendingGroup == groupId3) {
     botId = botId3;
-    groupName == 'Olson Family';
+    groupName = 'Olson Family';
   }
 
   //from an unrecognized group?
   if (botId == '1') {
-    groupName == 'Invalid Group';
+    groupName = 'Invalid Group';
     console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
 
