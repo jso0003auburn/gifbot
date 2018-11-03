@@ -32,30 +32,30 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-  console.log(sendingUser + ' : ' + message);
+  //console.log(sendingUser + ' : ' + message);
 
   //From the main group?    
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
-    groupName = 'MNBC';
+    groupName = 'MNBC       ';
   }
   
   //from the alt group?
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
-    groupName = 'Olson Test';
+    groupName = 'Olson Test ';
   }
 
   //from the 2 group WOLFPACK?
   if (sendingGroup == groupId2) {
     botId = botId2;
-    groupName = 'Wolfpack';
+    groupName = 'Wolfpack   ';
   }
 
   //from the 3 group OLSON FAMILY?
   if (sendingGroup == groupId3) {
     botId = botId3;
-    groupName = 'Olson Family';
+    groupName = 'Olson Family ';
   }
 
   //from an unrecognized group?
@@ -64,7 +64,7 @@ function respond() {
     console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
 
-  console.log(groupName + ' - ' + sendingUser + ' : ' + message);
+  console.log(groupName + ' - ' + sendingUser + ' - ' + message);
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -98,7 +98,7 @@ function gifTag(botId) {
     botResponse = parsedData.data.images.fixed_width.url;
     postMessage(botResponse, botId);
   } else {
-  console.log(message + ' is invalid');
+  console.log(groupName + ' - ' + message + ' is invalid');
   }
   });
 }
@@ -124,7 +124,7 @@ function stockTag(botId) {
     botResponse = (response);
     postMessage(botResponse, botId);
   } else {
-  console.log(message + ' is invalid');
+  console.log(groupName + ' - ' + message + ' is invalid');
   }
   });
 }
