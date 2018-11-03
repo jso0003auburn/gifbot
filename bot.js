@@ -126,7 +126,7 @@ function stockTag(botId) {
     } else {
     change = '+' + change;
     }
-    response = utf8.encode('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1));
+    response = '$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1);
     botResponse = (response);
     postMessage(botResponse, botId);
   } else {
