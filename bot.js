@@ -36,27 +36,34 @@ function respond() {
   //From the main group?    
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
+    groupName == 'MNBC';
   }
   
   //from the alt group?
   if (sendingGroup == groupIdAlt) {
     botId = botIdAlt;
+    groupName == 'Olson Test';
   }
 
   //from the 2 group WOLFPACK?
   if (sendingGroup == groupId2) {
     botId = botId2;
+    groupName == 'Wolfpack';
   }
 
   //from the 3 group OLSON FAMILY?
   if (sendingGroup == groupId3) {
     botId = botId3;
+    groupName == 'Olson Family';
   }
 
   //from an unrecognized group?
   if (botId == '1') {
-    console.log(message + ' sent without a valid group id from: ' + sendingGroup);
+    groupName == 'Invalid Group';
+    console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
+
+  console.log(groupName + ' - ' + sendingUser + ' : ' + message);
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -86,8 +93,7 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-    console.log('downsized: ' + parsedData.data.images.downsized.size);
-    console.log('fixed: ' + parsedData.data.images.fixed_width.size);
+    console.log('downsized: ' + parsedData.data.images.downsized.size + ' / fixed: ' + parsedData.data.images.fixed_width.size);
     botResponse = parsedData.data.images.fixed_width.url;
     postMessage(botResponse, botId);
   } else {
