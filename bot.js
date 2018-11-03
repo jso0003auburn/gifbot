@@ -97,7 +97,7 @@ function gifTag(botId) {
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     //console.log('downsized: ' + parsedData.data.images.downsized.size + ' / fixed: ' + parsedData.data.images.fixed_width.size);
-    botResponse = fixedWidth;
+    botResponse = parsedData.data.images.fixed_width.url;
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
