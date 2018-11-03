@@ -92,10 +92,12 @@ function botTag(botId) {
 function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
   parsedData = JSON.parse(body);
+  downsized = parsedData.data.images.downsized.size;
+  fixedWidth = parsedData.data.images.fixed_width.size;
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-    console.log('downsized: ' + parsedData.data.images.downsized.size + ' / fixed: ' + parsedData.data.images.fixed_width.size);
-    botResponse = parsedData.data.images.fixed_width.url;
+    //console.log('downsized: ' + parsedData.data.images.downsized.size + ' / fixed: ' + parsedData.data.images.fixed_width.size);
+    botResponse = fixedWidth;
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -144,7 +146,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('LOG - SUCCESS: ' + res.statusCode);
+        console.log('FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized + ' - ' + res.statusCode);
       } else {
       console.log('LOG - Bad status code: ' + res.statusCode);
       }
