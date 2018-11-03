@@ -1,6 +1,5 @@
 var request = require('request');
 var https = require('https');
-const utf8 = require('utf8');
 
 //  https://dev.groupme.com/bots
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
