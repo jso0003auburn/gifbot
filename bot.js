@@ -152,7 +152,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('LOG         - ' + log + ' - res.statusCode);
+        console.log('LOG         - ' + log + ' - ' + res.statusCode);
       } else {
       console.log('LOG - Bad status code: ' + res.statusCode);
       }
