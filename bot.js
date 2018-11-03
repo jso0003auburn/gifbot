@@ -11,8 +11,8 @@ var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
 
 // - Olson Test
-var groupIdAlt = process.env.groupIdAlt;
-var botIdAlt = process.env.botIdAlt;
+var groupIdTest = process.env.groupIdTest;
+var botIdTest = process.env.botIdTest;
 
 // - Wolfpack
 var groupId2 = process.env.groupId2;
@@ -31,7 +31,6 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
-  //console.log(sendingUser + ' : ' + message);
 
   //From the main group?    
   if (sendingGroup == groupIdMain) {
@@ -40,11 +39,11 @@ function respond() {
     rating = 'r'
   }
   
-  //from the alt group?
-  if (sendingGroup == groupIdAlt) {
-    botId = botIdAlt;
+  //from the Test group?
+  if (sendingGroup == groupIdTest) {
+    botId = botIdTest;
     groupName = 'Olson Test ';
-    rating = 'g';
+    rating = 'r';
   }
 
   //from the 2 group WOLFPACK?
@@ -87,7 +86,7 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  log = '1';
+  log = 'gifbot tag';
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
   postMessage(botResponse, botId);
 }
