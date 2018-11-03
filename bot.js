@@ -87,6 +87,7 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
+  log = '1';
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
   postMessage(botResponse, botId);
 }
@@ -101,6 +102,7 @@ function gifTag(botId) {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     //console.log('downsized: ' + parsedData.data.images.downsized.size + ' / fixed: ' + parsedData.data.images.fixed_width.size);
     botResponse = parsedData.data.images.fixed_width.url;
+    log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized ;
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -127,6 +129,7 @@ function stockTag(botId) {
     }
     response = '$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1);
     botResponse = (response);
+    log = message.substring(1);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -149,7 +152,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized + ' - ' + res.statusCode);
+        console.log('LOG         - ' + log + ' - res.statusCode);
       } else {
       console.log('LOG - Bad status code: ' + res.statusCode);
       }
