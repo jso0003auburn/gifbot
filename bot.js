@@ -3,9 +3,9 @@ var https = require('https');
 
 //  https://dev.groupme.com/bots
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
-// required variable
+// required variable is gifbot
 var botName = process.env.botName;
-	
+var alphaVantageAPIKey = process.env.alphaVantageAPIKey;	
 // - MNBC
 var groupIdMain = process.env.groupIdMain;
 var botIdMain = process.env.botIdMain;
@@ -99,7 +99,6 @@ function gifTag(botId) {
   fixedWidth = parsedData.data.images.fixed_width.size;
   
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-    //console.log('downsized: ' + parsedData.data.images.downsized.size + ' / fixed: ' + parsedData.data.images.fixed_width.size);
     botResponse = parsedData.data.images.fixed_width.url;
     log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized ;
     postMessage(botResponse, botId);
@@ -111,7 +110,7 @@ function gifTag(botId) {
 
 
 function stockTag(botId) {
-  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=528P3B6Q2EW4I7B3', function (error, response, body) {
+  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=' + alphaVantageAPIKey', function (error, response, body) {
   quoteObj = JSON.parse(body);
   if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
 

@@ -1,5 +1,7 @@
 ## GroupMe Gif Bot
-  * #omg or #(your search term) for a GIF
+  * add this bot to your groupme group chat to provide GIFs or stock prices when summoned
+  * post #omg or #happy birthday for a GIF
+  * post $BAC or $MSFT for a stock quotes
 
 ## Requirements:
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
@@ -12,6 +14,8 @@
       * groupIdMain = group id for your main group (from dev.groupme.com)
       * botIdAlt = bot id for an alternate group (optional-- should work even if you don't enter this variable)
       * groupIdAlt = group id for an alternate group (Optional-- should work if you don't enter this variable)
+      * alphaVantageAPIKey = API key for stock quotes
+  * AlphaVantage API key for stock Quotes [AlphaVantage](https://www.alphavantage.co/).
 
 
 
@@ -23,11 +27,9 @@
   * heroku logs
   * heroku logs --source app
   * heroku logs --app groupme-gif-bot --source app --tail
-  * alphavantage 528P3B6Q2EW4I7B3
   
 ## Contact
 
 john.stephen.olson@gmail.com
 
 
-https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AMZN&outputsize=compact&apikey=528P3B6Q2EW4I7B3
