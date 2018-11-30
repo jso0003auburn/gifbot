@@ -1,6 +1,7 @@
 ## GroupMe Gif Bot
   * add this bot to your groupme group chat to provide GIFs or stock prices when summoned
   * post #omg or #happy birthday for a GIF
+    * ![image](https://i.imgur.com/ztk71Bj.jpg)
   * post $BAC or $MSFT for a stock quotes
 
 ## Requirements:
