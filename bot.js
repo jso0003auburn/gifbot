@@ -110,7 +110,7 @@ function gifTag(botId) {
 
 
 function stockTag(botId) {
-  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=' + alphaVantageAPIKey', function (error, response, body) {
+  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
   quoteObj = JSON.parse(body);
   if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
 
