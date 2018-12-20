@@ -76,7 +76,7 @@ function respond() {
   //GIF #
   if (message.substring(0,1) == '#' && messageTrimmed.length > 8) {
     console.log('too long');
-    // botTag(botId);
+    tooLongTag(botId);
   }
   //GIF #
   if (message.substring(0,1) == '#' && botId !== '1') {
@@ -93,6 +93,13 @@ function respond() {
 function botTag(botId) {
   log = 'gifbot tag';
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
+  postMessage(botResponse, botId);
+}
+
+//if the hashtag message is over 8 characters this will suggest you don't used spaces
+function tooLongTag(botId) {
+  log = 'too long tag' + messageTrimmed + messageTrimmed.length;
+  botResponse = 'dont type your response like a hashtag\nuse spaces like this: #happy birthday';
   postMessage(botResponse, botId);
 }
 
