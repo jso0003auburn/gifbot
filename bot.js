@@ -110,7 +110,11 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
-  
+  if (messageTrimmed.length > 8) {
+    console.log('too long' + messageTrimmed + messageTrimmed.length);
+    tooLongTag(botId);
+    process.exit();
+  }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
     log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized ;
