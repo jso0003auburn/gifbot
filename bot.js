@@ -111,6 +111,7 @@ function gifTag(botId) {
     console.log('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
     botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
     postMessage(botResponse, botId);
+    response.statusCode = '1';
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
