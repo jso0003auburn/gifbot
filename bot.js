@@ -72,7 +72,10 @@ function respond() {
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
     botTag(botId);
   }
-
+  //GIF #
+  if (message.substring(0,1) == '#' && message.subtstring(1).trim().length > 8) {
+    botTag(botId);
+  }
   //GIF #
   if (message.substring(0,1) == '#' && botId !== '1') {
     gifTag(botId);
@@ -93,10 +96,7 @@ function botTag(botId) {
 
 //posts message
 function gifTag(botId) {
-  message = message.substring(1).trim();
-  if (message > 8) {
-    log = ' termtoo large ';
-  request('https://api.giphy.com/v1/gifs/translate?s=' + message + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
+  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
