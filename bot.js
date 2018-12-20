@@ -32,6 +32,7 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   messageTrimmed = message.substring(1).trim();
+  spaceCount = (messageTrimmed.split(" ").length - 1);
 
   //From the main group?    
   if (sendingGroup == groupIdMain) {
@@ -73,14 +74,9 @@ function respond() {
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
     botTag(botId);
   }
-  //GIF #
-  if (messageTrimmed.length > 8 && botId !== '1') {
-    console.log('too long' + messageTrimmed + messageTrimmed.length);
-    tooLongTag(botId);
-  }
+
   //GIF #
   if (message.substring(0,1) == '#' && botId !== '1') {
-    console.log('giftag too long');
     gifTag(botId);
   }
   //Stock $
@@ -110,10 +106,10 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
-  if (messageTrimmed.length > 8) {
-    console.log('too long' + messageTrimmed + messageTrimmed.length);
-    tooLongTag(botId);
-    process.exit();
+  }
+  //GIF #
+  if (spaceCount > 8) {
+    console.log('too long' + messageTrimmed + spaceCount);
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
