@@ -107,8 +107,10 @@ function gifTag(botId) {
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
   //GIF #
-  if (spaceCount < 1 && botId == botIdTest) {
+  if (spaceCount < 1 && messageTrimmed.length > 9) {
     console.log('too long' + messageTrimmed + spaceCount + ' ' + messageTrimmed.length);
+    botResponse = 'dont type your response like a hashtag\nuse spaces like this:\n#happy birthday';
+    postMessage(botResponse, botId);
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
