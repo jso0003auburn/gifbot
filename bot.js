@@ -93,7 +93,10 @@ function botTag(botId) {
 
 //posts message
 function gifTag(botId) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
+  message = message.substring(1).trim();
+  if (message > 8) {
+    log = ' termtoo large ';
+  request('https://api.giphy.com/v1/gifs/translate?s=' + message + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
