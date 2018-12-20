@@ -79,7 +79,8 @@ function respond() {
     tooLongTag(botId);
   }
   //GIF #
-  if (message.substring(0,1) == '#' && botId !== '1') {
+  if (message.substring(0,1) == '#' && botId !== '1' && messageTrimmed.length > 8) {
+    console.log('giftag too long');
     gifTag(botId);
   }
   //Stock $
