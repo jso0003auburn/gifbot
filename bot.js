@@ -31,6 +31,7 @@ function respond() {
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
+  messageTrimmed = message.substring(1).trim();
 
   //From the main group?    
   if (sendingGroup == groupIdMain) {
@@ -73,8 +74,9 @@ function respond() {
     botTag(botId);
   }
   //GIF #
-  if (message.substring(0,1) == '#' && message.subtstring(1).trim().length > 8) {
-    botTag(botId);
+  if (message.substring(0,1) == '#' && messageTrimmed.length > 8) {
+    console.log('too long');
+    // botTag(botId);
   }
   //GIF #
   if (message.substring(0,1) == '#' && botId !== '1') {
