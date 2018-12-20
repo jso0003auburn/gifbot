@@ -74,12 +74,12 @@ function respond() {
     botTag(botId);
   }
   //GIF #
-  if (message.substring(0,1) == '#' && messageTrimmed.length > 8 && botId !== '1') {
-    console.log('too long');
+  if (messageTrimmed.length > 8 && botId !== '1') {
+    console.log('too long' + messageTrimmed + messageTrimmed.length);
     tooLongTag(botId);
   }
   //GIF #
-  if (message.substring(0,1) == '#' && botId !== '1' && messageTrimmed.length > 8) {
+  if (message.substring(0,1) == '#' && botId !== '1') {
     console.log('giftag too long');
     gifTag(botId);
   }
