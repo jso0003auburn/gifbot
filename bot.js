@@ -106,9 +106,8 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
-  }
   //GIF #
-  if (spaceCount > 8) {
+  if (spaceCount < 2 && botId == botIdTest) {
     console.log('too long' + messageTrimmed + spaceCount);
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
