@@ -107,15 +107,15 @@ function gifTag(botId) {
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
   //GIF #
-  if (spaceCount < 2 && botId == botIdTest) {
-    console.log('too long' + messageTrimmed + spaceCount);
+  if (spaceCount < 1 && botId == botIdTest) {
+    console.log('too long' + messageTrimmed + spaceCount + ' ' + messageTrimmed.length);
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
     log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized ;
     postMessage(botResponse, botId);
   } else {
-  console.log(groupName + ' - ' + message + ' is invalid');
+  console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
   }
   });
 }
