@@ -93,13 +93,6 @@ function botTag(botId) {
   postMessage(botResponse, botId);
 }
 
-//if the hashtag message is over 8 characters this will suggest you don't used spaces
-function tooLongTag(botId) {
-  log = 'too long tag' + messageTrimmed + messageTrimmed.length;
-  botResponse = 'dont type your response like a hashtag\nuse spaces like this:\n#happy birthday';
-  postMessage(botResponse, botId);
-}
-
 //posts message
 function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
@@ -107,7 +100,7 @@ function gifTag(botId) {
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
   //GIF #
-  if (spaceCount < 1 && messageTrimmed.length > 9) {
+  if (spaceCount < 1 && messageTrimmed.length > 8) {
     console.log('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
     botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
     postMessage(botResponse, botId);
@@ -115,7 +108,7 @@ function gifTag(botId) {
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized ;
+    log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized + ' message length: ' + messageTrimmed.length + ' space count: ' + spaceCount;
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
