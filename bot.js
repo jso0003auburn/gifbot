@@ -32,6 +32,7 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   messageTrimmed = message.substring(1).trim();
+  messageTrimmmedLength = messageTrimmed.length;
   spaceCount = (messageTrimmed.split(" ").length - 1);
 
   //From the main group?    
@@ -100,15 +101,15 @@ function gifTag(botId) {
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
   //GIF #
-  if (spaceCount < 1 && messageTrimmed.length > 8) {
-    console.log('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
+  if (spaceCount < 1 && messageTrimmedLength > 8) {
+    console.log('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmedLength);
     botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
     postMessage(botResponse, botId);
     response.statusCode = '1';
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized + ' message length: ' + messageTrimmed.length + ' space count: ' + spaceCount;
+    log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized + ' message length: ' + messageTrimmedLength + ' space count: ' + spaceCount;
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
@@ -135,7 +136,6 @@ function stockTag(botId) {
     }
     response = '$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1);
     botResponse = (response);
-    log = message.substring(1);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -157,9 +157,9 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log(groupName + ' - LOG - ' + log + ' - ' + res.statusCode + ' ' + res.avatar_url);
+        console.log('POSTED to ' + groupName + ' - LOG - ' + messageTrimmed + ' - ' + res.statusCode);
       } else {
-      console.log(groupName + ' - LOG - Bad status code: ' + res.statusCode);
+      console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
   });
   botReq.end(JSON.stringify(options));
