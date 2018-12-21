@@ -88,9 +88,9 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  log = 'gifbot tag';
+  log = 'gifbot tag' + message;
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
-  postMessage(botResponse, botId, log;
+  postMessage(botResponse, botId, log);
 }
 
 //posts message
