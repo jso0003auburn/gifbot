@@ -69,7 +69,8 @@ function respond() {
     console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
 
-  console.log(groupName + ' - ' + sendingUser + ' - ' + message);
+  console.log('SENT to: ' + groupName + ' by ' + sendingUser + ': ' + message);
+  console.log('length: ' + messageTrimmedLength + ' space count: ' + spaceCount);
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -109,7 +110,7 @@ function gifTag(botId) {
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    log = groupName + ' - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized + ' message length: ' + messageTrimmedLength + ' space count: ' + spaceCount;
+    console.log('GIPHY - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
