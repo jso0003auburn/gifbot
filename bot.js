@@ -70,7 +70,6 @@ function respond() {
   }
 
   console.log('SENT to: ' + groupName + ' by ' + sendingUser + ': ' + message);
-  console.log('length: ' + messageTrimmedLength + ' space count: ' + spaceCount);
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
