@@ -90,7 +90,7 @@ function respond() {
 function botTag(botId) {
   log = 'gifbot tag';
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
-  postMessage(botResponse, botId);
+  postMessage(botResponse, botId, log;
 }
 
 //posts message
@@ -99,7 +99,7 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
-  //GIF #
+  //did they used spaces?
   if (spaceCount < 1 && messageTrimmed.length > 8) {
     log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
     botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
