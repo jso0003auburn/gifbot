@@ -32,7 +32,6 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   messageTrimmed = message.substring(1).trim();
-  messageTrimmmedLength = messageTrimmed.length;
   spaceCount = (messageTrimmed.split(" ").length - 1);
 
   //From the main group?    
@@ -101,8 +100,8 @@ function gifTag(botId) {
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
   //GIF #
-  if (spaceCount < 1 && messageTrimmedLength > 8) {
-    console.log('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmedLength);
+  if (spaceCount < 1 && messageTrimmed.length > 8) {
+    console.log('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
     botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
     postMessage(botResponse, botId);
     response.statusCode = '1';
