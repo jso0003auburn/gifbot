@@ -95,7 +95,7 @@ function botTag(botId) {
 
 //posts message
 function gifTag(botId) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
+  request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
@@ -118,7 +118,7 @@ function gifTag(botId) {
 
 
 function stockTag(botId) {
-  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + message.substring(1).trim() + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
+  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + messageTrimmed + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
   quoteObj = JSON.parse(body);
   if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
 
