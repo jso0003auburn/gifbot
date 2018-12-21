@@ -101,15 +101,15 @@ function gifTag(botId) {
   fixedWidth = parsedData.data.images.fixed_width.size;
   //GIF #
   if (spaceCount < 1 && messageTrimmed.length > 8) {
-    console.log('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
+    log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
     botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
-    postMessage(botResponse, botId);
+    postMessage(botResponse, botId, log);
     response.statusCode = '1';
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    console.log('GIPHY - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized);
-    postMessage(botResponse, botId);
+    log = ('GIPHY - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized);
+    postMessage(botResponse, botId, log);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
   }
@@ -143,7 +143,7 @@ function stockTag(botId) {
 }
 
 //posts message
-function postMessage(botResponse, botId) {
+function postMessage(botResponse, botId, log) {
   
   var options, botReq;
   options = {
@@ -157,6 +157,7 @@ function postMessage(botResponse, botId) {
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
         console.log('POSTED to ' + groupName + ' - LOG - ' + messageTrimmed + ' - ' + res.statusCode);
+        console.log(log);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
