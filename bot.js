@@ -146,7 +146,6 @@ function stockTag(botId) {
 //posts message
 function postMessage(botResponse, botId) {
   
-
   var options, botReq;
   options = {
     hostname: 'api.groupme.com',
@@ -158,7 +157,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log(groupName + ' - LOG - ' + log + ' - ' + res.statusCode);
+        console.log(groupName + ' - LOG - ' + log + ' - ' + res.statusCode + ' ' + res.avatar_url);
       } else {
       console.log(groupName + ' - LOG - Bad status code: ' + res.statusCode);
       }
