@@ -10,7 +10,7 @@
   	* Create a bot and set your callback URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
-  	* ![image](http://i.imgur.com/gCgMp6E.png =250x)
+  	* <img src="http://i.imgur.com/gCgMp6E.png" alt="variables" width="200"/>
   	  * botName = gifbot (set this in heroku and dev.groupme.com)
 
       * botIdMain = bot id for your main group (from dev.groupme.com)
