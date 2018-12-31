@@ -12,6 +12,7 @@ var botIdMain = process.env.botIdMain;
 
 // - Olson Test
 var groupIdTest = process.env.groupIdTest;
+var groupNameTest = process.env.groupNameTest;
 var botIdTest = process.env.botIdTest;
 
 // - Wolfpack
@@ -44,7 +45,7 @@ function respond() {
   //from the Test group?
   if (sendingGroup == groupIdTest) {
     botId = botIdTest;
-    groupName = 'Olson Test ';
+    groupName = groupNameTest;
     rating = 'r';
   }
 
