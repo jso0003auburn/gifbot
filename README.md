@@ -10,12 +10,18 @@
   	* Create a bot and set your callback URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
-  	* http://i.imgur.com/gCgMp6E.png
-  	  * botName = name of your bot (from dev.groupme.com)
+  	* ![image](http://i.imgur.com/gCgMp6E.png =250x)
+  	  * botName = gifbot (set this in heroku and dev.groupme.com)
+
       * botIdMain = bot id for your main group (from dev.groupme.com)
+      * groupNameMain = name of your main group
+      * ratingMain = determines the gif rating from giphy, options are: "r" or "pg-13" or "pg" or "g"
       * groupIdMain = group id for your main group (from dev.groupme.com)
-      * botIdAlt = bot id for an alternate group (optional-- should work even if you don't enter this variable)
-      * groupIdAlt = group id for an alternate group (Optional-- should work if you don't enter this variable)
+      
+      * botIdTest = bot id for your Test group (from dev.groupme.com)
+      * groupNameTest = name of your Test group
+      * ratingTest = determines the gif rating from giphy, options are: "r" or "pg-13" or "pg" or "g"
+      * groupIdTest = group id for your Test group (from dev.groupme.com)
       * alphaVantageAPIKey = API key for stock quotes
   * AlphaVantage API key for stock Quotes [AlphaVantage](https://www.alphavantage.co/).
 

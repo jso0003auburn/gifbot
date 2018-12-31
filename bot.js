@@ -10,6 +10,7 @@ var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var groupIdMain = process.env.groupIdMain;
 var groupNameMain = process.env.groupNameMain;
 var botIdMain = process.env.botIdMain;
+var ratingMain = process.env.ratingMain;
 
 // - Olson Test
 var groupIdTest = process.env.groupIdTest;
@@ -21,11 +22,13 @@ var ratingTest = process.env.ratingTest;
 var groupId2 = process.env.groupId2;
 var groupName2 = process.env.groupName2;
 var botId2 = process.env.botId2;
+var rating2 = process.env.rating2;
 
 // - Olson Family
 var groupId3 = process.env.groupId3;
 var groupName3 = process.env.groupName3;
 var botId3 = process.env.botId3;
+var rating3 = process.env.rating3;
 
 // - processes incoming groupme posts
 function respond() {
@@ -43,7 +46,7 @@ function respond() {
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
     groupName = groupNameMain;
-    rating = 'r'
+    rating = ratingMain;
   }
   
   //from the Test group?
@@ -57,14 +60,14 @@ function respond() {
   if (sendingGroup == groupId2) {
     botId = botId2;
     groupName = groupName2;
-    rating = 'r';
+    rating = rating2;
   }
 
   //from the 3 group OLSON FAMILY?
   if (sendingGroup == groupId3) {
     botId = botId3;
     groupName = groupName3;
-    rating = 'pg';
+    rating = rating3;
   }
 
   //from an unrecognized group?
