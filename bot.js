@@ -5,7 +5,8 @@ var https = require('https');
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
 // required variable is gifbot
 var botName = process.env.botName;
-var alphaVantageAPIKey = process.env.alphaVantageAPIKey;	
+var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
+
 // - MNBC
 var 1groupId = process.env.1groupId;
 var 1groupName = process.env.1groupName;
