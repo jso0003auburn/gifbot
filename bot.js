@@ -8,19 +8,23 @@ var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;	
 // - MNBC
 var groupIdMain = process.env.groupIdMain;
+var groupNameMain = process.env.groupNameMain;
 var botIdMain = process.env.botIdMain;
 
 // - Olson Test
 var groupIdTest = process.env.groupIdTest;
 var groupNameTest = process.env.groupNameTest;
 var botIdTest = process.env.botIdTest;
+var ratingTest = process.env.ratingTest;
 
 // - Wolfpack
 var groupId2 = process.env.groupId2;
+var groupName2 = process.env.groupName2;
 var botId2 = process.env.botId2;
 
 // - Olson Family
 var groupId3 = process.env.groupId3;
+var groupName3 = process.env.groupName3;
 var botId3 = process.env.botId3;
 
 // - processes incoming groupme posts
@@ -38,7 +42,7 @@ function respond() {
   //From the main group?    
   if (sendingGroup == groupIdMain) {
     botId = botIdMain;
-    groupName = 'MNBC       ';
+    groupName = groupNameMain;
     rating = 'r'
   }
   
@@ -46,20 +50,20 @@ function respond() {
   if (sendingGroup == groupIdTest) {
     botId = botIdTest;
     groupName = groupNameTest;
-    rating = 'r';
+    rating = ratingTest;
   }
 
   //from the 2 group WOLFPACK?
   if (sendingGroup == groupId2) {
     botId = botId2;
-    groupName = 'Wolfpack   ';
+    groupName = groupName2;
     rating = 'r';
   }
 
   //from the 3 group OLSON FAMILY?
   if (sendingGroup == groupId3) {
     botId = botId3;
-    groupName = 'Olson Family ';
+    groupName = groupName3;
     rating = 'pg';
   }
 
