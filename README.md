@@ -10,9 +10,9 @@
   	* Create a bot and set your callback URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
-  	* <img src="http://i.imgur.com/gCgMp6E.png" alt="variables" width="200"/>
-  	  * botName = gifbot (set this in heroku and dev.groupme.com)
+  	* <img src="http://i.imgur.com/gCgMp6E.png" alt="variables" width="400"/>
 
+  	  * botName = gifbot (set this in heroku and dev.groupme.com)
       * botIdMain = bot id for your main group (from dev.groupme.com)
       * groupNameMain = name of your main group
       * ratingMain = determines the gif rating from giphy, options are: "r" or "pg-13" or "pg" or "g"
