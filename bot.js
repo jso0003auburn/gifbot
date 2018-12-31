@@ -7,24 +7,6 @@ var https = require('https');
 var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 
-// - MNBC
-var mainGroupId = process.env.mainGroupId;
-var mainGroupName = process.env.mainGroupName;
-var mainBotId = process.env.mainBotId;
-var mainRating = process.env.mainRating;
-
-// - Wolfpack
-var groupId2 = process.env.groupId2;
-var groupName2 = process.env.groupName2;
-var botId2 = process.env.botId2;
-var rating2 = process.env.rating2;
-
-// - Olson Family
-var groupId3 = process.env.groupId3;
-var groupName3 = process.env.groupName3;
-var botId3 = process.env.botId3;
-var rating3 = process.env.rating3;
-
 // - processes incoming groupme posts
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
@@ -38,10 +20,10 @@ function respond() {
   spaceCount = (messageTrimmed.split(" ").length - 1);
 
   //From the main group?    
-  if (sendingGroup == mainGroupId) {
-    botId = mainBotId;
-    groupName = mainGroupName;
-    rating = mainRating;
+  if (sendingGroup == process.env.mainGroupId) {
+    botId = process.env.mainBotId;
+    groupName = process.env.mainGroupName;
+    rating = process.env.mainRating;
   }
   
   //from the Test group? (Olson Test)
@@ -52,17 +34,17 @@ function respond() {
   }
 
   //from the 2 group WOLFPACK?
-  if (sendingGroup == groupId2) {
-    botId = botId2;
-    groupName = groupName2;
-    rating = rating2;
+  if (sendingGroup == process.env.group2Id) {
+    botId = process.env.group2BotId;
+    groupName = process.env.group2Name;
+    rating = process.env.group2Rating;
   }
 
   //from the 3 group OLSON FAMILY?
-  if (sendingGroup == groupId3) {
-    botId = botId3;
-    groupName = groupName3;
-    rating = rating3;
+  if (sendingGroup == process.env.group3Id) {
+    botId = process.env.group3BotId;
+    groupName = process.env.group3Name;
+    rating = process.env.group3Rating;
   }
 
   //from an unrecognized group?
