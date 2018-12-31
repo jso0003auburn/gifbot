@@ -3,7 +3,7 @@
   * post #omg or #happy birthday for a GIF
     * ![image](https://i.imgur.com/ztk71Bj.jpg)
   * post $BAC or $MSFT for a stock quotes
-    * ![image](https://i.imgur.com/CHq3CVO.jpg)
+  <img src="https://i.imgur.com/CHq3CVO.jpg" alt="stocks" width="400"/>
 
 ## Requirements:
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
