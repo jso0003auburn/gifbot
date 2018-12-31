@@ -7,16 +7,16 @@ var https = require('https');
 var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;	
 // - MNBC
-var groupIdMain = process.env.groupIdMain;
-var groupNameMain = process.env.groupNameMain;
-var botIdMain = process.env.botIdMain;
-var ratingMain = process.env.ratingMain;
+var 1groupId = process.env.1groupId;
+var 1groupName = process.env.1groupName;
+var 1botId = process.env.1botId;
+var 1rating = process.env.1rating;
 
 // - Olson Test
-var groupIdTest = process.env.groupIdTest;
-var groupNameTest = process.env.groupNameTest;
-var botIdTest = process.env.botIdTest;
-var ratingTest = process.env.ratingTest;
+var testGroupId = process.env.testGroupId;
+var testGroupName = process.env.testgroupName;
+var testBotId = process.env.testBotId;
+var testRating = process.env.testRating;
 
 // - Wolfpack
 var groupId2 = process.env.groupId2;
@@ -43,17 +43,17 @@ function respond() {
   spaceCount = (messageTrimmed.split(" ").length - 1);
 
   //From the main group?    
-  if (sendingGroup == groupIdMain) {
-    botId = botIdMain;
-    groupName = groupNameMain;
-    rating = ratingMain;
+  if (sendingGroup == 1groupId) {
+    botId = 1botId;
+    groupName = 1groupName;
+    rating = 1rating;
   }
   
   //from the Test group?
-  if (sendingGroup == groupIdTest) {
-    botId = botIdTest;
-    groupName = groupNameTest;
-    rating = ratingTest;
+  if (sendingGroup == testGroupId) {
+    botId = process.env.testBotId;
+    groupName = process.env.testGroupName;
+    rating = process.env.testRating;
   }
 
   //from the 2 group WOLFPACK?
