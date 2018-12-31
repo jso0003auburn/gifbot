@@ -51,7 +51,7 @@ function respond() {
   }
   
   //from the Test group?
-  if (sendingGroup == testGroupId) {
+  if (sendingGroup == process.env.testGroupId) {
     botId = process.env.testBotId;
     groupName = process.env.testGroupName;
     rating = process.env.testRating;
