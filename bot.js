@@ -8,10 +8,10 @@ var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 
 // - MNBC
-var 1groupId = process.env.1groupId;
-var 1groupName = process.env.1groupName;
-var 1botId = process.env.1botId;
-var 1rating = process.env.1rating;
+var mainGroupId = process.env.mainGroupId;
+var mainGroupName = process.env.mainGroupName;
+var mainBotId = process.env.mainBotId;
+var mainRating = process.env.mainRating;
 
 // - Olson Test
 var testGroupId = process.env.testGroupId;
@@ -44,10 +44,10 @@ function respond() {
   spaceCount = (messageTrimmed.split(" ").length - 1);
 
   //From the main group?    
-  if (sendingGroup == 1groupId) {
-    botId = 1botId;
-    groupName = 1groupName;
-    rating = 1rating;
+  if (sendingGroup == mainGroupId) {
+    botId = mainBotId;
+    groupName = mainGroupName;
+    rating = mainRating;
   }
   
   //from the Test group?
