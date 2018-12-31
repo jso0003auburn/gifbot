@@ -102,7 +102,7 @@ function gifTag(botId) {
   //did they used spaces?
   if (spaceCount < 1 && messageTrimmed.length > 8) {
     log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
-    botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
+    botResponse = 'dont type:\n"' + message + '"\nuse spaces like this:\n"#happy birthday"';
     postMessage(botResponse, botId, log);
     response.statusCode = '1';
   }
