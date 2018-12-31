@@ -104,7 +104,7 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
-  //did they used spaces?
+  //did they use spaces?
   if (spaceCount < 1 && messageTrimmed.length > 8) {
     log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
     botResponse = 'dont type:\n' + message + '\nuse spaces like this:\n#happy birthday';
@@ -113,7 +113,7 @@ function gifTag(botId) {
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    log = ('GIPHY - FIXED - ' + fixedWidth + ' - DOWNSIZED - ' + downsized);
+    log = ('GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId, log);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
