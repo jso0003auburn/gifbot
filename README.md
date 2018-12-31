@@ -2,28 +2,28 @@
   * add this bot to your groupme group chat to provide GIFs or stock prices when summoned
 
 ## Post #lol or #happy birthday for a GIF
-  <img src="https://i.imgur.com/ztk71Bj.jpg" alt="gifs" width="400"/>
+  <img src="https://i.imgur.com/ztk71Bj.jpg" alt="gifs" width="300"/>
 
 ## Post $BAC or $MSFT for a stock quote
-  <img src="https://i.imgur.com/CHq3CVO.jpg" alt="stocks" width="400"/>
+  <img src="https://i.imgur.com/CHq3CVO.jpg" alt="stocks" width="300"/>
 
 ## Requirements:
   * GroupMe dev account [dev.GroupMe](https://dev.groupme.com/session/new),
   	* Create a bot and set your callback URL to your heroku app domain (your-heroku-app-name.herokuapp.com) 	
   * Heroku account [Heroku](http://heroku.com).
   	* use Heroku config vars to set the following (all variables come from dev.groupme.com)
-  	<img src="https://i.imgur.com/SKljWiz.jpg" alt="variables" width="400"/>
+  	<img src="https://i.imgur.com/QJphnhB.jpg" alt="variables" width="300"/>
 
   	  * botName = gifbot (set this in heroku and dev.groupme.com)
-      * botIdMain = bot id for your main group (from dev.groupme.com)
-      * groupNameMain = name of your main group
-      * ratingMain = determines the gif rating from giphy, options are: "r" or "pg-13" or "pg" or "g"
-      * groupIdMain = group id for your main group (from dev.groupme.com)
+      * mainBotId = bot id for your main group (from dev.groupme.com)
+      * mainGroupName = name of your main group
+      * mainRating = determines the gif rating from giphy, options are: "r" or "pg-13" or "pg" or "g"
+      * mainGroupId = group id for your main group (from dev.groupme.com)
       
-      * botIdTest = bot id for your Test group (from dev.groupme.com)
-      * groupNameTest = name of your Test group
-      * ratingTest = determines the gif rating from giphy, options are: "r" or "pg-13" or "pg" or "g"
-      * groupIdTest = group id for your Test group (from dev.groupme.com)
+      * testBotId = bot id for your Test group (from dev.groupme.com)
+      * testGroupName = name of your Test group
+      * testRating = determines the gif rating from giphy, options are: "r" or "pg-13" or "pg" or "g"
+      * testGroupId = group id for your Test group (from dev.groupme.com)
 
   * AlphaVantage API key for stock Quotes [AlphaVantage](https://www.alphavantage.co/).
       * alphaVantageAPIKey = API key for stock quotes
