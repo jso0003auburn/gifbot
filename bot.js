@@ -17,7 +17,7 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   messageTrimmed = message.substring(1).trim();
-  spaceCount = (messageTrimmed.split(" ").length - 1);
+  spaceCount = (message.split(" ").length - 1);
 
   //From the main group?    
   if (sendingGroup == process.env.mainGroupId) {
