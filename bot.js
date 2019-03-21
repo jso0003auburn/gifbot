@@ -80,12 +80,12 @@ function botTag(botId) {
 
 //posts message
 function gifTag(botId) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
+  request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating + '&weirdness=10', function (error, response, body) {
   parsedData = JSON.parse(body);
   downsized = parsedData.data.images.downsized.size;
   fixedWidth = parsedData.data.images.fixed_width.size;
   //did they use spaces?
-  if (spaceCount < 1 && messageTrimmed.length > 8) {
+  if (spaceCount < 1 && messageTrimmed.length > 10) {
     log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
     botResponse = 'use spaces like this:\n# happy birthday';
     postMessage(botResponse, botId, log);
