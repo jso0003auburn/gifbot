@@ -93,7 +93,7 @@ function gifTag(botId) {
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    log = ('GIPHY FIXED: ' + fixedWidth.toLocaleString() + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+    log = ('GIPHY FIXED: ' + parseFloat(fixedWidth).toLocaleString('en') + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId, log);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
