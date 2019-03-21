@@ -82,8 +82,10 @@ function botTag(botId) {
 function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating + '&weirdness=10', function (error, response, body) {
   parsedData = JSON.parse(body);
-  downsized = parsedData.data.images.downsized.size;
-  fixedWidth = parsedData.data.images.fixed_width.size;
+  //fixedWidth = parsedData.data.images.fixed_width.size;
+  fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
+  //downsized = parsedData.data.images.downsized.size;
+  downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
   //did they use spaces?
   if (spaceCount < 1 && messageTrimmed.length > 10) {
     log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
@@ -93,7 +95,7 @@ function gifTag(botId) {
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    log = ('GIPHY FIXED: ' + parseFloat(fixedWidth).toLocaleString('en') + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+    log = ('GIPHY FIXED: ' + fixedWdith + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId, log);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
