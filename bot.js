@@ -13,7 +13,6 @@ var testGroupId = process.env.testGroupId;
 var group2Id = process.env.group2Id;
 var group3Id = process.env.group3Id;
 
-
 // - processes incoming groupme posts
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
@@ -23,6 +22,9 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   messageTrimmed = message.substring(1).trim();
+
+  botTagResponse = 'try #lol for a gif\ntry $bac for a stock price';
+  botTagResponseLog = 'gifbot was tagged by: ' + sendingUser;
 
   //From the main group?    
   if (sendingGroup == mainGroupId) {
@@ -87,8 +89,8 @@ function respond() {
 }
 
 function botTag(botId) {
-    botResponse = 'try #lol for a gif\ntry $bac for a stock price';
-    specificLog = 'gifbot was tagged by: ' + sendingUser;
+    botResponse = botTagResponse;
+    specificLog = botTagResponseLog;
     postMessage(botResponse, botId);
 }
 
