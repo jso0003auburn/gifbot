@@ -52,7 +52,11 @@ function respond() {
     console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
 
-  console.log(sendingUser.padEnd(20) + 'SENT: ' + message + ' - ' + groupName);
+  if (sendingUser !== botName) {
+    console.log(sendingUser.padEnd(20) + 'SENT: ' + message + ' - ' + groupName);
+  } else {
+  console.log(sendingUser.padEnd(20) + 'SENT: something - ' + groupName);
+  }
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
