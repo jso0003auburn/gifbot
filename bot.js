@@ -57,7 +57,10 @@ function respond() {
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
-    botTag(botId);
+    logType = 'botTag';
+    botResponse = 'try #lol for a gif\ntry $bac for a stock price';
+    //specificLog = 'gifbot tag' + message;
+    postMessage(botResponse, botId);
   }
 
   //GIF #
@@ -75,6 +78,12 @@ function logMessages(res) {
   if (logType == 'botTag') {
     specificLog = 'gifbot tag' + message;
   }
+  if (logType == 'gifTagTooLong') {
+    specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
+  }
+  if (logType == 'gifTag') {
+    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+  }
   if (sendingUser !== botName && postLog == '1') {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
   }
@@ -89,14 +98,6 @@ function logMessages(res) {
   }
 }
 
-//if @gifbot was tagged this will post a help message
-function botTag(botId) {
-  logType = 'botTag';
-  botResponse = 'try #lol for a gif\ntry $bac for a stock price';
-  //specificLog = 'gifbot tag' + message;
-  postMessage(botResponse, botId);
-}
-
 //posts message
 function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
@@ -109,14 +110,16 @@ function gifTag(botId) {
   spaceCount = (message.split(" ").length - 1);
   if (spaceCount < 1 && messageTrimmed.length > 10) {
     botResponse = 'use spaces like this:\n# happy birthday';
-    specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
+    logType = 'gifTagTooLong';
+    //specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
     postMessage(botResponse, botId);
     response.statusCode = '1';
   }
 
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+    logType = 'gifTag';
+    //specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
