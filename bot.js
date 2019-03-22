@@ -14,6 +14,7 @@ function respond() {
   botId = '1';
   groupName = '1';
   postLog = '1';
+  logType = '1';
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
@@ -71,10 +72,8 @@ function respond() {
 }
 
 function logMessages(res) {
-
-  if (res.statusCode == 202) {
-    console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode + ' via LM')
-    response.statusCode = '1';
+  if (logType == 'botTag') {
+    specificLog = 'gifbot tag' + message;
   }
   if (sendingUser !== botName && postLog == '1') {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
@@ -82,12 +81,20 @@ function logMessages(res) {
   if (sendingUser == botName && postLog == '1') {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
   }
+  if (postLog == '202') {
+    console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode + ' via LM')
+    response.statusCode = '1';
+  }
+  if (postLog == 'fail') {
+    console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
+  }
 }
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
+  logType = 'botTag';
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
-  specificLog = 'gifbot tag' + message;
+  //specificLog = 'gifbot tag' + message;
   postMessage(botResponse, botId);
 }
 
@@ -164,7 +171,9 @@ function postMessage(botResponse, botId, log) {
         logMessages(res);
         //console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
       } else {
-      console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
+      postLog = 'fail';
+      logMessages(res);
+      //console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
   });
   botReq.end(JSON.stringify(options));
