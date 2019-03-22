@@ -106,14 +106,11 @@ function gifTag(botId) {
     botResponse = 'use spaces like this:\n# happy birthday';
     specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
     postMessage(botResponse, botId);
-    spaceCount = '1';
   }
-  if (!error && response.statusCode == 200 && parsedData && parsedData.data.images && spaceCount !== '1') {
+  if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
     specificLog = ('FIXED: ' + fixedWidth + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
     postMessage(botResponse, botId);
-  } else {
-  console.log(message + ' is invalid - response:' + response.statusCode + ' ' + spaceCount);
   }
   });
 }
