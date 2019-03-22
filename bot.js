@@ -53,9 +53,9 @@ function respond() {
   }
 
   if (sendingUser !== botName) {
-    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message + ' - ' + groupName);
+    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53,"...") + ' IN: ' + groupName);
   } else {
-  console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: something - ' + groupName);
+  console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: something IN: ' + groupName);
   }
 
   //Was the bot tagged?
@@ -150,7 +150,7 @@ function postMessage(botResponse, botId, log) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log(botName.padEnd(20) + 'POSTED to ' + groupName + ' using ' + messageTrimmed + ' - STATUS: ' + res.statusCode + ' - ' + specificLog);
+        console.log(botName.substring(0,10).padEnd(11) + 'POSTED to ' + groupName + ' using ' + messageTrimmed + ' - STATUS: ' + res.statusCode + ' - ' + specificLog);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
