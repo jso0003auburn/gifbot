@@ -83,7 +83,7 @@ function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating + '&weirdness=10', function (error, response, body) {
   parsedData = JSON.parse(body);
   //fixedWidth = parsedData.data.images.fixed_width.size;
-  fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
+  fixedWidth = parseFloat((parsedData.data.images.fixed_width.size/1000)).toLocaleString('en');
   //downsized = parsedData.data.images.downsized.size;
   downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
   //did they use spaces?
