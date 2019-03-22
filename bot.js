@@ -88,6 +88,7 @@ function respond() {
 
 }
 
+//was the bot tagged
 function botTag(botId) {
     botResponse = botTagResponse;
     specificLog = botTagResponseLog;
@@ -105,7 +106,7 @@ function gifTag(botId) {
 
   //did they use spaces?
   if (spaceCount < 1 && messageTrimmed.length > 12) {
-    botResponse = 'use spaces like this:\n# happy birthday';
+    botResponse = 
     specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
     postMessage(botResponse, botId);
   }
@@ -116,6 +117,9 @@ function gifTag(botId) {
   }
   });
 }
+
+
+//stock quote
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + messageTrimmed + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
   quoteObj = JSON.parse(body);
