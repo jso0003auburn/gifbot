@@ -77,18 +77,6 @@ function respond() {
 }
 
 function logMessages(res) {
-  if (logType == 'botTag') {
-    specificLog = 'gifbot was tagged by: ' + sendingUser;
-  }
-  if (logType == 'gifTagTooLong') {
-    specificLog = ('long: ' + messageTrimmed + parsedData.data.images.fixed_width.url);
-  }
-  if (logType == 'gifTag') {
-    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
-  }
-  if (logType == 'stockTag') {
-    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
-  }
   if (sendingUser !== botName && postLog == '1') {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
   }
@@ -97,9 +85,27 @@ function logMessages(res) {
   }
   if (postLog == '202') {
     console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName)
+    return;
   }
   if (postLog == 'fail') {
     console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
+    return;
+  }
+  if (logType == 'botTag') {
+    specificLog = 'gifbot was tagged by: ' + sendingUser;
+    return;
+  }
+  if (logType == 'gifTagTooLong') {
+    specificLog = ('long: ' + messageTrimmed + parsedData.data.images.fixed_width.url);
+    return;
+  }
+  if (logType == 'gifTag') {
+    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+    return;
+  }
+  if (logType == 'stockTag') {
+    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
+    return;
   }
 }
 
