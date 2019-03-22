@@ -74,7 +74,7 @@ function respond() {
 function botTag(botId) {
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
   specificLog = 'gifbot tag' + message;
-  postMessage(botResponse, botId, log);
+  postMessage(botResponse, botId);
 }
 
 //posts message
@@ -88,10 +88,9 @@ function gifTag(botId) {
   //did they use spaces?
   spaceCount = (message.split(" ").length - 1);
   if (spaceCount < 1 && messageTrimmed.length > 10) {
-    log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
     botResponse = 'use spaces like this:\n# happy birthday';
-    specificLog = 'no spaces';
-    postMessage(botResponse, botId, log);
+    specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
+    postMessage(botResponse, botId);
     response.statusCode = '1';
   }
 
