@@ -95,7 +95,6 @@ function gifTag(botId) {
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    //log = ('GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
@@ -143,7 +142,7 @@ function postMessage(botResponse, botId, log) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('POSTED to ' + groupName + ' using ' + messageTrimmed + ' - STATUS: ' + res.statusCode + ' - ' + 'GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+        console.log(botName.padEnd(20) + 'POSTED to ' + groupName + ' using ' + messageTrimmed + ' - STATUS: ' + res.statusCode + ' - ' + 'GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
