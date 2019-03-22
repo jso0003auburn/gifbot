@@ -52,7 +52,7 @@ function respond() {
     console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
 
-  console.log(sendingUser + ' SENT to ' + groupName + ' - ' + message);
+  console.log(sendingUser.padEnd(20) + 'SENT to ' + groupName + ' - ' + message);
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -143,7 +143,7 @@ function postMessage(botResponse, botId, log) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log('POSTED to ' + groupName + ' - with: ' + messageTrimmed + ' - status: ' + res.statusCode + ' - ' + 'GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+        console.log('POSTED to ' + groupName + ' using ' + messageTrimmed + ' - STATUS: ' + res.statusCode + ' - ' + 'GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
