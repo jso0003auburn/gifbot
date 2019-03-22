@@ -105,9 +105,7 @@ function gifTag(botId) {
 
   //did they use spaces?
   if (spaceCount < 1 && messageTrimmed.length > 12) {
-    botResponse = 
     specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
-    postMessage(botResponse, botId);
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
