@@ -23,9 +23,6 @@ function respond() {
   message = post.text;
   messageTrimmed = message.substring(1).trim();
 
-  botTagResponse = 'try #lol for a gif\ntry $bac for a stock price';
-  botTagResponseLog = 'gifbot was tagged by: ' + sendingUser;
-
   //From the main group?    
   if (sendingGroup == mainGroupId) {
     botId = process.env.mainBotId;
@@ -90,6 +87,8 @@ function respond() {
 
 //was the bot tagged
 function botTag(botId) {
+    botTagResponse = 'try #lol for a gif\ntry $bac for a stock price';
+    botTagResponseLog = 'I was tagged by: ' + sendingUser;
     botResponse = botTagResponse;
     specificLog = botTagResponseLog;
     postMessage(botResponse, botId);
