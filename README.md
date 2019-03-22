@@ -41,4 +41,11 @@
 
 john.stephen.olson@gmail.com
 
+  //did they use spaces?
+  if (spaceCount < 1 && messageTrimmed.length > 10) {
+    botResponse = 'use spaces like this:\n# happy birthday';
+    specificLog = ('long: ' + messageTrimmed + parsedData.data.images.fixed_width.url);
+  } else {
+  postMessage(botResponse, botId);
+  }
 

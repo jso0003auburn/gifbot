@@ -8,8 +8,6 @@ var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var botId = '1';
 var groupName = '1';
-var postLog = '1';
-var logType = '1';
 var testGroupId = process.env.testGroupId;
 
 // - processes incoming groupme posts
@@ -55,14 +53,17 @@ function respond() {
     console.log(message + ' sent without a valid group id: ' + sendingGroup);
   }
 
-  logMessages();
+  if (sendingUser !== botName) {
+    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
+  }
+
+  if (sendingUser == botName) {
+    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
+  }
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
-    logType = 'botTag';
-    botResponse = 'try #lol for a gif\ntry $bac for a stock price';
-    //specificLog = 'gifbot tag' + message;
-    postMessage(botResponse, botId);
+    botTag(botId);
   }
 
   //GIF #
@@ -76,35 +77,12 @@ function respond() {
   }
 }
 
-function logMessages(res) {
-  if (sendingUser !== botName && postLog == '1') {
-    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
-  }
-  if (sendingUser == botName && postLog == '1') {
-    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
-  }
-  if (postLog == '202') {
-    console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName)
-    return;
-  }
-  if (postLog == 'fail') {
-    console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
-    return;
-  }
-  if (logType == 'botTag') {
+
+
+function botTag(botId) {
+    botResponse = 'try #lol for a gif\ntry $bac for a stock price';
     specificLog = 'gifbot was tagged by: ' + sendingUser;
-    return;
-  }
-  if (logType == 'gifTagTooLong') {
-    return;
-  }
-  if (logType == 'gifTag') {
-    return;
-  }
-  if (logType == 'stockTag') {
-    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
-    return;
-  }
+    postMessage(botResponse, botId);
 }
 
 //posts message
@@ -118,14 +96,7 @@ function gifTag(botId) {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
     specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
-  }
-  //did they use spaces?
-  if (spaceCount < 1 && messageTrimmed.length > 10) {
-    botResponse = 'use spaces like this:\n# happy birthday';
-    specificLog = ('long: ' + messageTrimmed + parsedData.data.images.fixed_width.url);
     postMessage(botResponse, botId);
-  } else {
-  postMessage(botResponse, botId);
   }
   });
 }
@@ -149,6 +120,7 @@ function stockTag(botId) {
     }
 
     botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + messageTrimmed);
+    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -172,7 +144,6 @@ function postMessage(botResponse, botId, log) {
       if(res.statusCode == 202) {
         console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
       } else {
-      postLog = 'fail';
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
   });
