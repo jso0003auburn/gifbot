@@ -88,14 +88,14 @@ function gifTag(botId) {
   downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
   //did they use spaces?
   if (spaceCount < 1 && messageTrimmed.length > 10) {
-    log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length);
+    log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
     botResponse = 'use spaces like this:\n# happy birthday';
     postMessage(botResponse, botId, log);
     response.statusCode = '1';
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    log = ('GIPHY FIXED: ' + fixedWdith + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+    log = ('GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId, log);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
