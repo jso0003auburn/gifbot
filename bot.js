@@ -96,11 +96,9 @@ function logMessages(res) {
     return;
   }
   if (logType == 'gifTagTooLong') {
-    specificLog = ('long: ' + messageTrimmed + parsedData.data.images.fixed_width.url);
     return;
   }
   if (logType == 'gifTag') {
-    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     return;
   }
   if (logType == 'stockTag') {
@@ -119,13 +117,12 @@ function gifTag(botId) {
 
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    logType = 'gifTag';
-    logMessages();
+    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
   }
   //did they use spaces?
   if (spaceCount < 1 && messageTrimmed.length > 10) {
     botResponse = 'use spaces like this:\n# happy birthday';
-    logType = 'gifTagTooLong';
+    specificLog = ('long: ' + messageTrimmed + parsedData.data.images.fixed_width.url);
     postMessage(botResponse, botId);
   } else {
   postMessage(botResponse, botId);
@@ -173,13 +170,10 @@ function postMessage(botResponse, botId, log) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        postLog = '202';
-        logMessages(res);
-        //console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
+        console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
       } else {
       postLog = 'fail';
-      logMessages(res);
-      //console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
+      console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
   });
   botReq.end(JSON.stringify(options));
