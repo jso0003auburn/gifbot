@@ -8,7 +8,11 @@ var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var botId = '1';
 var groupName = '1';
+var mainGroupId = process.env.mainGroupId;
 var testGroupId = process.env.testGroupId;
+var group2Id = process.env.group2Id;
+var group3Id = process.env.group3Id;
+
 
 // - processes incoming groupme posts
 function respond() {
@@ -21,7 +25,7 @@ function respond() {
   messageTrimmed = message.substring(1).trim();
 
   //From the main group?    
-  if (sendingGroup == process.env.mainGroupId) {
+  if (sendingGroup == mainGroupId) {
     botId = process.env.mainBotId;
     groupName = process.env.mainGroupName;
     rating = process.env.mainRating;
@@ -35,14 +39,14 @@ function respond() {
   }
 
   //from the 2 group WOLFPACK?
-  if (sendingGroup == process.env.group2Id) {
+  if (sendingGroup == group2Id) {
     botId = process.env.group2BotId;
     groupName = process.env.group2Name;
     rating = process.env.group2Rating;
   }
 
   //from the 3 group OLSON FAMILY?
-  if (sendingGroup == process.env.group3Id) {
+  if (sendingGroup == group3Id) {
     botId = process.env.group3BotId;
     groupName = process.env.group3Name;
     rating = process.env.group3Rating;
@@ -77,8 +81,6 @@ function respond() {
   }
 }
 
-
-
 function botTag(botId) {
     botResponse = 'try #lol for a gif\ntry $bac for a stock price';
     specificLog = 'gifbot was tagged by: ' + sendingUser;
@@ -101,7 +103,31 @@ function gifTag(botId) {
   });
 }
 
+//posts message
+function gifTag(botId) {
+  request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
+  parsedData = JSON.parse(body);
+  fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
+  downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
 
+  spaceCount = (message.split(" ").length - 1);
+
+  //did they use spaces?
+  if (spaceCount < 1 && messageTrimmed.length > 12) {
+    botResponse = 'use spaces like this:\n# happy birthday';
+    specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
+    postMessage(botResponse, botId, log);
+    spaceCount = '1';
+  }
+  if (!error && response.statusCode == 200 && parsedData && parsedData.data.images && spaceCount !== '1') {
+    botResponse = parsedData.data.images.fixed_width.url;
+    specificLog = ('FIXED: ' + fixedWidth + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
+    postMessage(botResponse, botId);
+  } else {
+  console.log(message + ' is invalid - response:' + response.statusCode);
+  }
+  });
+}
 function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + messageTrimmed + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
   quoteObj = JSON.parse(body);
