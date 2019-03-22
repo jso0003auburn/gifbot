@@ -48,12 +48,13 @@ function respond() {
 
   //from an unrecognized group?
   if (botId == '1') {
-    groupName = 'Invalid Group';
-    console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
+    console.log(message + ' sent without a valid group id: ' + sendingGroup);
   }
 
+  logMessages();
+
+  //Message Logging
   if (sendingUser !== botName) {
-    logFunction();
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName);
   } else {
   console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName);
@@ -68,16 +69,19 @@ function respond() {
   if (message.substring(0,1) == '#' && botId !== '1') {
     gifTag(botId);
   }
+
   //Stock $
   if (message.substring(0,1) == '$' && botId !== '1' && post.name !== 'gifbot') {
     stockTag(botId);
   }
 }
 
-function logFunction() {
-  sendingUser = sendingUser.substring(0,10).padEnd(11) + 'SENT: ';
-  message = message.substring(0,50).padEnd(53," . ") + ' IN: ';
-  console.log(sendingUser + message + groupName + ' via LF');
+function logMessages() {
+  if (sendingUser !== botName) {
+    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + 'via LM');
+  } else {
+  console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName);
+  }
 }
 
 //if @gifbot was tagged this will post a help message
