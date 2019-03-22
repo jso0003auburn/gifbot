@@ -52,7 +52,7 @@ function respond() {
     console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
 
-  console.log(sendingUser.padEnd(20) + 'SENT to ' + groupName + ' - ' + message);
+  console.log(sendingUser.padEnd(20) + 'SENT: ' + message + ' - ' + groupName);
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -122,9 +122,9 @@ function stockTag(botId) {
     } else {
     change = '+' + change;
     }
-    response = '$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1);
-    botResponse = (response);
-    specificLog = ('STOCK TAG: ' + message.substring(1));
+
+    botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1));
+    specificLog = ('last refreshed: ' + lastRefreshed);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
