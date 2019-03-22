@@ -100,7 +100,7 @@ function gifTag(botId) {
 
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    specificLog = ('GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
@@ -127,8 +127,8 @@ function stockTag(botId) {
     change = '+' + change;
     }
 
-    botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1));
-    specificLog = ('last refreshed: ' + lastRefreshed);
+    botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + messageTrimmed);
+    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -150,7 +150,7 @@ function postMessage(botResponse, botId, log) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
+        console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
