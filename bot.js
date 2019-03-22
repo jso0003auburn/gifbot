@@ -165,6 +165,7 @@ function postMessage(botResponse, botId, log) {
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
         postLog = '202';
+        logMessages();
         console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
