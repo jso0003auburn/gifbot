@@ -17,7 +17,6 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   messageTrimmed = message.substring(1).trim();
-  spaceCount = (message.split(" ").length - 1);
 
   //From the main group?    
   if (sendingGroup == process.env.mainGroupId) {
@@ -53,7 +52,7 @@ function respond() {
     console.log(message + ' sent without a valid group id from: ' + sendingGroup + groupName);
   }
 
-  console.log(sendingUser + ' SENT to: ' + groupName + ' - ' + message);
+  console.log(sendingUser + ' SENT to ' + groupName + ' - ' + message);
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -82,10 +81,11 @@ function botTag(botId) {
 function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating + '&weirdness=10', function (error, response, body) {
   parsedData = JSON.parse(body);
-  //fixedWidth = parsedData.data.images.fixed_width.size;
-  fixedWidth = parseFloat((parsedData.data.images.fixed_width.size/1000)).toLocaleString('en');
-  //downsized = parsedData.data.images.downsized.size;
+  fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
   downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
+
+  spaceCount = (message.split(" ").length - 1);
+
   //did they use spaces?
   if (spaceCount < 1 && messageTrimmed.length > 10) {
     log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
