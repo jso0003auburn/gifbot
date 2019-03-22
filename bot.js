@@ -6,15 +6,17 @@ var https = require('https');
 // required variable is gifbot
 var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
+var botId = '1';
+var groupName = '1';
+var postLog = '1';
+var logType = '1';
+var testGroupId = process.env.testGroupId;
 
 // - processes incoming groupme posts
 function respond() {
   var post = JSON.parse(this.req.chunks[0]);
   this.res.writeHead(200);
-  botId = '1';
-  groupName = '1';
-  postLog = '1';
-  logType = '1';
+
   sendingGroup = post.group_id;
   sendingUser = post.name;
   message = post.text;
@@ -28,7 +30,7 @@ function respond() {
   }
   
   //from the Test group? (Olson Test)
-  if (sendingGroup == process.env.testGroupId) {
+  if (sendingGroup == testGroupId) {
     botId = process.env.testBotId;
     groupName = process.env.testGroupName;
     rating = process.env.testRating;
@@ -76,13 +78,16 @@ function respond() {
 
 function logMessages(res) {
   if (logType == 'botTag') {
-    specificLog = 'gifbot tag' + message;
+    specificLog = 'gifbot was tagged by: ' + sendingUser;
   }
   if (logType == 'gifTagTooLong') {
-    specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
+    specificLog = ('long: ' + messageTrimmed + parsedData.data.images.fixed_width.url);
   }
   if (logType == 'gifTag') {
     specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+  }
+  if (logType == 'stockTag') {
+    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
   }
   if (sendingUser !== botName && postLog == '1') {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
@@ -141,7 +146,6 @@ function stockTag(botId) {
     }
 
     botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + messageTrimmed);
-    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
