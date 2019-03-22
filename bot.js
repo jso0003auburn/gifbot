@@ -72,8 +72,8 @@ function respond() {
 
 //if @gifbot was tagged this will post a help message
 function botTag(botId) {
-  log = 'gifbot tag' + message;
   botResponse = 'try #lol for a gif\ntry $bac for a stock price';
+  specificLog = 'gifbot tag' + message;
   postMessage(botResponse, botId, log);
 }
 
@@ -84,21 +84,25 @@ function gifTag(botId) {
   fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
   downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
 
-  spaceCount = (message.split(" ").length - 1);
 
   //did they use spaces?
+  spaceCount = (message.split(" ").length - 1);
   if (spaceCount < 1 && messageTrimmed.length > 10) {
     log = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
     botResponse = 'use spaces like this:\n# happy birthday';
+    specificLog = 'no spaces';
     postMessage(botResponse, botId, log);
     response.statusCode = '1';
   }
+
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
+    specificLog = ('GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
   }
+
   });
 }
 
@@ -121,6 +125,7 @@ function stockTag(botId) {
     }
     response = '$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + message.substring(1);
     botResponse = (response);
+    specificLog = ('STOCK TAG: ' + message.substring(1));
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -142,7 +147,7 @@ function postMessage(botResponse, botId, log) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log(botName.padEnd(20) + 'POSTED to ' + groupName + ' using ' + messageTrimmed + ' - STATUS: ' + res.statusCode + ' - ' + 'GIPHY FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+        console.log(botName.padEnd(20) + 'POSTED to ' + groupName + ' using ' + messageTrimmed + ' - STATUS: ' + res.statusCode + ' - ' + specificLog);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
       }
