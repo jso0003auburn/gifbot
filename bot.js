@@ -74,10 +74,11 @@ function logMessages(res) {
   if (postLog == '202') {
     console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode + ' via LM')
   }
-  if (sendingUser !== botName && postLog !== '202') {
+  if (sendingUser !== botName && postLog == '1') {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
-  } else {
-  console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
+  }
+  if (sendingUser == botName && postLog == '1') {
+    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
   }
 }
 
