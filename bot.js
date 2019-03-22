@@ -104,27 +104,21 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
   downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
-
-
-  //did they use spaces?
   spaceCount = (message.split(" ").length - 1);
-  if (spaceCount < 1 && messageTrimmed.length > 10) {
-    botResponse = 'use spaces like this:\n# happy birthday';
-    logType = 'gifTagTooLong';
-    //specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
-    postMessage(botResponse, botId);
-    response.statusCode = '1';
-  }
 
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
     logType = 'gifTag';
-    //specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
+    logMessages();
+  }
+  //did they use spaces?
+  if (spaceCount < 1 && messageTrimmed.length > 10) {
+    botResponse = 'use spaces like this:\n# happy birthday';
+    logType = 'gifTagTooLong';
     postMessage(botResponse, botId);
   } else {
-  console.log(groupName + ' - ' + message + ' is invalid - response:' + response.statusCode);
+  postMessage(botResponse, botId);
   }
-
   });
 }
 
