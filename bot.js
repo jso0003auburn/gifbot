@@ -57,13 +57,17 @@ function respond() {
     console.log(message + ' sent without a valid group id: ' + sendingGroup);
   }
 
+  //sent from the bot?
+  if (sendingUser == botName) {
+    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
+    return;
+  }
+
+  //sent from not the bot
   if (sendingUser !== botName) {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
   }
 
-  if (sendingUser == botName) {
-    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
-  }
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -79,28 +83,13 @@ function respond() {
   if (message.substring(0,1) == '$' && botId !== '1' && post.name !== 'gifbot') {
     stockTag(botId);
   }
+
 }
 
 function botTag(botId) {
     botResponse = 'try #lol for a gif\ntry $bac for a stock price';
     specificLog = 'gifbot was tagged by: ' + sendingUser;
     postMessage(botResponse, botId);
-}
-
-//posts message
-function gifTag(botId) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
-  parsedData = JSON.parse(body);
-  fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
-  downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
-  spaceCount = (message.split(" ").length - 1);
-
-  if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-    botResponse = parsedData.data.images.fixed_width.url;
-    specificLog = ('FIXED: ' + fixedWidth + ' DOWNSIZED : ' + downsized + ' RATING: ' + parsedData.data.rating);
-    postMessage(botResponse, botId);
-  }
-  });
 }
 
 //posts message
@@ -116,7 +105,7 @@ function gifTag(botId) {
   if (spaceCount < 1 && messageTrimmed.length > 12) {
     botResponse = 'use spaces like this:\n# happy birthday';
     specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
-    postMessage(botResponse, botId, log);
+    postMessage(botResponse, botId);
     spaceCount = '1';
   }
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images && spaceCount !== '1') {
@@ -155,7 +144,7 @@ function stockTag(botId) {
 }
 
 //posts message
-function postMessage(botResponse, botId, log) {
+function postMessage(botResponse, botId) {
   
   var options, botReq;
   options = {
