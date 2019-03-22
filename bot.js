@@ -53,9 +53,9 @@ function respond() {
   }
 
   if (sendingUser !== botName) {
-    console.log(sendingUser.padEnd(20) + 'SENT: ' + message + ' - ' + groupName);
+    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message + ' - ' + groupName);
   } else {
-  console.log(sendingUser.padEnd(20) + 'SENT: something - ' + groupName);
+  console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: something - ' + groupName);
   }
 
   //Was the bot tagged?
