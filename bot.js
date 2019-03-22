@@ -71,8 +71,10 @@ function respond() {
 }
 
 function logMessages(res) {
-  if (postLog == '202') {
+
+  if (res.statusCode == 202) {
     console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode + ' via LM')
+    response.statusCode = '1';
   }
   if (sendingUser !== botName && postLog == '1') {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName + ' via LM');
