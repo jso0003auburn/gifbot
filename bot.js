@@ -53,9 +53,9 @@ function respond() {
   }
 
   if (sendingUser !== botName) {
-    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName);
+    console.log(sendingUser.substring(0,10).padEnd(11) + ('SENT: ' + message).substring(55).padEnd(58," . ") + ' IN: ' + groupName);
   } else {
-  console.log(sendingUser.substring(0,10).padEnd(11) + ('SENT: something'.padEnd(53," . ")) + ' IN: ' + groupName);
+  console.log(sendingUser.substring(0,10).padEnd(11) + ('SENT: something'.padEnd(58," . ")) + ' IN: ' + groupName);
   }
 
   //Was the bot tagged?
