@@ -113,7 +113,7 @@ function gifTag(botId) {
     specificLog = ('FIXED: ' + fixedWidth + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
     postMessage(botResponse, botId);
   } else {
-  console.log(message + ' is invalid - response:' + response.statusCode);
+  console.log(message + ' is invalid - response:' + response.statusCode + ' ' + spaceCount);
   }
   });
 }
@@ -121,8 +121,6 @@ function stockTag(botId) {
   request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + messageTrimmed + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
   quoteObj = JSON.parse(body);
   if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
-
-
     open = Number(quoteObj['Global Quote']['02. open']);
     price = Number(quoteObj['Global Quote']['05. price']);
     lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
