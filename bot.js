@@ -87,7 +87,7 @@ function respond() {
 
 //was the bot tagged
 function botTag(botId) {
-    botTagResponse = 'try #lol for a gif\ntry $bac for a stock price';
+    botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
     botTagResponseLog = 'I was tagged by: ' + sendingUser;
     botResponse = botTagResponse;
     specificLog = botTagResponseLog;
