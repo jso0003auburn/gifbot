@@ -1,6 +1,6 @@
 {
   "name": "gifbot",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "groupme bot",
   "main": "index.js",
   "scripts": {
@@ -8,11 +8,13 @@
   },
   "dependencies": {
     "director": "",
+    "https": "",
+    "mysportsfeeds-node": "^2.0.1",
     "request": "",
-    "https": ""
+    "utf8": "^3.0.0"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "x.10.x"
   },
   "repository": {
     "type": "git",
