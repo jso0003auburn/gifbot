@@ -4,14 +4,8 @@ var https = require('https');
 // https://dev.groupme.com/bots
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
 var botName = process.env.botName;
-var botId = '1';
-var groupName = '1';
-
-
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
-
-
-
+var botId = '1';
 
 // - processes incoming groupme posts
 function respond() {
@@ -22,11 +16,6 @@ function respond() {
   sendingUser = post.name;
   message = post.text;
   messageTrimmed = message.substring(1).trim();
-
-
-
-
-  //GROUPING
 
   //From the main group?
   mainGroupId = process.env.mainGroupId;
@@ -68,15 +57,12 @@ function respond() {
 
 
 
+  // LOGGING
   //from an unrecognized group?
   if (botId == '1') {
     console.log(message + ' sent without a valid group id: ' + sendingGroup);
+    return:
   }
-
-
-
-
-  // LOGGING
 
   //sent from the bot?
   if (sendingUser == botName) {
@@ -91,8 +77,9 @@ function respond() {
   }
 
 
-
 }
+
+
 
 
 function tagCheck(botId) {
@@ -113,6 +100,10 @@ function tagCheck(botId) {
     stockTag(botId);
   }
 }
+
+
+
+
 //was the bot tagged
 function botTag(botId) {
     botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
