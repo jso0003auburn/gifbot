@@ -1,14 +1,16 @@
 var request = require('request');
 var https = require('https');
 
-//  https://dev.groupme.com/bots
+// https://dev.groupme.com/bots
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
-// required variable is gifbot
 var botName = process.env.botName;
-var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
-
 var botId = '1';
 var groupName = '1';
+
+
+var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
+
+
 
 
 // - processes incoming groupme posts
@@ -21,6 +23,11 @@ function respond() {
   message = post.text;
   messageTrimmed = message.substring(1).trim();
 
+
+
+
+  //GROUPING
+
   //From the main group?
   mainGroupId = process.env.mainGroupId;
   if (sendingGroup == mainGroupId) {
@@ -28,7 +35,9 @@ function respond() {
     groupName = process.env.mainGroupName;
     rating = process.env.mainRating;
   }
-  
+
+
+
   //from the Test group? (Olson Test)
   testGroupId = process.env.testGroupId;
   if (sendingGroup == testGroupId) {
@@ -36,6 +45,8 @@ function respond() {
     groupName = process.env.testGroupName;
     rating = process.env.testRating;
   }
+
+
 
   //from the 2 group WOLFPACK?
   group2Id = process.env.group2Id;
@@ -45,6 +56,8 @@ function respond() {
     rating = process.env.group2Rating;
   }
 
+
+
   //from the 3 group OLSON FAMILY?
   group3Id = process.env.group3Id;
   if (sendingGroup == group3Id) {
@@ -53,10 +66,17 @@ function respond() {
     rating = process.env.group3Rating;
   }
 
+
+
   //from an unrecognized group?
   if (botId == '1') {
     console.log(message + ' sent without a valid group id: ' + sendingGroup);
   }
+
+
+
+
+  // LOGGING
 
   //sent from the bot?
   if (sendingUser == botName) {
@@ -69,6 +89,9 @@ function respond() {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName);
   }
 
+
+
+  // TAGGING
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -100,19 +123,19 @@ function botTag(botId) {
 function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=dc6zaTOxFJmzC&rating=' + rating, function (error, response, body) {
   parsedData = JSON.parse(body);
-  fixedWidth = parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
-  downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
-
 
   //did they use spaces?
   spaceCount = (message.split(" ").length - 1);
   if (spaceCount < 1 && messageTrimmed.length > 12) {
-    specificLog = ('too long: ' + messageTrimmed + ' space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' ' + parsedData.data.images.fixed_width.url);
-    console.log(specificLog + response.statusCode);
+    console.log('too long - space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' status: ' + response.statusCode);
   }
+
+
+
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
-    specificLog = ('FIXED: ' + fixedWidth + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
+    //downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
+    specificLog = ('FIXED: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
     postMessage(botResponse, botId);
   }
   });
