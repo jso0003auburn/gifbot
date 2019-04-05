@@ -87,11 +87,16 @@ function respond() {
   //sent from not the bot
   if (sendingUser !== botName) {
     console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName);
+    tagCheck(botId);
   }
 
 
 
-  // TAGGING
+}
+
+
+function tagCheck(botId) {
+
 
   //Was the bot tagged?
   if (message.indexOf('@' + botName) >= 0 && botId !== '1') {
@@ -107,9 +112,7 @@ function respond() {
   if (message.substring(0,1) == '$' && botId !== '1' && post.name !== 'gifbot') {
     stockTag(botId);
   }
-
 }
-
 //was the bot tagged
 function botTag(botId) {
     botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
