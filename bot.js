@@ -61,7 +61,7 @@ function respond() {
   //from an unrecognized group?
   if (botId == '1') {
     console.log(message + ' sent without a valid group id: ' + sendingGroup);
-    return:
+    return;
   }
 
   //sent from the bot?
