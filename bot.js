@@ -14,11 +14,6 @@ var mainGroupName = process.env.mainGroupName;
 var mainRating = process.env.mainRating;
 
 
-var testGroupId = process.env.testGroupId;
-var testBotId = process.env.testBotId;
-var testGroupName = process.env.testGroupName;
-var testRating = process.env.testRating;
-
 var group2Id = process.env.group2Id;
 var group3Id = process.env.group3Id;
 var botId = '1';
@@ -35,7 +30,7 @@ function respond() {
   message = post.text;
   messageTrimmed = message.substring(1).trim();
 
-  //From the main group?    
+  //From the main group? 
   if (sendingGroup == mainGroupId) {
     botId = mainBotId;
     groupName = mainGroupName;
@@ -43,7 +38,11 @@ function respond() {
   }
   
   //from the Test group? (Olson Test)
+  testGroupId = process.env.testGroupId;
   if (sendingGroup == testGroupId) {
+    testBotId = process.env.testBotId;
+    testGroupName = process.env.testGroupName;
+    testRating = process.env.testRating;
     botId = testBotId;
     groupName = testGroupName;
     rating = testRating;
