@@ -37,6 +37,9 @@
   * heroku logs --source app
   * heroku logs --app groupme-gif-bot --source app --tail
   
+  * downloaded heroku CLI and install brew
+  * https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+ 
 ## Contact
 
 john.stephen.olson@gmail.com

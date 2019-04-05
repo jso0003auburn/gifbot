@@ -6,12 +6,13 @@ var https = require('https');
 // required variable is gifbot
 var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
-var botId = '1';
-var groupName = '1';
 var mainGroupId = process.env.mainGroupId;
 var testGroupId = process.env.testGroupId;
 var group2Id = process.env.group2Id;
 var group3Id = process.env.group3Id;
+var botId = '1';
+var groupName = '1';
+
 
 // - processes incoming groupme posts
 function respond() {

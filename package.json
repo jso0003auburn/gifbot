@@ -9,7 +9,6 @@
   "dependencies": {
     "director": "",
     "https": "",
-    "mysportsfeeds-node": "^2.0.1",
     "request": "",
     "utf8": "^3.0.0"
   },
