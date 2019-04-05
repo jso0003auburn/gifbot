@@ -6,8 +6,19 @@ var https = require('https');
 // required variable is gifbot
 var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
+
+
 var mainGroupId = process.env.mainGroupId;
+var mainBotId = process.env.mainBotId;
+var mainGroupName = process.env.mainGroupName;
+var mainRating = process.env.mainRating;
+
+
 var testGroupId = process.env.testGroupId;
+var testBotId = process.env.testBotId;
+var testGroupName = process.env.testGroupName;
+var testRating = process.env.testRating;
+
 var group2Id = process.env.group2Id;
 var group3Id = process.env.group3Id;
 var botId = '1';
@@ -26,16 +37,16 @@ function respond() {
 
   //From the main group?    
   if (sendingGroup == mainGroupId) {
-    botId = process.env.mainBotId;
-    groupName = process.env.mainGroupName;
-    rating = process.env.mainRating;
+    botId = mainBotId;
+    groupName = mainGroupName;
+    rating = mainRating;
   }
   
   //from the Test group? (Olson Test)
   if (sendingGroup == testGroupId) {
-    botId = process.env.testBotId;
-    groupName = process.env.testGroupName;
-    rating = process.env.testRating;
+    botId = testBotId;
+    groupName = testGroupName;
+    rating = testRating;
   }
 
   //from the 2 group WOLFPACK?
