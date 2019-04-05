@@ -109,7 +109,7 @@ function tagCheck(botId) {
   }
 
   //Stock $
-  if (message.substring(0,1) == '$' && botId !== '1' && post.name !== 'gifbot') {
+  if (message.substring(0,1) == '$' && botId !== '1') {
     stockTag(botId);
   }
 }
