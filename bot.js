@@ -189,6 +189,7 @@ function postMessage(botResponse, botId) {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
     method: 'POST',
+    "token" : 'f785ce5043270133562d05f0d49317f6',
     "bot_id" : botId,
     "text" : botResponse 
   };
