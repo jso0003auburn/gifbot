@@ -99,6 +99,11 @@ function tagCheck(botId) {
   if (message.substring(0,1) == '$' && botId !== '1') {
     stockTag(botId);
   }
+  
+  //MLB
+  if (message.substring(0,1) == '!' && botId !== '1') {
+    mlbTag(botId);
+  }
 }
 
 
@@ -160,6 +165,21 @@ function stockTag(botId) {
   }
   });
 }
+
+
+//stock quote
+function mlbTag(botId) {
+  request('https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/2019-APR-25?key=136c286ab6c747edb2c36b80b9bf4d09', function (error, response, body) {
+  quoteObj = JSON.data;
+  for (var p in quoteObj) {
+    if( quoteObj.hasOwnProperty(p) ) {
+      result += p + " , " + obj[p] + "\n";
+    }
+  }
+  console.log(result)
+  });
+}
+
 
 //posts message
 function postMessage(botResponse, botId) {
