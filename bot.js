@@ -99,11 +99,6 @@ function tagCheck(botId) {
   if (message.substring(0,1) == '$' && botId !== '1') {
     stockTag(botId);
   }
-  
-  //MLB
-  if (message.substring(0,1) == '!' && botId !== '1') {
-    mlbTag(botId);
-  }
 }
 
 
@@ -122,10 +117,7 @@ function botTag(botId) {
 function gifTag(botId) {
   request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=nUPvLMDC26cn0c4heIYSx6bW8pZY9Gmh&rating=' + rating, function (error, response, body) {
   parsedData = JSON.parse(body);
-  console.log(error);
   //did they use spaces?
-  specificLog = ('FIXED: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
-  console.log(specificLog);
   spaceCount = (message.split(" ").length - 1);
   if (spaceCount < 1 && messageTrimmed.length > 12) {
     console.log('too long - space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' status: ' + response.statusCode);
@@ -137,7 +129,6 @@ function gifTag(botId) {
     botResponse = parsedData.data.images.fixed_width.url;
     //downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
     specificLog = ('FIXED: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
-    console.log(specificLog);
     postMessage(botResponse, botId);
   }
   });
@@ -166,20 +157,6 @@ function stockTag(botId) {
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
   }
-  });
-}
-
-
-//stock quote
-function mlbTag(botId) {
-  request('https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/2019-APR-25?key=136c286ab6c747edb2c36b80b9bf4d09', function (error, response, body) {
-  quoteObj = JSON.data;
-  for (var p in quoteObj) {
-    if( quoteObj.hasOwnProperty(p) ) {
-      result += p + " , " + obj[p] + "\n";
-    }
-  }
-  console.log(result)
   });
 }
 
