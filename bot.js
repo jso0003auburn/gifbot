@@ -135,6 +135,7 @@ function gifTag(botId) {
     botResponse = parsedData.data.images.fixed_width.url;
     //downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
     specificLog = ('FIXED: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
+    console.log(specificLog)
     postMessage(botResponse, botId);
   }
   });
