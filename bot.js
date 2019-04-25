@@ -124,6 +124,8 @@ function gifTag(botId) {
   parsedData = JSON.parse(body);
   console.log(error);
   //did they use spaces?
+  specificLog = ('FIXED: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
+  console.log(specificLog);
   spaceCount = (message.split(" ").length - 1);
   if (spaceCount < 1 && messageTrimmed.length > 12) {
     console.log('too long - space count ' + spaceCount + ' message length: ' + messageTrimmed.length + ' status: ' + response.statusCode);
@@ -135,7 +137,7 @@ function gifTag(botId) {
     botResponse = parsedData.data.images.fixed_width.url;
     //downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
     specificLog = ('FIXED: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
-    console.log(specificLog)
+    console.log(specificLog);
     postMessage(botResponse, botId);
   }
   });
