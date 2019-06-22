@@ -66,13 +66,15 @@ function respond() {
 
   //sent from the bot?
   if (sendingUser == botName) {
-    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName);
+    //console.log(groupName.pad + sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName);
+    console.log(groupName.padEnd(12,"-") + sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something');
     return;
   }
 
   //sent from not the bot
   if (sendingUser !== botName) {
-    console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName);
+    //console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName);
+    console.log(groupName.padEnd(12,"-") + sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message);
     tagCheck(botId);
   }
 
