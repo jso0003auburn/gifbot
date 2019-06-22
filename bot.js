@@ -66,15 +66,14 @@ function respond() {
 
   //sent from the bot?
   if (sendingUser == botName) {
-    //console.log(groupName.pad + sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + 'something'.padEnd(53," . ") + ' IN: ' + groupName);
-    console.log(groupName.padEnd(15," -") + sendingUser.substring(0,10).padEnd(11," -") + 'SENT: something');
+    console.log(groupName.padEnd(15," -") + sendingUser.substring(0,10).padEnd(15," -") + 'SENT: something');
     return;
   }
 
   //sent from not the bot
   if (sendingUser !== botName) {
     //console.log(sendingUser.substring(0,10).padEnd(11) + 'SENT: ' + message.substring(0,50).padEnd(53," . ") + ' IN: ' + groupName);
-    console.log(groupName.padEnd(15," -") + sendingUser.substring(0,10).padEnd(11," -") + 'SENT: ' + message);
+    console.log(groupName.padEnd(15," -") + sendingUser.substring(0,10).padEnd(15," -") + 'SENT: ' + message);
     tagCheck(botId);
   }
 
@@ -130,7 +129,7 @@ function gifTag(botId) {
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
     botResponse = parsedData.data.images.fixed_width.url;
     //downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
-    specificLog = ('FIXED: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' RATING: ' + parsedData.data.rating + ' STATUS: ' + response.statusCode);
+    specificLog = ('Fixed Size: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' Rating: ' + parsedData.data.rating + ' Giphy Status: ' + response.statusCode);
     postMessage(botResponse, botId);
   }
   });
@@ -154,7 +153,7 @@ function stockTag(botId) {
     }
 
     botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + messageTrimmed);
-    specificLog = (messageTrimmed + ' ' + price + ' ' + change);
+    specificLog = (messageTrimmed + ' ' + price + ' ' + change + ' alphavantage status: ' + response.statusCode);
     postMessage(botResponse, botId);
   } else {
   console.log(groupName + ' - ' + message + ' is invalid');
@@ -178,7 +177,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log(groupName.padEnd(15," -") + botName.substring(0,10).padEnd(11," -") + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," -") + ' STATUS: ' + res.statusCode);
+        console.log(groupName.padEnd(15," -") + botName.substring(0,10).padEnd(11," -") + 'POSTED: ' + specificLog.substring(0,48) + ' GroupMe Status: ' + res.statusCode);
         //console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
