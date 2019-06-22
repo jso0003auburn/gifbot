@@ -177,7 +177,7 @@ function postMessage(botResponse, botId) {
 
   botReq = https.request(options, function(res) {
       if(res.statusCode == 202) {
-        console.log(groupName.padEnd(15," -") + botName.substring(0,10).padEnd(11," -") + 'POSTED: ' + specificLog.substring(0,48) + ' GroupMe Status: ' + res.statusCode);
+        console.log(groupName.padEnd(15," -") + botName.substring(0,10).padEnd(15," -") + 'POSTED: ' + specificLog.substring(0,48) + ' GroupMe Status: ' + res.statusCode);
         //console.log(botName.substring(0,10).padEnd(11) + 'POSTED: ' + specificLog.substring(0,48).padEnd(51," . ") + ' IN: ' + groupName + ' - STATUS: ' + res.statusCode);
       } else {
       console.log('Error posting to: ' + groupName + ' - LOG - Bad status code: ' + res.statusCode + ' messageTrimmed: ' + messageTrimmed);
