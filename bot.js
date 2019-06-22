@@ -5,6 +5,7 @@ var https = require('https');
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
 var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
+var groupMeAppToken = process.env.groupMeAppToken;
 var botId = '1';
 
 // - processes incoming groupme posts
@@ -170,7 +171,7 @@ function postMessage(botResponse, botId) {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
     method: 'POST',
-    "token" : 'f785ce5043270133562d05f0d49317f6',
+    "token" : groupMeAppToken,
     "bot_id" : botId,
     "text" : botResponse 
   };
