@@ -108,6 +108,9 @@ function tagCheck(botId) {
 
 //was the bot tagged
 function botTag(botId) {
+    request('https://braves-groupme.appspot.com/CHECK?environment=test', function (error, response, body) {
+    console.log(response.statusCode);
+    });
     botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
     botTagResponseLog = 'I was tagged by: ' + sendingUser;
     botResponse = botTagResponse;
