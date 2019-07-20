@@ -108,14 +108,18 @@ function tagCheck(botId) {
 
 //was the bot tagged
 function botTag(botId) {
+
     request('https://braves-groupme.appspot.com/CHECK?environment=test&groupName=' + groupName, function (error, response, body) {
     console.log(response.statusCode);
     });
-    botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
-    botTagResponseLog = 'I was tagged by: ' + sendingUser;
-    botResponse = botTagResponse;
-    specificLog = botTagResponseLog;
-    postMessage(botResponse, botId);
+    
+    if (response.statusCode == 201) {
+        botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
+        botTagResponseLog = 'I was tagged by: ' + sendingUser;
+        botResponse = botTagResponse;
+        specificLog = botTagResponseLog;
+        postMessage(botResponse, botId);
+    }
 }
 
 //posts message
