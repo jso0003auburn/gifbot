@@ -101,6 +101,11 @@ function tagCheck(botId) {
   if (message.substring(0,1) == '$' && botId !== '1') {
     stockTag(botId);
   }
+  
+  //GIF #
+  if (message.substring(0,1) == '^' && botId !== '1') {
+    mlbTag(botId);
+  }
 }
 
 
@@ -109,7 +114,7 @@ function tagCheck(botId) {
 //was the bot tagged
 function botTag(botId) {
 
-    request('https://braves-groupme.appspot.com/CHECK?groupName=' + groupName, function (error, response, body) {
+    request('https://braves-groupme.appspot.com/CHECK?groupName=' + groupName + '&teamKey=ATL', function (error, response, body) {
     console.log(response.statusCode);
     if (response.statusCode == 201) {
         botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
@@ -168,7 +173,12 @@ function stockTag(botId) {
   });
 }
 
-
+//was the bot tagged
+function mlbTag(botId) {
+    request('https://braves-groupme.appspot.com/CHECK?groupName=' + groupName + '&teamKey=' + messageTrimmed, function (error, response, body) {
+    console.log(response.statusCode);
+    });
+}
 //posts message
 function postMessage(botResponse, botId) {
   
