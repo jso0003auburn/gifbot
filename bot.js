@@ -177,6 +177,13 @@ function stockTag(botId) {
 function mlbTag(botId) {
     request('https://braves-groupme.appspot.com/CHECK?groupName=' + groupName + '&teamKey=' + messageTrimmed, function (error, response, body) {
     console.log(response.statusCode);
+    if (response.statusCode == 500) {
+        botTagResponse = 'https://braves-groupme.appspot.com/';
+        botTagResponseLog = 'I was tagged by: ' + sendingUser;
+        botResponse = botTagResponse;
+        specificLog = botTagResponseLog;
+        postMessage(botResponse, botId);
+    }      
     });
 }
 //posts message
