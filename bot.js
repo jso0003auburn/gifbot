@@ -175,7 +175,8 @@ function stockTag(botId) {
 
 //was the bot tagged
 function mlbTag(botId) {
-    request('https://braves-groupme.appspot.com/CHECK?groupName=' + groupName + '&teamKey=' + messageTrimmed.toUpperCase, function (error, response, body) {
+    messageTrimmed = messageTrimmed.toUpperCase();
+    request('https://braves-groupme.appspot.com/CHECK?groupName=' + groupName + '&teamKey=' + messageTrimmed, function (error, response, body) {
     console.log(response.statusCode);
     if (response.statusCode == 500) {
         botTagResponse = 'https://braves-groupme.appspot.com/';
