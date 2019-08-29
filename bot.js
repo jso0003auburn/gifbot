@@ -180,10 +180,10 @@ function mlbTag(botId) {
     console.log(response.statusCode);
     if (response.statusCode == 500) {
         botTagResponse = 'https://braves-groupme.appspot.com/';
-        botTagResponseLog = 'I was tagged by: ' + sendingUser;
-        botResponse = botTagResponse;
-        specificLog = botTagResponseLog;
-        postMessage(botResponse, botId);
+//         botTagResponseLog = 'I was tagged by: ' + sendingUser;
+//         botResponse = botTagResponse;
+//         specificLog = botTagResponseLog;
+//         postMessage(botResponse, botId);
     }      
     });
 }
