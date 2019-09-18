@@ -6,6 +6,7 @@ var https = require('https');
 var botName = process.env.botName;
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var groupMeAppToken = process.env.groupMeAppToken;
+var giphyAPIKey = process.env.giphyAPIKey;
 var botId = '1';
 
 // - processes incoming groupme posts
@@ -128,7 +129,7 @@ function botTag(botId) {
 
 //posts message
 function gifTag(botId) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=nUPvLMDC26cn0c4heIYSx6bW8pZY9Gmh&rating=' + rating, function (error, response, body) {
+  request('https://api.giphy.com/v1/gifs/translate?s=' + messageTrimmed + '&api_key=' + giphyAPIKey + '&rating=' + rating, function (error, response, body) {
   parsedData = JSON.parse(body);
   //did they use spaces?
   spaceCount = (message.split(" ").length - 1);
@@ -173,17 +174,13 @@ function stockTag(botId) {
   });
 }
 
-//was the bot tagged
+//was the bot tagged with an MLB team?
 function mlbTag(botId) {
     messageTrimmed = messageTrimmed.toUpperCase();
     request('https://braves-groupme.appspot.com/CHECK?groupName=' + groupName + '&teamKey=' + messageTrimmed, function (error, response, body) {
     console.log(response.statusCode);
     if (response.statusCode == 500) {
         botTagResponse = 'https://braves-groupme.appspot.com/';
-//         botTagResponseLog = 'I was tagged by: ' + sendingUser;
-//         botResponse = botTagResponse;
-//         specificLog = botTagResponseLog;
-//         postMessage(botResponse, botId);
     }      
     });
 }
