@@ -68,7 +68,7 @@ function gifTag(message) {
         // Did they use spaces?
         spaceCount = (message.split(' ').length - 1);
         if (spaceCount < 1 && messageTrimmed.length > 12) {
-            console.log('too long - space count ' + spaceCount + ' message length: ' + trim(message.text)length + ' status: ' + response.statusCode);
+            console.log('too long - space count ' + spaceCount + ' message length: ' + trim(message.text).length + ' status: ' + response.statusCode);
         }
 
         if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
