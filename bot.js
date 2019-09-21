@@ -21,6 +21,8 @@ function respond() {
     if (message.sender_type != 'bot') {
         tagCheck(message);
     }
+
+    this.res.end("OK");
 }
 
 
