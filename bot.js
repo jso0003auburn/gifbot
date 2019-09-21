@@ -125,7 +125,7 @@ function mlbTag(message) {
 
 // Post message
 function postMessage(text, groupID) {
-    bot.instance(groupID).then((instance) => {
+    bot.getInstance(groupID).then((instance) => {
         var options, botReq;
         options = {
             hostname: 'api.groupme.com',

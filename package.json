@@ -9,7 +9,7 @@
   "dependencies": {
     "director": "",
     "https": "",
-    "mebots": "^1.0.2",
+    "mebots": "^1.1.0",
     "request": "",
     "utf8": "^3.0.0"
   },
