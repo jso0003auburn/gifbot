@@ -33,23 +33,23 @@ function trim(text) {
 
 function tagCheck(message) {
     // Was the bot tagged?
-    if (message.toLowerCase().indexOf('@gifbot') >= 0) {
-        botTag(groupID);
+    if (message.text.toLowerCase().indexOf('@gifbot') >= 0) {
+        botTag(message);
     }
 
     // GIF #
-    if (message.substring(0,1) == '#') {
-        gifTag(groupID);
+    if (message.text.substring(0,1) == '#') {
+        gifTag(message);
     }
 
     // Stock $
-    if (message.substring(0,1) == '$') {
-        stockTag(groupID);
+    if (message.text.substring(0,1) == '$') {
+        stockTag(message);
     }
 
     // GIF #
-    if (message.substring(0,1) == '^') {
-        mlbTag(groupID);
+    if (message.text.substring(0,1) == '^') {
+        mlbTag(message);
     }
 }
 
@@ -88,8 +88,8 @@ function gifTag(message) {
 
 
 // Stock quote
-function stockTag(groupID) {
-    request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + messageTrimmed + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
+function stockTag(message) {
+    request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + trim(message.text) + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
         quoteObj = JSON.parse(body);
         if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
             open = Number(quoteObj['Global Quote']['02. open']);
@@ -113,7 +113,7 @@ function stockTag(groupID) {
 }
 
 // Was the bot tagged with an MLB team?
-function mlbTag(groupID) {
+function mlbTag(message) {
     messageTrimmed = trim(message.text).toUpperCase();
     request('https://braves-groupme.appspot.com/CHECK?groupName=' + message.group_id + '&teamKey=' + messageTrimmed, function (error, response, body) {
         console.log(response.statusCode);
