@@ -10,7 +10,11 @@ var bot = new mebots.Bot('gifbot', process.env.botToken);
 
 // Process incoming groupme messages
 function respond() {
-    var message = JSON.parse(this.req.chunks[0]);
+    try {
+        var message = JSON.parse(this.req.chunks[0]);
+    } catch (e) {
+        console.log('Invalid JSON passed.');
+    }
     this.res.writeHead(200);
 
     console.log(message.group_id + ' @' + message.name + ': ' + message.text);
