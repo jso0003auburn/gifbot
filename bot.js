@@ -47,7 +47,7 @@ function tagCheck(message) {
         stockTag(message);
     }
 
-    // GIF #
+    // MLB ^
     if (message.text.substring(0,1) == '^') {
         mlbTag(message);
     }
@@ -119,7 +119,7 @@ function mlbTag(message) {
 }
 
 // Post message
-function postMessage(botResponse, groupID) {
+function postMessage(text, groupID) {
     bot.getInstance(groupID).then((instance) => {
         var options, botReq;
         options = {
@@ -127,7 +127,7 @@ function postMessage(botResponse, groupID) {
             path: '/v3/bots/post',
             method: 'POST',
             'bot_id': instance.id,
-            'text': botResponse
+            'text': text
         };
 
         botReq = https.request(options, function(res) {
