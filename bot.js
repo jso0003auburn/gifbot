@@ -100,7 +100,7 @@ function stockTag(message) {
 
             botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + trim(message.text));
             specificLog = (trim(message.text) + ' ' + price + ' ' + change + ' alphavantage status: ' + response.statusCode);
-            postMessage(botResponse, botId);
+            postMessage(botResponse, message.group_id);
         } else {
             console.log(message.group_id + ' - ' + message.text + ' is invalid');
         }
