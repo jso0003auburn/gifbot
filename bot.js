@@ -6,6 +6,7 @@ var mebots = require('mebots');
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var giphyAPIKey = process.env.giphyAPIKey;
+var groupMeAppToken = process.env.groupMeAppToken;
 var bot = new mebots.Bot('gifbot', process.env.botToken);
 
 // Process incoming groupme messages
@@ -126,6 +127,7 @@ function postMessage(text, groupID) {
             hostname: 'api.groupme.com',
             path: '/v3/bots/post',
             method: 'POST',
+            'token' : groupMeAppToken,
             'bot_id': instance.id,
             'text': text
         };
