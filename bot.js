@@ -71,11 +71,6 @@ function botTag(message) {
 function gifTag(message) {
     request('https://api.giphy.com/v1/gifs/translate?s=' + trim(message.text) + '&api_key=' + giphyAPIKey, function (error, response, body) {
         parsedData = JSON.parse(body);
-        // Did they use spaces?
-        spaceCount = (message.split(' ').length - 1);
-        if (spaceCount < 1 && messageTrimmed.length > 12) {
-            console.log('too long - space count ' + spaceCount + ' message length: ' + trim(message.text).length + ' status: ' + response.statusCode);
-        }
 
         if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
             botResponse = parsedData.data.images.fixed_width.url;
