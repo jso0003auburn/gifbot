@@ -127,7 +127,7 @@ function postMessage(text, groupID) {
             hostname: 'api.groupme.com',
             path: '/v3/bots/post',
             method: 'POST',
-            'token' : groupMeAppToken,
+            //'token' : groupMeAppToken,
             'bot_id': instance.id,
             'text': text
         };
@@ -136,7 +136,7 @@ function postMessage(text, groupID) {
             if(res.statusCode == 202) {
                 console.log(groupID.padEnd(15,', POSTED -') + 'POSTED: ' + text);
             } else {
-                console.log('Error posting to: ' + groupID + ' - LOG - Bad status code: ' + res.statusCode + ' message: ' + text);
+                console.log('Error posting to: ' + groupID + ' - LOG - Bad status code: ' + res.statusCode + ' message: ' + text + ' bot_id: ' + instance.id);
             }
         });
         botReq.end(JSON.stringify(options));
