@@ -119,7 +119,7 @@ function mlbTag(message) {
 }
 
 // Post message
-function postMessage(text, groupID) {
+function postMessage(botResponse, groupID) {
     bot.getInstance(groupID).then((instance) => {
         var options, botReq;
         options = {
@@ -127,7 +127,7 @@ function postMessage(text, groupID) {
             path: '/v3/bots/post',
             method: 'POST',
             'bot_id': instance.id,
-            'text': text
+            'text': botResponse
         };
 
         botReq = https.request(options, function(res) {
