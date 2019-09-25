@@ -6,7 +6,6 @@ var mebots = require('mebots');
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
 var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var giphyAPIKey = process.env.giphyAPIKey;
-var groupMeAppToken = process.env.groupMeAppToken;
 var bot = new mebots.Bot('gifbot', process.env.botToken);
 
 // Process incoming groupme messages
@@ -57,15 +56,8 @@ function tagCheck(message) {
 
 // If the bot was tagged
 function botTag(message) {
-    request('https://braves-groupme.appspot.com/CHECK?groupName=' + message.group_id + '&teamKey=ATL', function (error, response, body) {
-        if (response.statusCode == 201) {
-            botTagResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
-            botTagResponseLog = 'I was tagged by: ' + sendingUser;
-            botResponse = botTagResponse;
-            specificLog = botTagResponseLog;
-            postMessage(botResponse, message.group_id);
-        }
-    });
+    botResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
+    postMessage(botResponse, message.group_id);
 }
 
 // If a GIF was requested
