@@ -119,7 +119,6 @@ function postMessage(text, groupID) {
             hostname: 'api.groupme.com',
             path: '/v3/bots/post',
             method: 'POST',
-            //'token' : groupMeAppToken,
             'bot_id': instance.id,
             'text': text
         };
