@@ -67,11 +67,11 @@ function gifTag(message) {
     
     request('https://api.giphy.com/v1/gifs/translate?s=' + trim(message.text) + '&api_key=' + giphyAPIKey, function (error, response, body) {
         parsedData = JSON.parse(body);
+        controlURL = parsedData.data.images.fixed_width.url;
+        controlSize = parsedData.data.rating + ' ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
         if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
             controlURL = parsedData.data.images.fixed_width.url;
             controlSize = parsedData.data.rating + ' ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en');
-
-
         }
     });
     
@@ -85,15 +85,15 @@ function gifTag(message) {
             } else {
                 console.log('controlURL: ' + controlURL);
                 console.log('controlSize: ' + controlSize);
-
             }
             console.log('LOG: original GIF : ' + parsedData.data.images.original.url);
             console.log('LOG: original GIF Fixed Size: ' + parseFloat(parsedData.data.images.original.size).toLocaleString('en'));          
            
-            botResponse = parsedData.data.images.fixed_width.url;
             console.log('LOG: GIF Fixed Size: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en'));
             console.log('LOG: Rating: ' + parsedData.data.rating + ' Giphy Status: ' + response.statusCode);
-
+            
+            
+            botResponse = parsedData.data.images.fixed_width.url;
             postMessage(botResponse, message.group_id);
         }
     });
