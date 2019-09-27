@@ -79,23 +79,31 @@ function gifTag(message) {
 function stockTag(message) {
     request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + trim(message.text) + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
         quoteObj = JSON.parse(body);
-        if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
-            open = Number(quoteObj['Global Quote']['02. open']);
-            price = Number(quoteObj['Global Quote']['05. price']);
-            lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
-            change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
-            change = Number(change);
-            if (quoteObj['Global Quote']['10. change percent'].substring(0,1) == '-') {
-                //change = change;
-            } else {
-                change = '+' + change;
-            }
+        try {
+            if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
+                open = Number(quoteObj['Global Quote']['02. open']);
+                price = Number(quoteObj['Global Quote']['05. price']);
+                lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
+                change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
+                change = Number(change);
+                if (quoteObj['Global Quote']['10. change percent'].substring(0,1) == '-') {
+                    //change = change;
+                } else {
+                    change = '+' + change;
+                }
 
-            botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + trim(message.text));
-            specificLog = (trim(message.text) + ' ' + price + ' ' + change + ' alphavantage status: ' + response.statusCode);
-            postMessage(botResponse, message.group_id);
-        } else {
-            console.log(message.group_id + ' - ' + message.text + ' is invalid');
+                botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + trim(message.text));
+                specificLog = (trim(message.text) + ' ' + price + ' ' + change + ' alphavantage status: ' + response.statusCode);
+                postMessage(botResponse, message.group_id);
+            } else {
+                console.log(message.group_id + ' - ' + message.text + ' is invalid');
+            }
+        }
+        
+        catch (e) {
+            console.log("entering catch block");
+            console.log(e);
+            console.log("leaving catch block");
         }
     });
 }
