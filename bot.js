@@ -65,7 +65,7 @@ function botTag(message) {
 // If a GIF was requested
 function gifTag(message) {
     
-    request('https://api.giphy.com/v1/gifs/search?s=' + trim(message.text) + '&api_key=' + giphyAPIKey, function (error, response, body) {
+    request('https://api.giphy.com/v1/gifs/search?q=' + trim(message.text) + '&api_key=' + giphyAPIKey + '&limit=1', function (error, response, body) {
         parsedData = JSON.parse(body);
         console.log('Giphy Status: ' + response.statusCode);
         console.log('Search: ' + parsedData.data.images.fixed_width.url);
