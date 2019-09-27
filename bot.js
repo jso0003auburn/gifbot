@@ -70,7 +70,9 @@ function gifTag(message) {
         if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
             //downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
             botResponse = parsedData.data.images.fixed_width.url;
-            console.log('Fixed Size: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' Rating: ' + parsedData.data.rating + ' Giphy Status: ' + response.statusCode);
+            console.log('LOG: GIF Fixed Size: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en'));
+            console.log('LOG: Rating: ' + parsedData.data.rating + ' Giphy Status: ' + response.statusCode);
+
             postMessage(botResponse, message.group_id);
         }
     });
@@ -100,14 +102,10 @@ function stockTag(message) {
                 console.log('alphavantage status: ' + response.statusCode);
                 botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + trim(message.text));
                 postMessage(botResponse, message.group_id);
-            } else {
-                console.log(message.group_id + ' - ' + message.text + ' is invalid');
-            }
-        }
-        
+        } 
         catch (e) {
             //console.log(e);
-            console.log("caught error due to invalid $ sign");
+            console.log("LOG: stockTag caught error due to invalid $ sign");
         }
     });
 }
@@ -116,7 +114,7 @@ function stockTag(message) {
 function mlbTag(message) {
     messageTrimmed = trim(message.text).toUpperCase();
     request('https://braves-groupme.appspot.com/CHECK?groupName=' + message.group_id + '&teamKey=' + messageTrimmed, function (error, response, body) {
-        console.log('mlbTag status code: ' + response.statusCode);
+        console.log('LOG: mlbTag status code: ' + response.statusCode);
     });
 }
 
@@ -134,9 +132,9 @@ function postMessage(text, groupID) {
 
         botReq = https.request(options, function(res) {
             if(res.statusCode == 202) {
-                console.log('gifbot POSTED: ' + text + ' - ' + groupID);
+                console.log('LOG: GroupMe SUCCESS: ' + res.statusCode + ' in group: ' + groupID + ' - ' + text);
             } else {
-                console.log('Error posting to: ' + groupID + ' - LOG - Bad status code: ' + res.statusCode + ' message: ' + text + ' bot_id: ' + instance.id);
+                console.log('LOG: GroupMe ERROR: ' + res.statusCode + ' in group: ' + groupID + ' - ' + text);
             }
         });
         botReq.end(JSON.stringify(options));
