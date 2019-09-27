@@ -102,6 +102,7 @@ function stockTag(message) {
                 console.log('alphavantage status: ' + response.statusCode);
                 botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + trim(message.text));
                 postMessage(botResponse, message.group_id);
+            };
         } catch (e) {
             //console.log(e);
             console.log("LOG: stockTag caught error due to invalid $ sign");
