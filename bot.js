@@ -134,7 +134,7 @@ function postMessage(text, groupID) {
 
         botReq = https.request(options, function(res) {
             if(res.statusCode == 202) {
-                console.log('gifbot POSTED: ' + text + ' - ' groupID);
+                console.log('gifbot POSTED: ' + text + ' - ' + groupID);
             } else {
                 console.log('Error posting to: ' + groupID + ' - LOG - Bad status code: ' + res.statusCode + ' message: ' + text + ' bot_id: ' + instance.id);
             }
