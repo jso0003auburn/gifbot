@@ -8,6 +8,8 @@ var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var giphyAPIKey = process.env.giphyAPIKey;
 var bot = new mebots.Bot('gifbot', process.env.botToken);
 
+
+
 // Process incoming groupme messages
 function respond() {
     try {
@@ -17,7 +19,7 @@ function respond() {
     }
     this.res.writeHead(200);
 
-    console.log(message.group_id + ' @' + message.name + ': ' + message.text);
+    console.log('@' + message.name + ': ' + message.text + ' in: ' + message.group_id);
     if (message.sender_type != 'bot') {
         tagCheck(message);
     }
@@ -56,7 +58,7 @@ function tagCheck(message) {
 
 // If the bot was tagged
 function botTag(message) {
-    botResponse = 'try #auburn basketball for a gif\ntry $bac for a stock price';
+    botResponse = 'try "#auburn basketball" for a gif\ntry "$bac" for a stock price';
     postMessage(botResponse, message.group_id);
 }
 
@@ -66,9 +68,9 @@ function gifTag(message) {
         parsedData = JSON.parse(body);
 
         if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
-            botResponse = parsedData.data.images.fixed_width.url;
             //downsized = parseFloat(parsedData.data.images.downsized.size).toLocaleString('en');
-            specificLog = ('Fixed Size: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' Rating: ' + parsedData.data.rating + ' Giphy Status: ' + response.statusCode);
+            botResponse = parsedData.data.images.fixed_width.url;
+            console.log('Fixed Size: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en') + ' Rating: ' + parsedData.data.rating + ' Giphy Status: ' + response.statusCode);
             postMessage(botResponse, message.group_id);
         }
     });
@@ -86,14 +88,17 @@ function stockTag(message) {
                 lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
                 change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
                 change = Number(change);
+                
+                
                 if (quoteObj['Global Quote']['10. change percent'].substring(0,1) == '-') {
                     //change = change;
                 } else {
                     change = '+' + change;
                 }
-
+                
+                
+                console.log('alphavantage status: ' + response.statusCode);
                 botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + trim(message.text));
-                specificLog = (trim(message.text) + ' ' + price + ' ' + change + ' alphavantage status: ' + response.statusCode);
                 postMessage(botResponse, message.group_id);
             } else {
                 console.log(message.group_id + ' - ' + message.text + ' is invalid');
@@ -101,9 +106,8 @@ function stockTag(message) {
         }
         
         catch (e) {
-            console.log("entering catch block");
-            console.log(e);
-            console.log("leaving catch block");
+            //console.log(e);
+            console.log("caught error due to invalid $ sign");
         }
     });
 }
@@ -112,10 +116,7 @@ function stockTag(message) {
 function mlbTag(message) {
     messageTrimmed = trim(message.text).toUpperCase();
     request('https://braves-groupme.appspot.com/CHECK?groupName=' + message.group_id + '&teamKey=' + messageTrimmed, function (error, response, body) {
-        console.log(response.statusCode);
-        if (response.statusCode == 500) {
-            botTagResponse = 'https://braves-groupme.appspot.com/';
-        }
+        console.log('mlbTag status code: ' + response.statusCode);
     });
 }
 
@@ -133,7 +134,7 @@ function postMessage(text, groupID) {
 
         botReq = https.request(options, function(res) {
             if(res.statusCode == 202) {
-                console.log(groupID.padEnd(15,', POSTED -') + 'POSTED: ' + text);
+                console.log('gifbot POSTED: ' + text + ' - ' groupID);
             } else {
                 console.log('Error posting to: ' + groupID + ' - LOG - Bad status code: ' + res.statusCode + ' message: ' + text + ' bot_id: ' + instance.id);
             }
