@@ -48,7 +48,7 @@ function tagCheck(message) {
 
 // If the bot was tagged
 function botTag(message) {
-    botResponse = 'try "#auburn basketball" for a gif\ntry "$bac" for a stock price';
+    botResponse = 'try one of these:\n#auburn basketball\n#lol\n#godzilla';
     postMessage(botResponse, message.group_id);
 }
 
