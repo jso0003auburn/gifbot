@@ -4,7 +4,7 @@ var mebots = require('mebots');
 
 // https://dev.groupme.com/bots
 // https://dashboard.heroku.com/apps/groupme-gif-bot/settings
-var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
+//var alphaVantageAPIKey = process.env.alphaVantageAPIKey;
 var giphyAPIKey = process.env.giphyAPIKey;
 var bot = new mebots.Bot('gifbot', process.env.botToken);
 
@@ -43,16 +43,6 @@ function tagCheck(message) {
     if (message.text.substring(0,1) == '#') {
         gifTag(message);
     }
-
-    // Stock $
-    if (message.text.substring(0,1) == '$') {
-        stockTag(message);
-    }
-
-    // MLB ^
-    if (message.text.substring(0,1) == '^') {
-        mlbTag(message);
-    }
 }
 
 
@@ -68,10 +58,10 @@ function gifTag(message) {
         parsedData = JSON.parse(body);
         if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
             
-            console.log('LOG: original URL : ' + parsedData.data.images.original.url);
-            console.log('LOG: original Size: ' + parseFloat(parsedData.data.images.original.size).toLocaleString('en'));          
+            //console.log('LOG: original URL : ' + parsedData.data.images.original.url);
+            //console.log('LOG: original Size: ' + parseFloat(parsedData.data.images.original.size).toLocaleString('en'));          
             console.log('LOG: fixed_width Size: ' + parseFloat(parsedData.data.images.fixed_width.size).toLocaleString('en'));
-            console.log('LOG: Rating: ' + parsedData.data.rating);
+            console.log('LOG: rating: ' + parsedData.data.rating);
             
             
             botResponse = parsedData.data.images.fixed_width.url;
@@ -80,45 +70,6 @@ function gifTag(message) {
     });
 }
 
-
-// Stock quote
-function stockTag(message) {
-    request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + trim(message.text) + '&outputsize=compact&apikey=' + alphaVantageAPIKey, function (error, response, body) {
-        quoteObj = JSON.parse(body);
-        try {
-            if (!error && quoteObj && Number(quoteObj['Global Quote']['05. price']) == Number(quoteObj['Global Quote']['05. price'])) {
-                open = Number(quoteObj['Global Quote']['02. open']);
-                price = Number(quoteObj['Global Quote']['05. price']);
-                lastRefreshed = quoteObj['Global Quote']['07. latest trading day'];
-                change = quoteObj['Global Quote']['10. change percent'].slice(0,-3);
-                change = Number(change);
-                
-                
-                if (quoteObj['Global Quote']['10. change percent'].substring(0,1) == '-') {
-                    change = change.toFixed(2);
-                } else {
-                    change = '+' + change;
-                }
-                
-                
-                console.log('alphavantage status: ' + response.statusCode);
-                botResponse = ('$' + price + '\n' + change + 'pct\n' + 'https://finance.yahoo.com/quote/' + trim(message.text));
-                postMessage(botResponse, message.group_id);
-            };
-        } catch (e) {
-            //console.log(e);
-            console.log("LOG: stockTag caught error due to invalid $ sign");
-        }
-    });
-}
-
-// Was the bot tagged with an MLB team?
-function mlbTag(message) {
-    messageTrimmed = trim(message.text).toUpperCase();
-    request('https://braves-groupme.appspot.com/CHECK?groupName=' + message.group_id + '&teamKey=' + messageTrimmed, function (error, response, body) {
-        console.log('LOG: mlbTag status code: ' + response.statusCode);
-    });
-}
 
 // Post message
 function postMessage(text, groupID) {
