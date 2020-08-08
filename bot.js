@@ -34,6 +34,13 @@ function trim(text) {
 
 
 function tagCheck(message) {
+
+    // Was there an EOR tag
+    if (message.text.toLowerCase().indexOf('#EOR') >= 0) {
+        botResponse = 'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg';
+        postMessage(botResponse, message.group_id);    
+    }
+    
     // Was the bot tagged?
     if (message.text.toLowerCase().indexOf('@gifbot') >= 0) {
         botTag(message);
