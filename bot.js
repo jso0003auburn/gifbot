@@ -35,10 +35,7 @@ function trim(text) {
 
 function tagCheck(message) {
 
-    // Was EOR tagged
-    if (message.text.toLowerCase().indexOf('of riches') >= 0) {
-        eorTag(message);
-    }
+
   
     // Was the bot tagged?
     if (message.text.toLowerCase().indexOf('@gifbot') >= 0) {
@@ -47,14 +44,24 @@ function tagCheck(message) {
 
     // GIF #
     if (message.text.substring(0,1) == '#') {
-        gifTag(message);
+        // Was EOR tagged
+        if (message.text.toLowerCase().indexOf('of riches') >= 0) {
+            eorTag(message);
+        } else {    
+            gifTag(message);
+        }
     }
 }
 
 
 // EOR
 function eorTag(message) {
-    botResponse = 'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg';
+    myArray = [
+        'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg', 
+        'https://media.tenor.com/images/bc962c5ecaf73c213cafc1ec56b86ebb/tenor.gif'
+        ];
+    botResponse = myArray[Math.floor(Math.random()*myArray.length)]; 
+    //botResponse = 'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg';
     postMessage(botResponse, message.group_id);
 }
 
