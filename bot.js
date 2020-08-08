@@ -34,6 +34,11 @@ function trim(text) {
 
 
 function tagCheck(message) {
+
+    // Was EOR tagged
+    if (message.text.toLowerCase().indexOf('of riches') >= 0) {
+        eorTag(message);
+    }
   
     // Was the bot tagged?
     if (message.text.toLowerCase().indexOf('@gifbot') >= 0) {
@@ -42,15 +47,16 @@ function tagCheck(message) {
 
     // GIF #
     if (message.text.substring(0,1) == '#') {
-        // Was there an EOR tag
-        if (message.text.toLowerCase().indexOf('eor') >= 0) {
-            botResponse = 'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg';
-            postMessage(botResponse, message.group_id);    
-        }
         gifTag(message);
     }
 }
 
+
+// EOR
+function eorTag(message) {
+    botResponse = 'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg';
+    postMessage(botResponse, message.group_id);
+}
 
 // If the bot was tagged
 function botTag(message) {
