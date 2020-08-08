@@ -40,13 +40,14 @@ function tagCheck(message) {
     // Was the bot tagged?
     if (message.text.toLowerCase().indexOf('@gifbot') >= 0) {
         botTag(message);
+        message = 'no'
     }
 
     // GIF #
     if (message.text.substring(0,1) == '#') {
         // Was EOR tagged
-        if (message.text.toLowerCase().indexOf('of riches') >= 0 || message.text.toLowerCase().indexOf('eor') >= 0) {
-            eorTag(message);
+        if (message.text.toLowerCase().indexOf('riches') >= 0 || message.text.toLowerCase().indexOf('eor') >= 0) {
+            customTag(message);
         } else {    
             gifTag(message);
         }
@@ -55,12 +56,14 @@ function tagCheck(message) {
 
 
 // EOR
-function eorTag(message) {
+function customTag(message) {
     myArray = [
         'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg', 
         'https://media.tenor.com/images/bc962c5ecaf73c213cafc1ec56b86ebb/tenor.gif',
         'https://media2.giphy.com/media/YZGJc1WmUZPi0/200.gif',
-        'https://i.gifer.com/KhZT.gif'
+        'https://i.gifer.com/KhZT.gif',
+        'https://media1.tenor.com/images/e31ac0918c235d2618bdfea962e33167/tenor.gif?itemid=5178207',
+        'https://i.pinimg.com/originals/f6/ff/d5/f6ffd5fb41b2d43bd7ca7e499d8c1695.gif'
         ];
     botResponse = myArray[Math.floor(Math.random()*myArray.length)]; 
     postMessage(botResponse, message.group_id);
