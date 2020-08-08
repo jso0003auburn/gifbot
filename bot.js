@@ -36,7 +36,7 @@ function trim(text) {
 function tagCheck(message) {
 
     // Was there an EOR tag
-    if (message.text.toLowerCase().indexOf('#EOR') >= 0) {
+    if (message.text.toLowerCase().indexOf('eor') >= 0) {
         botResponse = 'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg';
         postMessage(botResponse, message.group_id);    
     }
