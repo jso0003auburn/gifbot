@@ -40,7 +40,6 @@ function tagCheck(message) {
     // Was the bot tagged?
     if (message.text.toLowerCase().indexOf('@gifbot') >= 0) {
         botTag(message);
-        message = 'no'
     }
 
     // GIF #
