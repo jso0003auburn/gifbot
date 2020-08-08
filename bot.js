@@ -45,7 +45,7 @@ function tagCheck(message) {
     // GIF #
     if (message.text.substring(0,1) == '#') {
         // Was EOR tagged
-        if (message.text.toLowerCase().indexOf('of riches') >= 0) || (message.text.toLowerCase().indexOf('eor') >= 0) {
+        if (message.text.toLowerCase().indexOf('of riches') >= 0 || message.text.toLowerCase().indexOf('eor') >= 0) {
             eorTag(message);
         } else {    
             gifTag(message);
