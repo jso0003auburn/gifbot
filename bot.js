@@ -45,7 +45,7 @@ function tagCheck(message) {
     // GIF #
     if (message.text.substring(0,1) == '#') {
         // Was EOR tagged
-        if (message.text.toLowerCase().indexOf('of riches') >= 0) {
+        if (message.text.toLowerCase().indexOf('of riches') >= 0) || (message.text.toLowerCase().indexOf('eor') >= 0) {
             eorTag(message);
         } else {    
             gifTag(message);
@@ -58,10 +58,11 @@ function tagCheck(message) {
 function eorTag(message) {
     myArray = [
         'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg', 
-        'https://media.tenor.com/images/bc962c5ecaf73c213cafc1ec56b86ebb/tenor.gif'
+        'https://media.tenor.com/images/bc962c5ecaf73c213cafc1ec56b86ebb/tenor.gif',
+        'https://media2.giphy.com/media/YZGJc1WmUZPi0/200.gif',
+        'https://i.gifer.com/KhZT.gif'
         ];
     botResponse = myArray[Math.floor(Math.random()*myArray.length)]; 
-    //botResponse = 'https://images-na.ssl-images-amazon.com/images/I/61QLymbWvCL._SX364_BO1,204,203,200_.jpg';
     postMessage(botResponse, message.group_id);
 }
 
